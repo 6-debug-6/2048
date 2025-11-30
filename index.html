@@ -11,6 +11,7 @@
             border: 2px solid rgb(130, 5, 5);
             padding: 10px;
             margin: 10px;
+            width: 800px
         }
 
         #div0 {
@@ -20,17 +21,19 @@
             padding: 10px;
             margin: 10px;
             height: 120px;
+
+
         }
 
         #div1 {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             border: 2px solid rgb(130, 5, 5);
             padding: 10px;
             margin: 10px;
         }
 
-        #paral {
+        #para1 {
             text-align: center;
             color: red;
         }
@@ -54,7 +57,7 @@
     </script>
 </head>
 
-<body style="justify-content: center; align-items: center; height: 100vh; text-align: center;">
+<body style="display: flex; flex-direction: column; height: 250vh; text-align: center;">
 
     <h1>2048官网</h1>
     <!导航栏>
@@ -69,12 +72,15 @@
                 <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048介绍</p>
 
             </div>
-            <div class="flex" id="div0">
-                <div>
+            <div style="display: flex;justify-content: center;">
+                <div class="flex" id="div0">
+
                     <p>2048组是由2025届油豆中学的十名优秀学生组成的一个神秘组织<br>
                         该组织从事桌游制作，玩梗，搞抽象等等领域<br>
                         对当今的国际局势有着深远的影响<br>
                         本网页秉持着尊重隐私的原则，在不透露绝大部分人的真名的前提下，为访客介绍该组织的故事</p>
+
+
                 </div>
             </div>
             <!2048历史>
@@ -83,13 +89,14 @@
                     <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048历史</p>
 
                 </div>
-                <div class="flex" id="div1">
-                    <div>
-                        <p id="paral">2048组成立于2024年秋季学期初<br>
+                <div style="display: flex;justify-content: center;">
+
+                    <div class="flex" style="flex-direction: column;">
+                        <p id="para1">2048组成立于2024年秋季学期初<br>
                             当时的高三2班时局动荡，人心惶惶，班级分裂为11个小团体，各个团体明争暗斗，极力拓展自身在班级里的势力范围，2048组正是其中之一。但和其他团体不同的是，
                             2048组是一个充满爱与正义的组织，他们为天下饥民带来了温暖与希望，笑语和欢歌（我瞎几把乱说的）<br>
                             最初，2048组只有六名成员，
-                            他们分别是阿潇、杨洲、洛阳城、绫华的老公、老登和pc。
+                            他们分别是阿潇、扬洲、洛阳城、绫华的老公、老登和pc。
                             他们志同道合，决定联合起来，共同应对班级内的各种挑战，
                             他们的目标是通过团结合作，提升整个班级的凝聚力</p>
                         <p>但是，社会环境险恶，2048组并非一帆风顺，
@@ -109,11 +116,13 @@
                         <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048新闻</p>
 
                     </div>
-                    <div class="flex" id="div1">
-                        <p></p>
-                        <p></p>
-                        <p></p>
+                    <div style="display: flex;justify-content: center;">
+                        <div class="flex" id="div1">
+                            <p></p>
+                            <p></p>
+                            <p></p>
 
+                        </div>
                     </div>
                     <!2048成员>
                         <div style="display: flex; justify-content:space-around; height: 31px;">
@@ -121,20 +130,22 @@
                             <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048成员</p>
 
                         </div>
-                        <div class="flex" style="height: auto;">
-                            <div>
-                                <p><b>组长：</b>阿潇</p>
-                                <p><b>副组长：</b>杨洲</p>
-                                <p><b>首席外交官:</b>洛阳城</p>
-                                <p><b>艺术总监</b>：绫华的老公</p>
-                                <p><b>后勤部部长:</b>老登</p>
-                            </div>
-                            <div>
-                                <p><b>骨干精英:</b>pc</p>
-                                <p><b>吉祥物:</b>楷子</p>
-                                <p><b>大国工匠:</b>金姐</p>
-                                <p><b>氟化钾：</b>可凡</p>
-                                <p><b>老实人：</b>黄牛</p>
+                        <div style="display: flex;justify-content: center;">
+                            <div class="flex" style="height: auto;">
+                                <div>
+                                    <p><b>组长：</b>阿潇</p>
+                                    <p><b>副组长：</b>扬洲</p>
+                                    <p><b>首席外交官:</b>洛阳城</p>
+                                    <p><b>艺术总监</b>：绫华的老公</p>
+                                    <p><b>后勤部部长:</b>老登</p>
+                                </div>
+                                <div>
+                                    <p><b>骨干精英:</b>pc</p>
+                                    <p><b>吉祥物:</b>楷子</p>
+                                    <p><b>大国工匠:</b>金姐</p>
+                                    <p><b>氟化钾：</b>可凡</p>
+                                    <p><b>老实人：</b>黄牛</p>
+                                </div>
                             </div>
                         </div>
                         <!2048关系网>
@@ -143,17 +154,25 @@
                                 <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048关系网</p>
 
                             </div>
-                            <div class="flex">第三节</div>
+                            <div style="display: flex;justify-content: center;">
+
+                                <div class="flex">第三节</div>
+                            </div>
                             <!点击计数器>
-                                <div style="margin-top: 20px; border:2px solid rgb(130, 5, 5); padding:10px;">
-                                    <p>注意！每当这个按钮被点击2048次，这个世界上就会有一只无辜的土拨鼠死去！！！</p>
-                                    <button id="clickButton">点击我！</button>
-                                    <p>按钮已被点击 <span id="clickCount">0</span> 次。</p>
-                                    <!底部信息>
-                                        <div
-                                            style="margin-top: 20px; border-top: 2px solid rgb(130, 5, 5); padding-top: 10px;">
-                                            <p>© 2024 2048组. 保留所有权利.</p>
-                                        </div>
+                                <div style="display: flex; justify-content:space-around; height: 31px;">
+                                    <div
+                                        style="border: 2px solid rgb(130, 5, 5); width: 800px; height: 150px; padding: 10px; margin: 10px;">
+                                        <p>点击计数器</p>
+                                        <p>注意！每当这个按钮被点击2048次，这个世界上就会有一只无辜的土拨鼠死去！！！</p>
+                                        <button id="clickButton">点击我！</button>
+                                        <p>按钮已被点击 <span id="clickCount">0</span> 次。</p>
+                                    </div>
+                                </div>
+                                <!--页脚-->
+                                <footer style="margin-top: auto; padding: 10px; border-top: 10px solid #320303;">
+                                    <p>&copy; 2024 2048组. 保留所有权利。</p>
+                                </footer>
+
 
 </body>
 
