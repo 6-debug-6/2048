@@ -3,62 +3,65 @@
 
 <head>
     <meta charset="utf-8">
-    <title>2048网站</title>
-    <style>
-        .flex {
-            display: flex;
-            justify-content: center;
-            border: 2px solid rgb(130, 5, 5);
-            padding: 10px;
-            margin: 10px;
-            width: 800px
-        }
+    <!更改浏览器图标>
+        <link rel="icon" href="图库\生成简约浏览器图标含‘2048’艺术字.png" type="image/png">
+        <title>2048网站</title>
+        <style>
+            .flex {
+                display: flex;
+                justify-content: center;
+                border: 2px solid rgb(130, 5, 5);
+                padding: 10px;
+                margin: 10px;
+                width: 800px
+            }
 
-        #div0 {
-            display: flex;
-            justify-content: center;
-            border: 2px solid rgb(130, 5, 5);
-            padding: 10px;
-            margin: 10px;
-            height: 120px;
+            #div0 {
+                display: flex;
+                justify-content: center;
+                border: 2px solid rgb(130, 5, 5);
+                padding: 10px;
+                margin: 10px;
+                height: 120px;
 
 
-        }
+            }
 
-        #div1 {
-            display: flex;
-            justify-content: center;
-            border: 2px solid rgb(130, 5, 5);
-            padding: 10px;
-            margin: 10px;
-        }
+            #div1 {
+                display: flex;
+                justify-content: center;
+                border: 2px solid rgb(130, 5, 5);
+                padding: 10px;
+                margin: 10px;
+            }
 
-        #para1 {
-            text-align: center;
-            color: red;
-        }
+            #para1 {
+                text-align: center;
+                color: red;
+            }
 
-        #para2 {
-            text-align: center;
-            color: #000;
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var clickButton = document.getElementById("clickButton");
-            var clickCount = document.getElementById("clickCount");
-            var count = 0;
+            #para2 {
+                text-align: center;
+                color: #000;
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var clickButton = document.getElementById("clickButton");
+                var clickCount = document.getElementById("clickCount");
+                var count = 0;
 
-            clickButton.addEventListener("click", function () {
-                count++;
-                clickCount.textContent = count;
+                clickButton.addEventListener("click", function () {
+                    count++;
+                    clickCount.textContent = count;
+                });
             });
-        });
-    </script>
+        </script>
 </head>
 
-<body style="display: flex; flex-direction: column; height: 250vh; text-align: center;">
+<body style="display: flex; flex-direction: column; height: 200vh; text-align: center; align-items: center;">
 
+    <img src=图库\生成简约浏览器图标含‘2048’艺术字.png alt="2048" width="50px" height="50px" style="margin-top: 20px;">
     <h1>2048官网</h1>
     <!导航栏>
         <nav>
@@ -168,11 +171,11 @@
                                         <p>按钮已被点击 <span id="clickCount">0</span> 次。</p>
                                     </div>
                                 </div>
-                                <!--页脚-->
-                                <footer style="margin-top: auto; padding: 10px; border-top: 10px solid #320303;">
-                                    <p>&copy; 2024 2048组. 保留所有权利。</p>
-                                </footer>
-
+                                <!页脚>
+                                    <footer
+                                        style="margin-top: auto; border-top: 1px solid rgb(130, 5, 5); width: 100%; text-align: center; padding: 10px 0px 10px 0px;">
+                                        <p>&copy; 2024 2048组. 保留所有权利。</p>
+                                    </footer>
 
 </body>
 
