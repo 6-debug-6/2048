@@ -11,45 +11,22 @@
                 display: flex;
                 justify-content: center;
                 border: 2px solid rgb(130, 5, 5);
-                padding: 10px;
-                margin: 10px;
-                width: 800px
+
+
+                width: 100%
             }
 
-            #div0 {
-                display: flex;
-                justify-content: center;
-                border: 2px solid rgb(130, 5, 5);
-                padding: 10px;
-                margin: 10px;
-                height: 120px;
-
-
-            }
-
-            #div1 {
-                display: flex;
-                justify-content: center;
-                border: 2px solid rgb(130, 5, 5);
-                padding: 10px;
-                margin: 10px;
-            }
 
             #para1 {
                 text-align: center;
                 color: red;
             }
-
-            #para2 {
-                text-align: center;
-                color: #000;
-            }
         </style>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                var clickButton = document.getElementById("clickButton");
-                var clickCount = document.getElementById("clickCount");
-                var count = 0;
+                let clickButton = document.getElementById("clickButton");
+                let clickCount = document.getElementById("clickCount");
+                let count = 0;
 
                 clickButton.addEventListener("click", function () {
                     count++;
@@ -59,7 +36,7 @@
         </script>
 </head>
 
-<body style="display: flex; flex-direction: column; height: 200vh; text-align: center; align-items: center;">
+<body style="display: flex; flex-direction: column; height: 220vh; text-align: center; align-items: center;">
 
     <img src=图库\生成简约浏览器图标含‘2048’艺术字.png alt="2048" width="50px" height="50px" style="margin-top: 20px;">
     <h1>2048官网</h1>
@@ -70,13 +47,13 @@
             <a href="about.html">关于我们</a>
         </nav>
         <!2048介绍>
-            <div style="display: flex; justify-content:space-around; height: 31px;">
+            <div style="display: flex; justify-content:space-around;margin-bottom: 0px;">
 
-                <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048介绍</p>
+                <p style=" border:1px solid rgb(130, 5, 5);width: 100px;margin-bottom: 0px;">2048介绍</p>
 
             </div>
-            <div style="display: flex;justify-content: center;">
-                <div class="flex" id="div0">
+            <div style="display: flex;justify-content: center;width: 50%;">
+                <div class="flex">
 
                     <p>2048组是由2025届油豆中学的十名优秀学生组成的一个神秘组织<br>
                         该组织从事桌游制作，玩梗，搞抽象等等领域<br>
@@ -87,12 +64,12 @@
                 </div>
             </div>
             <!2048历史>
-                <div style="display: flex; justify-content:space-around; height: 31px;">
+                <div style="display: flex; justify-content:space-around;">
 
-                    <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048历史</p>
+                    <p style=" border:1px solid rgb(130, 5, 5);width: 100px;margin-bottom: 0px;">2048历史</p>
 
                 </div>
-                <div style="display: flex;justify-content: center;">
+                <div style="display: flex;justify-content: center;width: 50%;">
 
                     <div class="flex" style="flex-direction: column;">
                         <p id="para1">2048组成立于2024年秋季学期初<br>
@@ -114,27 +91,27 @@
                     </div>
                 </div>
                 <!2048新闻>
-                    <div style="display: flex; justify-content:space-around; height: 31px;">
+                    <div style="display: flex; justify-content:space-around;">
 
-                        <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048新闻</p>
+                        <p style=" border:1px solid rgb(130, 5, 5);margin-bottom: 0px;">2048新闻</p>
 
                     </div>
-                    <div style="display: flex;justify-content: center;">
-                        <div class="flex" id="div1">
-                            <p></p>
-                            <p></p>
-                            <p></p>
+                    <div style="display: flex;justify-content: center;width: 50%;margin-bottom: 16px;">
+                        <div class="flex" style="margin-top: 0px;">
+                            <p>2048</p>
+                            <p>2048</p>
+                            <p>2048</p>
 
                         </div>
                     </div>
                     <!2048成员>
-                        <div style="display: flex; justify-content:space-around; height: 31px;">
+                        <div style="display: flex; justify-content:space-around;margin-bottom: 0px; ">
 
-                            <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048成员</p>
+                            <p style=" border:1px solid rgb(130, 5, 5);width: 100px;margin: 0px;">2048成员</p>
 
                         </div>
-                        <div style="display: flex;justify-content: center;">
-                            <div class="flex" style="height: auto;">
+                        <div style="display: flex;justify-content: center;margin-top: 0px;width: 50%;">
+                            <div class="flex">
                                 <div>
                                     <p><b>组长：</b>阿潇</p>
                                     <p><b>副组长：</b>扬洲</p>
@@ -152,19 +129,21 @@
                             </div>
                         </div>
                         <!2048关系网>
-                            <div style="display: flex; justify-content:space-around; height: 31px;">
+                            <div style="display: flex; justify-content:space-around;">
 
-                                <p style=" border:1px solid rgb(130, 5, 5);width: 100px;height: 25px;">2048关系网</p>
+
+                                <p style=" border:1px solid rgb(130, 5, 5);width: 100px;margin-bottom: 0px;">2048关系网</p>
+
 
                             </div>
-                            <div style="display: flex;justify-content: center;">
+                            <div style="display: flex;justify-content: center;width: 50%;">
 
                                 <div class="flex">第三节</div>
                             </div>
                             <!点击计数器>
-                                <div style="display: flex; justify-content:space-around; height: 31px;">
+                                <div style="display: flex; justify-content:space-around; height: 31px;width: 50%;">
                                     <div
-                                        style="border: 2px solid rgb(130, 5, 5); width: 800px; height: 150px; padding: 10px; margin: 10px;">
+                                        style="border: 2px solid rgb(130, 5, 5); width: 100%; height: 150px; padding: 10px; margin: 10px;">
                                         <p>点击计数器</p>
                                         <p>注意！每当这个按钮被点击2048次，这个世界上就会有一只无辜的土拨鼠死去！！！</p>
                                         <button id="clickButton">点击我！</button>
