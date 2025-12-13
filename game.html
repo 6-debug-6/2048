@@ -10,125 +10,141 @@
             .flex {
                 display: flex;
                 justify-content: center;
-                border: 2px solid rgb(130, 5, 5);
+                box-shadow: rgb(0 0 0 / 20%) 0px 4px 1px -1px,
+                    rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 5px 3px 0px;
+
                 width: 100%
             }
 
-
-            #paral {
-                text-align: center;
-                color: red;
-            }
-
-            #para2 {
-                text-align: center;
-                color: #000;
+            .background1 {
+                background-color: rgb(29, 123, 123);
             }
         </style>
 </head>
 
 <body
     style="justify-content: center; align-items: center; height: 100vh; text-align: center;display: flex;flex-direction: column;">
-    <img src=图库\生成简约浏览器图标含‘2048’艺术字.png alt="2048" width="50px" height="50px" style="margin-top: 20px;">
-    <h1>2048游戏介绍</h1>
-    <!导航栏>
-        <nav>
-            <a href="index.html">首页</a> |
-            <a href="game.html">游戏</a> |
-            <a href="about.html">关于我们</a>
-        </nav>
+    <!顶部靠右的导航栏>
+        <div style="width: 100%;background-color:rgb(29, 123, 123);">
+            <nav style="position: absolute; top: 10px; right: 10px;">
+                <a href="index.html">首页</a> |
+                <a href="game.html">游戏</a> |
+                <a href="about.html">关于我们</a>
+            </nav>
 
-        <div style="display: flex; justify-content:space-around; ">
-
-            <p style=" border:1px solid rgb(130, 5, 5);width: 100px;margin-bottom: 0px;">2048游戏</p>
-
+            <img src=图库\生成简约浏览器图标含‘2048’艺术字.png alt="2048" width="50px" height="50px" style="margin-top: 55px;">
         </div>
+        <!顶部靠右但在导航栏下方的搜索框>
+            <form style=" position: absolute; top: 40px; right: 10px; display: flex; align-items: center; justify-content:
+                        center;">
+                <input type="text" placeholder="搜索..."
+                    style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                <button type="submit"
+                    style="padding: 5px 10px; margin-left: 5px; background-color: rgb(29, 123, 123); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    搜索
+                </button>
+            </form>
 
-        <div style="width: 50%;">
-            <div class="flex">
-                <div>
-                    <p id="paral">2048是一款单人益智类数字合并游戏。玩家通过上下左右滑动屏幕，使相同数字的方块合并，目标是合成2048方块。</p>
-                    <p id="para2">
-                        游戏玩法简单但富有挑战性，玩家需要合理规划每一步操作，以避免棋盘被填满而无法继续游戏。2048不仅考验玩家的策略思维，还提供了极高的娱乐价值，成为全球范围内广受欢迎的休闲游戏之一。
-                    </p>
-                </div>
-            </div>
-        </div>
+            <div
+                style=" margin-right: 25%;margin-left: 25%; border-right:  2px solid rgb(29, 123, 123);border-left:  2px solid rgb(29, 123, 123);display: flex;flex-direction: column;text-align: center;align-items: center;">
+
+                <h1>2048游戏介绍</h1>
 
 
-
-
-        <div>
-            <p>你以为我要讲的是这些？你还在玩传统的2048游戏？你out了哥们！</p>
-        </div>
-        <div style="display: flex; justify-content:space-around; ">
-
-            <p style=" color: rgb(130, 5, 5);margin-bottom: 0px;"><b>2048新作!!!</b><br>首先是游戏灵感！！！</p>
-        </div>
-        <!游戏灵感>
-            <div style="width: 50%;">
-                <div class="flex">
-                    <div>
-                        <p id="paral">这是高二的某一天</p>
-                        <p id="para2">
-                            后续版本经过多次改进
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!游戏规则>
                 <div style="display: flex; justify-content:space-around; ">
 
-                    <p style=" color: rgb(130, 5, 5);margin-bottom: 0px;"><b>游戏规则!!!</b><br>pvp回合制卡牌策略对战游戏！</p>
+                    <p class="background1" style=" width: 100px;margin-bottom: 0px;">2048游戏</p>
+
                 </div>
-                <div style="width: 50%;">
+
+                <div style="width: 100%;">
                     <div class="flex">
                         <div>
-                            <p id="paral">待补充</p>
-                            <p id="para2">
-                                待补充
+                            <p>2048是一款单人益智类数字合并游戏。玩家通过上下左右滑动屏幕，使相同数字的方块合并，目标是合成2048方块。</p>
+                            <p>
+                                游戏玩法简单但富有挑战性，玩家需要合理规划每一步操作，以避免棋盘被填满而无法继续游戏。2048不仅考验玩家的策略思维，还提供了极高的娱乐价值，成为全球范围内广受欢迎的休闲游戏之一。
                             </p>
                         </div>
                     </div>
                 </div>
-                <!--插入2048新作介绍-->
-                <!生成表格展示卡牌数量以及内容>
-                    <div style="margin-bottom: 20px;padding: 5px;border: 1px solid rgb(130, 5, 5);width: 300px;">
-                        <table border="1" style="width: 100%; text-align: center; border-collapse: collapse;">
-                            <tr>
-                                <td>卡牌种类</td>
-                                <td>卡牌数量</td>
-                            </tr>
-                            <tr>
-                                <td>特技牌</td>
-                                <td>数字1-16</td>
-                            </tr>
-                            <tr>
-                                <td>效果牌</td>
-                                <td>81</td>
-                            </tr>
-                            <tr>
-                                <td>攻击牌</td>
-                                <td>51</td>
-                            </tr>
-                            <tr>
-                                <td>盖牌</td>
-                                <td>39</td>
-                        </table>
-                    </div>
-                    <!更多内容详见图鉴页面>
-                        <div>
-                            <p>更多内容详见<a href="卡牌图鉴.html">图鉴页面</a></p>
+
+
+
+
+                <div>
+                    <p>你以为我要讲的是这些？你还在玩传统的2048游戏？你out了哥们！</p>
+                </div>
+                <div style="display: flex; justify-content:space-around; ">
+
+                    <p style=" color: rgb(130, 5, 5);margin-bottom: 0px;"><b>2048新作!!!</b><br>首先是游戏灵感！！！</p>
+                </div>
+                <!游戏灵感>
+                    <div style="width: 100%;">
+                        <div class="flex">
+                            <div>
+                                <p id="paral">这是高二的某一天</p>
+                                <p id="para2">
+                                    后续版本经过多次改进
+                                </p>
+                            </div>
                         </div>
+                    </div>
+                    <!游戏规则>
+                        <div style="display: flex; justify-content:space-around; ">
+
+                            <p style=" color: rgb(130, 5, 5);margin-bottom: 0px;"><b>游戏规则!!!</b><br>pvp回合制卡牌策略对战游戏！</p>
+                        </div>
+                        <div style="width: 100%;">
+                            <div class="flex">
+                                <div>
+                                    <p id="paral">待补充</p>
+                                    <p id="para2">
+                                        待补充
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--插入2048新作介绍-->
+                        <!生成表格展示卡牌数量以及内容>
+                            <div
+                                style="margin-bottom: 20px;padding: 5px;border: 1px solid rgb(100, 100, 100);width: 300px;">
+                                <table border="1" style="width: 100%; text-align: center; border-collapse: collapse;">
+                                    <tr>
+                                        <td>卡牌种类</td>
+                                        <td>卡牌数量</td>
+                                    </tr>
+                                    <tr>
+                                        <td>特技牌</td>
+                                        <td>24</td>
+                                    </tr>
+                                    <tr>
+                                        <td>效果牌</td>
+                                        <td>81</td>
+                                    </tr>
+                                    <tr>
+                                        <td>攻击牌</td>
+                                        <td>51</td>
+                                    </tr>
+                                    <tr>
+                                        <td>盖牌</td>
+                                        <td>39</td>
+                                </table>
+                            </div>
+                            <!更多内容详见图鉴页面>
+                                <div>
+                                    <p>更多内容详见<a href="卡牌图鉴.html" target="_blank" rel="noopener noreferrer"
+                                            title="图鉴页面">图鉴页面</a>
+                                    </p>
+                                </div>
+            </div>
 
 
 
 
 
-
-                        <!页脚>
-                            <footer
-                                style="margin-top: auto; border-top: 1px solid rgb(130, 5, 5); width: 100%; text-align: center; padding: 10px 0px 10px 0px;">
-                                <p>© 2024 2048官网. 保留所有权利。</p>
-                            </footer>
+            <!页脚>
+                <footer
+                    style="margin-top: auto; background-color: rgb(29, 123, 123); width: 100%; text-align: center; padding: 10px 0px 10px 0px;">
+                    <p>© 2024 2048官网. 保留所有权利。</p>
+                </footer>
 </body>
