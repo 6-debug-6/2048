@@ -23,7 +23,7 @@
 </head>
 
 <body
-    style="justify-content: center; align-items: center; height: 100vh; text-align: center;display: flex;flex-direction: column;">
+    style="justify-content: center; align-items: center; height: 100vh; text-align: center;display: flex;flex-direction: column;height: auto;">
     <!顶部靠右的导航栏>
         <div style="width: 100%;background-color:rgb(29, 123, 123);">
             <nav style="position: absolute; top: 10px; right: 10px;">
@@ -33,7 +33,7 @@
             </nav>
 
             <img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
-                style="margin-top: 55px;">
+                style="margin-top: 15px;">
         </div>
         <!顶部靠右但在导航栏下方的搜索框>
             <form style=" position: absolute; top: 40px; right: 10px; display: flex; align-items: center; justify-content:
@@ -83,60 +83,84 @@
                     <div style="width: 100%;">
                         <div class="flex">
                             <div>
-                                <p id="paral">这是高二的某一天</p>
-                                <p id="para2">
-                                    后续版本经过多次改进
+                                <p>
+                                    这是高二的某一天，老登提出想制作一款桌游，扬州楷子等人积极响应，他们仿照网络上一些正在流行的回合制卡牌游戏，制作出了2048桌游的雏形。然后他们开始在取名玩梗上下功夫，什么“卖肾”“抢贱”“请你抛却身外之物”等等奇怪的东西不胜枚举。
                                 </p>
+                                <p>
+                                    后续版本经过多次改进，出现了各种玩法模式，比如BOSS战，也出现了许多分支版本，比如扬州主导的什么“扬州版2048桌游”，里面是什么神符啥啥啥的。
+                                </p>
+                                <p>流传最广的版本是在一班制作的版本，里面引入了许多游戏梗，加入了药水体系和相对简单易懂的“光元素”，收获了一大堆忠实粉丝，陪伴了1班2班同学无数时光（包括体育课，周六下午放学后，甚至考试日的下午不想复习也会打牌）
+                                </p>
+                                <p>最新的版本是金姐重置的，更改了大量卡牌的名字，添加了背景故事，使之成为了一个较为正规的桌游</p>
                             </div>
                         </div>
                     </div>
-                    <!游戏规则>
+                    <!游戏背景>
                         <div style="display: flex; justify-content:space-around; ">
 
-                            <p style=" color: rgb(130, 5, 5);margin-bottom: 0px;"><b>游戏规则!!!</b><br>pvp回合制卡牌策略对战游戏！</p>
+                            <p style=" color: rgb(130, 5, 5);margin-bottom: 0px;"><b>游戏背景!!!</b><br>这是一个充满魔法与冒险的世界！</p>
                         </div>
                         <div style="width: 100%;">
                             <div class="flex">
                                 <div>
-                                    <p id="paral">待补充</p>
-                                    <p id="para2">
-                                        待补充
+                                    <p>
+                                        在这个世界中，元素力量无处不在，掌握元素之力的人们被称为“元素使者”。他们通过操控水、火、风、雷、冰、岩、光等七种基本元素，展开了一场场惊心动魄的冒险。
+                                    </p>
+                                    <p>
+                                        玩家将扮演一名年轻的元素使者，踏上寻找失落神器的旅程。在旅途中，你将遇到各种各样的挑战和敌人，需要运用你的智慧和策略，合理搭配元素力量，击败强大的对手，解开隐藏在世界背后的秘密。
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <!--插入2048新作介绍-->
-                        <!生成表格展示卡牌数量以及内容>
-                            <div
-                                style="margin-bottom: 20px;padding: 5px;border: 1px solid rgb(100, 100, 100);width: 300px;">
-                                <table border="1" style="width: 100%; text-align: center; border-collapse: collapse;">
-                                    <tr>
-                                        <td>卡牌种类</td>
-                                        <td>卡牌数量</td>
-                                    </tr>
-                                    <tr>
-                                        <td>特技牌</td>
-                                        <td>24</td>
-                                    </tr>
-                                    <tr>
-                                        <td>效果牌</td>
-                                        <td>81</td>
-                                    </tr>
-                                    <tr>
-                                        <td>攻击牌</td>
-                                        <td>51</td>
-                                    </tr>
-                                    <tr>
-                                        <td>盖牌</td>
-                                        <td>39</td>
-                                </table>
+                        <!游戏规则>
+                            <div style="display: flex; justify-content:space-around; ">
+
+                                <p style=" color: rgb(130, 5, 5);margin-bottom: 0px;"><b>游戏规则!!!</b><br>pvp回合制卡牌策略对战游戏！
+                                </p>
                             </div>
-                            <!更多内容详见图鉴页面>
-                                <div>
-                                    <p>更多内容详见<a href="卡牌图鉴.html" target="_blank" rel="noopener noreferrer"
-                                            title="图鉴页面">图鉴页面</a>
-                                    </p>
+                            <div style="width: 100%;">
+                                <div class="flex">
+                                    <div>
+                                        <p>核心玩法特色是“元素反应”：现行版本中有“水火风雷冰岩光”7中元素攻击，每种元素会造成相应的效果，不同元素搭配还可以发生反应</p>
+                                        <p>
+                                            核心玩法之外，还有盖牌和特技牌体系：盖牌作为防御牌，盖在自己的区域，效果不为敌人所知，起到出其不意的效果；发动特技牌需要消耗你一整个回合，但是可以产生强力而持久的效果
+                                        </p>
+                                    </div>
                                 </div>
+                            </div>
+                            <!--插入2048新作介绍-->
+                            <!生成表格展示卡牌数量以及内容>
+                                <div
+                                    style="margin-bottom: 20px;padding: 5px;border: 1px solid rgb(100, 100, 100);width: 300px;">
+                                    <table border="1"
+                                        style="width: 100%; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td>卡牌种类</td>
+                                            <td>卡牌数量</td>
+                                        </tr>
+                                        <tr>
+                                            <td>特技牌</td>
+                                            <td>24</td>
+                                        </tr>
+                                        <tr>
+                                            <td>效果牌</td>
+                                            <td>81</td>
+                                        </tr>
+                                        <tr>
+                                            <td>攻击牌</td>
+                                            <td>51</td>
+                                        </tr>
+                                        <tr>
+                                            <td>盖牌</td>
+                                            <td>39</td>
+                                    </table>
+                                </div>
+                                <!更多内容详见图鉴页面>
+                                    <div>
+                                        <p>更多内容详见<a href="卡牌图鉴.html" target="_blank" rel="noopener noreferrer"
+                                                title="图鉴页面">图鉴页面</a>
+                                        </p>
+                                    </div>
             </div>
 
 
