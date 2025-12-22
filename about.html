@@ -33,154 +33,165 @@
         </style>
 </head>
 
-<body style=" text-align: center;display: flex; align-items: center;flex-direction: column;height: auto;">
-    <!顶部靠右的导航栏>
-        <div style="width: 100%;background-color:rgb(29, 123, 123);">
-            <nav style="position: absolute; top: 10px; right: 10px;">
-                <a href="index.html">首页</a> |
-                <a href="game.html">游戏</a> |
-                <a href="about.html">关于我们</a>
-            </nav>
-
-            <img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
-                style="margin-top: 10px;">
+<body
+    style=" text-align: center;display: flex; align-items: center;flex-direction: column;height: auto;padding-top: 56px;">
+    <!顶部导航栏和搜索框合并>
+        <div
+            style="display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
+            <div style="flex:1;color:rgb(29, 123, 123);"></div>
+            <div style="flex:1"><img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
+                    style="margin-top: 10px;"></div>
+            <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
+                <div>
+                    <!顶部靠右的导航栏>
+                        <nav>
+                            <a href="index.html">首页</a> |
+                            <a href="game.html">游戏</a> |
+                            <a href="about.html">关于我们</a>|
+                            <a href="news.html">新闻</a>
+                        </nav>
+                </div>
+                <div>
+                    <!顶部靠右但在导航栏下方的搜索框>
+                        <form style="  display: flex; align-items: center; justify-content:
+                            center;">
+                            <input type="text" placeholder="搜索..."
+                                style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            <button type="submit"
+                                style="padding: 5px 10px; margin-left: 5px; background-color: rgb(33, 159, 159); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                搜索
+                            </button>
+                        </form>
+                </div>
+            </div>
         </div>
-        <!顶部靠右但在导航栏下方的搜索框>
-            <form style=" position: absolute; top: 40px; right: 10px; display: flex; align-items: center; justify-content:
-                center;">
-                <input type="text" placeholder="搜索..."
-                    style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
-                <button type="submit"
-                    style="padding: 5px 10px; margin-left: 5px; background-color: rgb(29, 123, 123); color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    搜索
-                </button>
-            </form>
 
 
-            <div style=" padding: 10px; margin-right: 25%;margin-left: 25%; border-right: solid rgb(29, 123, 123) ;border-left:
+
+        <div style=" padding: 10px; margin-right: 25%;margin-left: 25%; border-right: solid rgb(29, 123, 123) ;border-left:
                 solid rgb(29, 123, 123) ;display: flex;flex-direction: column;text-align: center;align-items: center;">
 
 
-                <h1 style=" margin-top: 0px;">2048组详细介绍</h1>
+            <h1 style=" margin-top: 0px;">2048组详细介绍</h1>
 
 
-                <h2 class="background1" style=" width: 200px;height: 40;margin: 0 0 0px 0;padding: 0;">
-                    成员详细介绍
-                </h2>
-                <!插入表格链接介绍组员>
-                    <div style="margin-bottom: 20px;padding: 5px;border: 1px solid rgb(100, 100, 100);width: 100%;">
-                        <table border="1" style="width: 100%; text-align: center; border-collapse: collapse;">
-                            <tr>
-                                <td>正式组员</td>
-                                <td><a href="人物介绍文件夹\阿潇.html" target="frame1">阿潇</a></td>
-                                <td><a href="人物介绍文件夹\yangzhou.html" target="frame1">扬州</a></td>
-                                <td><a href="人物介绍文件夹\绫华的老公.html" target="frame1">绫华的老公</a></td>
-                                <td><a href="人物介绍文件夹\洛阳城.html" target="frame1">洛阳城</a></td>
-                                <td><a href="人物介绍文件夹\pc.html" target="frame1">pc</a></td>
-                                <td><a href="人物介绍文件夹\老登.html" target="frame1">老登</a></td>
-                            </tr>
-                            <tr>
-                                <td>正式组员</td>
-                                <td><a href="人物介绍文件夹\guojinkai.html" target="frame1">楷子</a></td>
-                                <td><a href="人物介绍文件夹\golden sister.html" target="frame1">金姐</a></td>
-                                <td><a href="人物介绍文件夹\可凡.html" target="frame1">可凡</a></td>
-                                <td><a href="人物介绍文件夹\黄牛.html" target="frame1">黄牛</a></td>
-                                <td><a></a></td>
-                                <td><a></a></td>
-                            </tr>
-                            <tr>
-                                <td>外籍人员</td>
-                                <td><a href="人物介绍文件夹\涛哥.html" target="frame1">涛哥</a></td>
-                                <td><a href="人物介绍文件夹\goat.html" target="frame1">goat</a></td>
-                                <td><a></a></td>
-                                <td><a></a></td>
-                                <td><a></a></td>
-                                <td><a></a></td>
-                            </tr>
-                        </table>
-                        <iframe style=" width: 100%; height: 100%; border:1px solid rgb(100, 100, 100);height: 50vh;"
-                            name="frame1"></iframe>
+            <h2 class="background1" style=" width: 200px;height: 40;margin: 0 0 0px 0;padding: 0;">
+                成员详细介绍
+            </h2>
+            <!插入表格链接介绍组员>
+                <div style="margin-bottom: 20px;padding: 5px;border: 1px solid rgb(100, 100, 100);width: 100%;">
+                    <table border="1" style="width: 100%; text-align: center; border-collapse: collapse;">
+                        <tr>
+                            <td>正式组员</td>
+                            <td><a href="人物介绍文件夹\阿潇.html" target="frame1">阿潇</a></td>
+                            <td><a href="人物介绍文件夹\yangzhou.html" target="frame1">扬州</a></td>
+                            <td><a href="人物介绍文件夹\绫华的老公.html" target="frame1">绫华的老公</a></td>
+                            <td><a href="人物介绍文件夹\洛阳城.html" target="frame1">洛阳城</a></td>
+                            <td><a href="人物介绍文件夹\pc.html" target="frame1">pc</a></td>
+                            <td><a href="人物介绍文件夹\老登.html" target="frame1">老登</a></td>
+                        </tr>
+                        <tr>
+                            <td>正式组员</td>
+                            <td><a href="人物介绍文件夹\guojinkai.html" target="frame1">楷子</a></td>
+                            <td><a href="人物介绍文件夹\golden sister.html" target="frame1">金姐</a></td>
+                            <td><a href="人物介绍文件夹\可凡.html" target="frame1">可凡</a></td>
+                            <td><a href="人物介绍文件夹\黄牛.html" target="frame1">黄牛</a></td>
+                            <td><a></a></td>
+                            <td><a></a></td>
+                        </tr>
+                        <tr>
+                            <td>外籍人员</td>
+                            <td><a href="人物介绍文件夹\涛哥.html" target="frame1">涛哥</a></td>
+                            <td><a href="人物介绍文件夹\goat.html" target="frame1">goat</a></td>
+                            <td><a></a></td>
+                            <td><a></a></td>
+                            <td><a></a></td>
+                            <td><a></a></td>
+                        </tr>
+                    </table>
+                    <iframe style=" width: 100%; height: 100%; border:1px solid rgb(100, 100, 100);height: 50vh;"
+                        name="frame1"></iframe>
+                </div>
+
+
+
+                <h2 class="background1" style="margin: 0px;padding: 5px;">组名内涵</h2>
+                <div style="margin-bottom: 20px;border: 1px solid rgb(100, 100, 100);width: 100%;">
+                    <div class="box1">
+                        <p
+                            style="flex:1;margin: 0px 0px 0px 0px;padding-top: 50px;padding-bottom:50px ; border-right: 1px solid rgb(100, 100, 100);">
+                            组名含义</p>
+                        <p style="flex:5">"2048"是2的十一次方，当时二班群雄并起，分裂成了11个势力，“2048”象征了这个组织有着比肩整个2班的强大实力，象征了我们一统二班的决心。
+                        </p>
+                    </div>
+                    <div class="box1">
+                        <p
+                            style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
+                            组徽含义
+                        </p>
+                        <div style="flex:5;" class="box2">
+                            <p>组徽是由2048数字组成，外形像一个面具，灵感来源于三星堆考古得到的铜面具，一半青铜一半黄金，象征着过去及现在的辉煌
+                            </p><img src="图库\组徽样式.png" alt="组徽样式" width="25%">
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <h2 class="background1" style="margin: 0px;padding: 5px;">梗与故事</h2>
+                <div style="margin-bottom: 20px;border: 1px solid rgb(100, 100, 100);width: 100%;">
+                    <div class="box1">
+                        <p
+                            style="flex:1;margin: 0px 0px 0px 0px;padding-top: 50px;padding-bottom:50px ; border-right: 1px solid rgb(100, 100, 100);">
+                            2048的诅咒</p>
+                        <p style="flex:5">
+                            记得高一的某一天某一天，楷子在借同学的手表玩2048游戏。他一直玩儿，一直玩儿，就是活不过2048。玩儿的次数过于频繁，以至于同学们都调侃他活不过2048。由此，2048的诅咒出现。
+                        </p>
+                    </div>
+                    <div class="box1">
+                        <p
+                            style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
+                            土拨鼠的来源
+                        </p>
+                        <p style="flex:5">
+                            起初，楷子和阿潇是同桌。楷子和阿潇约定了一句口头禅，“哦，你这只愚蠢的土拨鼠”。也许是这句口头禅太过沙雕，楷子经常把它挂在嘴上，甚至写在自己的笔袋上，久而久之，在班上传了开来，他就真的成为土拨鼠了。
+                        </p>
+                    </div>
+                    <div class="box1">
+                        <p
+                            style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
+                            空洞骑士助力竞赛
+                        </p>
+                        <p style="flex:5">
+                            2048的各位大部分是由游戏互相联系在一起的，其中最重要的一个游戏就是空洞骑士。比较巧合的是，玩空洞骑士比较专注的几位成员都在各类学科竞赛中取得了优异成绩。于是我们调侃，玩空洞骑士可以促进学科竞赛能力。
+                        </p>
+                    </div>
+                    <div class="box1">
+                        <p
+                            style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
+                            消化复习</p>
+                        <p style="flex:5">egg是我们又烦人又受人爱戴的数学老师，他最常挂在嘴边的口头禅就是，消化、总结、复习、整理。依稀记得有一张吊图是egg在说“代表太阳消化你”</p>
+                    </div>
+                    <div class="box1">
+                        <p
+                            style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
+                            奖杯</p>
+                        <p style="flex:5">老登的口头禅，类似畜生的意思，其来源大概是与jb同缩写，后来用于激动语境等多种语境，类似“你妈的”，灵活多用，可看作口癖</p>
                     </div>
 
 
+                </div>
 
-                    <h2 class="background1" style="margin: 0px;padding: 5px;">组名内涵</h2>
-                    <div style="margin-bottom: 20px;border: 1px solid rgb(100, 100, 100);width: 100%;">
-                        <div class="box1">
-                            <p
-                                style="flex:1;margin: 0px 0px 0px 0px;padding-top: 50px;padding-bottom:50px ; border-right: 1px solid rgb(100, 100, 100);">
-                                组名含义</p>
-                            <p style="flex:5">"2048"是2的十一次方，当时二班群雄并起，分裂成了11个势力，“2048”象征了这个组织有着比肩整个2班的强大实力，象征了我们一统二班的决心。
-                            </p>
-                        </div>
-                        <div class="box1">
-                            <p
-                                style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
-                                组徽含义
-                            </p>
-                            <div style="flex:5;" class="box2">
-                                <p>组徽是由2048数字组成，外形像一个面具，灵感来源于三星堆考古得到的铜面具，一半青铜一半黄金，象征着过去及现在的辉煌
-                                </p><img src="图库\组徽样式.png" alt="组徽样式" width="25%">
-                            </div>
-
-                        </div>
-                    </div>
+        </div>
 
 
 
-                    <h2 class="background1" style="margin: 0px;padding: 5px;">梗与故事</h2>
-                    <div style="margin-bottom: 20px;border: 1px solid rgb(100, 100, 100);width: 100%;">
-                        <div class="box1">
-                            <p
-                                style="flex:1;margin: 0px 0px 0px 0px;padding-top: 50px;padding-bottom:50px ; border-right: 1px solid rgb(100, 100, 100);">
-                                2048的诅咒</p>
-                            <p style="flex:5">
-                                记得高一的某一天某一天，楷子在借同学的手表玩2048游戏。他一直玩儿，一直玩儿，就是活不过2048。玩儿的次数过于频繁，以至于同学们都调侃他活不过2048。由此，2048的诅咒出现。
-                            </p>
-                        </div>
-                        <div class="box1">
-                            <p
-                                style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
-                                土拨鼠的来源
-                            </p>
-                            <p style="flex:5">
-                                起初，楷子和阿潇是同桌。楷子和阿潇约定了一句口头禅，“哦，你这只愚蠢的土拨鼠”。也许是这句口头禅太过沙雕，楷子经常把它挂在嘴上，甚至写在自己的笔袋上，久而久之，在班上传了开来，他就真的成为土拨鼠了。
-                            </p>
-                        </div>
-                        <div class="box1">
-                            <p
-                                style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
-                                空洞骑士助力竞赛
-                            </p>
-                            <p style="flex:5">
-                                2048的各位大部分是由游戏互相联系在一起的，其中最重要的一个游戏就是空洞骑士。比较巧合的是，玩空洞骑士比较专注的几位成员都在各类学科竞赛中取得了优异成绩。于是我们调侃，玩空洞骑士可以促进学科竞赛能力。
-                            </p>
-                        </div>
-                        <div class="box1">
-                            <p
-                                style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
-                                消化复习</p>
-                            <p style="flex:5">egg是我们又烦人又受人爱戴的数学老师，他最常挂在嘴边的口头禅就是，消化、总结、复习、整理。依稀记得有一张吊图是egg在说“代表太阳消化你”</p>
-                        </div>
-                        <div class="box1">
-                            <p
-                                style="flex:1;margin: 0px;padding-top: 50px;padding-bottom:50px;border-right:  1px solid rgb(100, 100, 100);">
-                                奖杯</p>
-                            <p style="flex:5">老登的口头禅，类似畜生的意思，其来源大概是与jb同缩写，后来用于激动语境等多种语境，类似“你妈的”，灵活多用，可看作口癖</p>
-                        </div>
-
-
-                    </div>
-
-            </div>
-
-
-
-            <!页脚>
-                <footer
-                    style="margin-top: auto; background-color: rgb(29, 123, 123); width: 100%; text-align: center; padding: 10px 0px 10px 0px;">
-                    <p>&copy; 2024 2048组. 保留所有权利。</p>
-                </footer>
+        <!页脚>
+            <footer
+                style="margin-top: auto; background-color: rgb(29, 123, 123); width: 100%; text-align: center; padding: 10px 0px 10px 0px;">
+                <p>&copy; 2024 2048组. 保留所有权利。</p>
+            </footer>
 </body>
 
 </html>

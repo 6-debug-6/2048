@@ -64,174 +64,192 @@
         </script>
 </head>
 
-<body style="display: flex; flex-direction: column; height: 160vh; text-align: center; align-items: center;">
-    <!顶部靠右的导航栏>
-        <div style="width: 100%;background-color:rgb(29, 123, 123);">
-            <nav style="position: absolute; top: 10px; right: 10px;">
-                <a href="index.html">首页</a> |
-                <a href="game.html">游戏</a> |
-                <a href="about.html">关于我们</a>
-            </nav>
-
-            <img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
-                style="margin-top: 10px;">
-        </div>
-        <!顶部靠右但在导航栏下方的搜索框>
-            <form style=" position: absolute; top: 40px; right: 10px; display: flex; align-items: center; justify-content:
-                        center;">
-                <input type="text" placeholder="搜索..."
-                    style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
-                <button type="submit"
-                    style="padding: 5px 10px; margin-left: 5px; background-color: rgb(29, 123, 123); color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    搜索
-                </button>
-            </form>
-            <!大图>
-                <div style="background-color: rgb(121, 217, 217);border-bottom: solid rgb(29, 123, 123) 50px;"
-                    height="80px">
-                    <img src="图库\compressed-背景图1改.jpg" alt="2048大图" width="100%" height="100%">
+<body
+    style="display: flex; flex-direction: column; height: 160vh; text-align: center; align-items: center;padding-top: 56px;">
+    <!顶部导航栏和搜索框合并>
+        <div
+            style="display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
+            <div style="flex:1;color:rgb(29, 123, 123);"></div>
+            <div style="flex:1"><img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
+                    style="margin-top: 10px;"></div>
+            <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
+                <div>
+                    <!顶部靠右的导航栏>
+                        <nav>
+                            <a href="index.html">首页</a> |
+                            <a href="game.html">游戏</a> |
+                            <a href="about.html">关于我们</a>|
+                            <a href="news.html">新闻</a>
+                        </nav>
                 </div>
+                <div>
+                    <!顶部靠右但在导航栏下方的搜索框>
+                        <form style="  display: flex; align-items: center; justify-content:
+                        center;">
+                            <input type="text" placeholder="搜索..."
+                                style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            <button type="submit"
+                                style="padding: 5px 10px; margin-left: 5px; background-color: rgb(33, 159, 159); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                搜索
+                            </button>
+                        </form>
+                </div>
+            </div>
+        </div>
 
 
-                <div
-                    style="padding-right: 10px; margin-right: 25%;margin-left: 25%; border-right:   solid rgb(29, 123, 123) ;border-left:   solid rgb(29, 123, 123) ;display: flex;flex-direction: column;text-align: center;align-items: center;">
+
+
+        <!大图>
+            <div>
+                <div style="border-bottom: solid rgb(29, 123, 123) 50px;display: flex;justify-content:space-around;"
+                    height="80px">
+                    <div></div>
+                    <img src="图库\compressed-背景图1改.jpg" alt="2048大图" width="80%" height="100%">
+                    <div></div>
+                </div>
+            </div>
+
+
+            <div
+                style="padding-right: 10px; margin-right: 25%;margin-left: 25%; border-right:   solid rgb(29, 123, 123) ;border-left:   solid rgb(29, 123, 123) ;display: flex;flex-direction: column;text-align: center;align-items: center;">
 
 
 
 
 
-                    <!2048介绍>
-                        <div style="display: flex; justify-content:space-around;margin-bottom: 0px;">
+                <!2048介绍>
+                    <div style="display: flex; justify-content:space-around;margin-bottom: 0px;">
 
-                            <p class="background1" style="width:  100px;margin-bottom: 0px;">2048介绍</p>
+                        <p class="background1" style="width:  100px;margin-bottom: 0px;">2048介绍</p>
+
+                    </div>
+                    <div style="display: flex;justify-content: center;width: 100%;">
+                        <div class="flex">
+
+                            <p>2048组是由2025届油豆中学的十名优秀学生组成的一个神秘组织<br>
+                                该组织从事桌游制作，玩梗，搞抽象等等领域<br>
+                                对当今的国际局势有着深远的影响<br>
+                                本网页秉持着尊重隐私的原则，在不透露绝大部分人的真名的前提下，为访客介绍该组织的故事</p>
+
+
+                        </div>
+                    </div>
+                    <!2048历史>
+                        <div style="display: flex; justify-content:space-around;">
+
+                            <p class="background1" style=" width: 100px;margin-bottom: 0px;">2048历史</p>
 
                         </div>
                         <div style="display: flex;justify-content: center;width: 100%;">
-                            <div class="flex">
 
-                                <p>2048组是由2025届油豆中学的十名优秀学生组成的一个神秘组织<br>
-                                    该组织从事桌游制作，玩梗，搞抽象等等领域<br>
-                                    对当今的国际局势有着深远的影响<br>
-                                    本网页秉持着尊重隐私的原则，在不透露绝大部分人的真名的前提下，为访客介绍该组织的故事</p>
-
-
+                            <div class="flex" style="flex-direction: column;">
+                                <p>2048组成立于2024年秋季学期初<br>
+                                    当时的高三2班时局动荡，人心惶惶，班级分裂为11个小团体，各个团体明争暗斗，极力拓展自身在班级里的势力范围，2048组正是其中之一。但和其他团体不同的是，
+                                    2048组是一个充满爱与正义的组织，他们为天下饥民带来了温暖与希望，笑语和欢歌（我瞎几把乱说的）<br>
+                                    最初，2048组只有六名成员，
+                                    他们分别是阿潇、扬洲、洛阳城、绫华的老公、老登和pc。
+                                    他们志同道合，决定联合起来，共同应对班级内的各种挑战，
+                                    他们的目标是通过团结合作，提升整个班级的凝聚力</p>
+                                <p>但是，社会环境险恶，2048组并非一帆风顺，
+                                    他们经历了无数次的挫折和考验，为了应对外部的压力，
+                                    他们不断壮大自己的队伍，吸纳隔壁1班有才华的成员加入。
+                                    截至2024年6月，2048组共有十名成员。
+                                    新增的成员包括楷子、金姐、可凡和黄牛，
+                                    是个人分别在不同领域展现出卓越的才能，
+                                    包括编程、设计、写作等。<br>
+                                    高考之后，虽然各个成员去往了不同的大学，
+                                    但他们依然保持着紧密的联系，继续为2048组的发展贡献自己的力量。</p>
                             </div>
                         </div>
-                        <!2048历史>
+                        <!2048新闻>
                             <div style="display: flex; justify-content:space-around;">
 
-                                <p class="background1" style=" width: 100px;margin-bottom: 0px;">2048历史</p>
+                                <p class="background1" style=" width: 100px; margin-bottom: 0px;">2048新闻</p>
 
                             </div>
-                            <div style="display: flex;justify-content: center;width: 100%;">
+                            <div style="display: flex;justify-content: center;margin-bottom: 16px;width: 100%;">
+                                <div class="flex" style="margin-top: 0px;">
+                                    <p>下次这个板块要换个位置，移到侧面</p>
+                                    <p></p>
+                                    <p></p>
 
-                                <div class="flex" style="flex-direction: column;">
-                                    <p>2048组成立于2024年秋季学期初<br>
-                                        当时的高三2班时局动荡，人心惶惶，班级分裂为11个小团体，各个团体明争暗斗，极力拓展自身在班级里的势力范围，2048组正是其中之一。但和其他团体不同的是，
-                                        2048组是一个充满爱与正义的组织，他们为天下饥民带来了温暖与希望，笑语和欢歌（我瞎几把乱说的）<br>
-                                        最初，2048组只有六名成员，
-                                        他们分别是阿潇、扬洲、洛阳城、绫华的老公、老登和pc。
-                                        他们志同道合，决定联合起来，共同应对班级内的各种挑战，
-                                        他们的目标是通过团结合作，提升整个班级的凝聚力</p>
-                                    <p>但是，社会环境险恶，2048组并非一帆风顺，
-                                        他们经历了无数次的挫折和考验，为了应对外部的压力，
-                                        他们不断壮大自己的队伍，吸纳隔壁1班有才华的成员加入。
-                                        截至2024年6月，2048组共有十名成员。
-                                        新增的成员包括楷子、金姐、可凡和黄牛，
-                                        是个人分别在不同领域展现出卓越的才能，
-                                        包括编程、设计、写作等。<br>
-                                        高考之后，虽然各个成员去往了不同的大学，
-                                        但他们依然保持着紧密的联系，继续为2048组的发展贡献自己的力量。</p>
                                 </div>
                             </div>
-                            <!2048新闻>
-                                <div style="display: flex; justify-content:space-around;">
+                            <!2048成员>
+                                <div style="display: flex; justify-content:space-around;margin-bottom: 0px; ">
 
-                                    <p class="background1" style=" width: 100px; margin-bottom: 0px;">2048新闻</p>
+                                    <p class="background1" style=" width: 100px;margin: 0px;">2048成员</p>
 
                                 </div>
-                                <div style="display: flex;justify-content: center;margin-bottom: 16px;width: 100%;">
-                                    <div class="flex" style="margin-top: 0px;">
-                                        <p>下次这个板块要换个位置，移到侧面</p>
-                                        <p></p>
-                                        <p></p>
-
+                                <div style="display: flex;justify-content: center;margin-top: 0px;width: 100%;">
+                                    <div class="flex">
+                                        <div>
+                                            <p><b>组长：</b>阿潇</p>
+                                            <p><b>副组长：</b>扬洲</p>
+                                            <p><b>首席外交官:</b>洛阳城</p>
+                                            <p><b>艺术总监</b>：绫华的老公</p>
+                                            <p><b>后勤部部长:</b>老登</p>
+                                        </div>
+                                        <div>
+                                            <p><b>骨干精英:</b>pc</p>
+                                            <p><b>吉祥物:</b>楷子</p>
+                                            <p><b>大国工匠:</b>金姐</p>
+                                            <p><b>氟化钾：</b>可凡</p>
+                                            <p><b>老实人：</b>黄牛</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <!2048成员>
-                                    <div style="display: flex; justify-content:space-around;margin-bottom: 0px; ">
+                                <!2048关系网>
+                                    <div style="display: flex; justify-content:space-around;">
 
-                                        <p class="background1" style=" width: 100px;margin: 0px;">2048成员</p>
+
+                                        <p class="background1" style=" width: 100px;margin-bottom: 0px;">2048关系网</p>
+
 
                                     </div>
-                                    <div style="display: flex;justify-content: center;margin-top: 0px;width: 100%;">
+                                    <div style="display: flex;justify-content: center;width: 100%;">
+
                                         <div class="flex">
                                             <div>
-                                                <p><b>组长：</b>阿潇</p>
-                                                <p><b>副组长：</b>扬洲</p>
-                                                <p><b>首席外交官:</b>洛阳城</p>
-                                                <p><b>艺术总监</b>：绫华的老公</p>
-                                                <p><b>后勤部部长:</b>老登</p>
-                                            </div>
-                                            <div>
-                                                <p><b>骨干精英:</b>pc</p>
-                                                <p><b>吉祥物:</b>楷子</p>
-                                                <p><b>大国工匠:</b>金姐</p>
-                                                <p><b>氟化钾：</b>可凡</p>
-                                                <p><b>老实人：</b>黄牛</p>
+                                                <p><img src="图库\1班蹭饭图.jpg" alt="2048关系网" width="50%"><img
+                                                        src="图库\2班蹭饭图.jpg" alt="2048关系网" width="50%"> </p>
+
+                                                <p class="poem-style">粉笔灰扬黑板右，下课铃追，打闹人堆走。食堂黄昏粥尚烫，篮球撞破春衫袖。<br>
+                                                    短信忽来屏幕亮，各有远方，书信参差瘦。合影当时挨得够，相见如今谁与共？</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <!2048关系网>
-                                        <div style="display: flex; justify-content:space-around;">
-
-
-                                            <p class="background1" style=" width: 100px;margin-bottom: 0px;">2048关系网</p>
-
-
-                                        </div>
-                                        <div style="display: flex;justify-content: center;width: 100%;">
-
-                                            <div class="flex">
-                                                <div>
-                                                    <p><img src="图库\1班蹭饭图.jpg" alt="2048关系网" width="50%"><img
-                                                            src="图库\2班蹭饭图.jpg" alt="2048关系网" width="50%"> </p>
-
-                                                    <p class="poem-style">粉笔灰扬黑板右，下课铃追，打闹人堆走。食堂黄昏粥尚烫，篮球撞破春衫袖。<br>
-                                                        短信忽来屏幕亮，各有远方，书信参差瘦。合影当时挨得够，相见如今谁与共？</p>
-                                                </div>
+                                    <!点击计数器>
+                                        <div style="display: flex; justify-content:space-around; height: 31px;">
+                                            <div
+                                                style="border: 2px solid rgb(29, 123, 123); width: 100%; height: 150px; padding: 10px; margin: 10px;">
+                                                <p>点击计数器</p>
+                                                <p>注意！每当这个按钮被点击2048次，这个世界上就会有一只无辜的土拨鼠死去！！！</p>
+                                                <button id="clickButton">点击我！</button>
+                                                <p>按钮已被点击 <span id="clickCount">0</span> 次。</p>
                                             </div>
                                         </div>
-                                        <!点击计数器>
-                                            <div style="display: flex; justify-content:space-around; height: 31px;">
-                                                <div
-                                                    style="border: 2px solid rgb(29, 123, 123); width: 100%; height: 150px; padding: 10px; margin: 10px;">
-                                                    <p>点击计数器</p>
-                                                    <p>注意！每当这个按钮被点击2048次，这个世界上就会有一只无辜的土拨鼠死去！！！</p>
-                                                    <button id="clickButton">点击我！</button>
-                                                    <p>按钮已被点击 <span id="clickCount">0</span> 次。</p>
-                                                </div>
+                                        <!暂时无用>
+
+                                            <div
+                                                style="display: flex; justify-content:space-around;margin-top:280px ;width: 100%;background-color: rgb(239, 243, 243);">
+
+
+                                                <p></p>
+
+
                                             </div>
-                                            <!暂时无用>
-
-                                                <div
-                                                    style="display: flex; justify-content:space-around;margin-top:280px ;width: 100%;background-color: rgb(239, 243, 243);">
-
-
-                                                    <p></p>
-
-
-                                                </div>
 
 
 
-                </div>
+            </div>
 
-                <!页脚>
-                    <footer
-                        style="margin-top: auto;  width: 100%; text-align: center; padding: 10px 0px 10px 0px;background-color:rgb(29, 123, 123);">
-                        <p>&copy; 2024 2048组. 保留所有权利。</p>
-                    </footer>
+            <!页脚>
+                <footer
+                    style="margin-top: auto;  width: 100%; text-align: center; padding: 10px 0px 10px 0px;background-color:rgb(29, 123, 123);">
+                    <p>&copy; 2024 2048组. 保留所有权利。</p>
+                </footer>
 
 
 </body>
