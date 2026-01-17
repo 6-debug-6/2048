@@ -330,8 +330,8 @@
         <h2>打砖块小游戏</h2>
         <canvas id="gameCanvas" width="800" height="600"></canvas>
         <div>
-            <button onclick="startGame()">开始游戏</button>
-            <button onclick="pauseGame()">暂停</button>
+            <button onclick="startBrickGame()">开始游戏</button> <!-- 改为 startBrickGame -->
+            <button onclick="pauseBrickGame()">暂停</button> <!-- 改为 pauseBrickGame -->
             <span id="score">得分: 0</span>
             <span id="lives">生命: 3</span>
         </div>
@@ -341,7 +341,7 @@
             const ctx0 = canvas0.getContext('2d');
 
             // 游戏状态
-            const gameState = {
+            const brickGameState = {  // 改为 brickGameState
                 score: 0,
                 lives: 3,
                 isRunning: false,
@@ -353,7 +353,7 @@
 
             // 初始化砖块
             function initBricks() {
-                gameState.bricks = [];
+                brickGameState.bricks = [];
                 const brickRows = 5;
                 const brickCols = 10;
                 const brickWidth = 70;
@@ -366,7 +366,7 @@
                     for (let c = 0; c < brickCols; c++) {
                         const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
                         const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
-                        gameState.bricks.push({
+                        brickGameState.bricks.push({
                             x: brickX,
                             y: brickY,
                             width: brickWidth,
@@ -379,24 +379,24 @@
             }
 
             // 绘制函数
-            function draw() {
+            function drawBrickGame() {  // 改为 drawBrickGame
                 // 清空画布
                 ctx0.clearRect(0, 0, canvas0.width, canvas0.height);
 
                 // 绘制球
                 ctx0.beginPath();
-                ctx0.arc(gameState.ball.x, gameState.ball.y, gameState.ball.radius, 0, Math.PI * 2);
+                ctx0.arc(brickGameState.ball.x, brickGameState.ball.y, brickGameState.ball.radius, 0, Math.PI * 2);
                 ctx0.fillStyle = '#FF6B6B';
                 ctx0.fill();
                 ctx0.closePath();
 
                 // 绘制挡板
                 ctx0.fillStyle = '#4ECDC4';
-                ctx0.fillRect(gameState.paddle.x, canvas0.height - 20,
-                    gameState.paddle.width, gameState.paddle.height);
+                ctx0.fillRect(brickGameState.paddle.x, canvas0.height - 20,
+                    brickGameState.paddle.width, brickGameState.paddle.height);
 
                 // 绘制砖块
-                gameState.bricks.forEach(brick => {
+                brickGameState.bricks.forEach(brick => {
                     if (brick.visible) {
                         ctx0.fillStyle = brick.color;
                         ctx0.fillRect(brick.x, brick.y, brick.width, brick.height);
@@ -408,10 +408,10 @@
                 // 绘制游戏信息
                 ctx0.font = '16px Arial';
                 ctx0.fillStyle = '#333';
-                ctx0.fillText(`得分: ${gameState.score}`, 10, 20);
-                ctx0.fillText(`生命: ${gameState.lives}`, 100, 20);
+                ctx0.fillText(`得分: ${brickGameState.score}`, 10, 20);
+                ctx0.fillText(`生命: ${brickGameState.lives}`, 100, 20);
 
-                if (!gameState.isRunning) {
+                if (!brickGameState.isRunning) {
                     ctx0.font = '40px Arial';
                     ctx0.fillStyle = '#FF6B6B';
                     ctx0.textAlign = 'center';
@@ -421,61 +421,62 @@
             }
 
             // 更新函数
-            function update() {
-                if (gameState.isPaused || !gameState.isRunning) return;
+            function updateBrickGame() {  // 改为 updateBrickGame
+                if (brickGameState.isPaused || !brickGameState.isRunning) return;
 
                 // 移动球
-                gameState.ball.x += gameState.ball.dx;
-                gameState.ball.y += gameState.ball.dy;
+                brickGameState.ball.x += brickGameState.ball.dx;
+                brickGameState.ball.y += brickGameState.ball.dy;
 
                 // 墙壁碰撞检测
-                if (gameState.ball.x + gameState.ball.radius > canvas0.width ||
-                    gameState.ball.x - gameState.ball.radius < 0) {
-                    gameState.ball.dx = -gameState.ball.dx;
+                if (brickGameState.ball.x + brickGameState.ball.radius > canvas0.width ||
+                    brickGameState.ball.x - brickGameState.ball.radius < 0) {
+                    brickGameState.ball.dx = -brickGameState.ball.dx;
                 }
 
-                if (gameState.ball.y - gameState.ball.radius < 0) {
-                    gameState.ball.dy = -gameState.ball.dy;
+                if (brickGameState.ball.y - brickGameState.ball.radius < 0) {
+                    brickGameState.ball.dy = -brickGameState.ball.dy;
                 }
 
                 // 掉落检测
-                if (gameState.ball.y + gameState.ball.radius > canvas0.height) {
-                    gameState.lives--;
-                    if (gameState.lives <= 0) {
-                        gameOver();
+                if (brickGameState.ball.y + brickGameState.ball.radius > canvas0.height) {
+                    brickGameState.lives--;
+                    document.getElementById('lives').textContent = `生命: ${brickGameState.lives}`;
+                    if (brickGameState.lives <= 0) {
+                        brickGameOver();  // 改为 brickGameOver
                     } else {
-                        resetBall();
+                        resetBrickBall();  // 改为 resetBrickBall
                     }
                 }
 
                 // 挡板碰撞检测
-                if (gameState.ball.y + gameState.ball.radius > canvas0.height - 20 &&
-                    gameState.ball.y - gameState.ball.radius < canvas0.height &&
-                    gameState.ball.x > gameState.paddle.x &&
-                    gameState.ball.x < gameState.paddle.x + gameState.paddle.width) {
+                if (brickGameState.ball.y + brickGameState.ball.radius > canvas0.height - 20 &&
+                    brickGameState.ball.y - brickGameState.ball.radius < canvas0.height &&
+                    brickGameState.ball.x > brickGameState.paddle.x &&
+                    brickGameState.ball.x < brickGameState.paddle.x + brickGameState.paddle.width) {
 
                     // 根据击中挡板的位置改变反弹角度
-                    const hitPos = (gameState.ball.x - gameState.paddle.x) / gameState.paddle.width;
-                    gameState.ball.dx = 10 * (hitPos - 0.5);
-                    gameState.ball.dy = -Math.abs(gameState.ball.dy);
+                    const hitPos = (brickGameState.ball.x - brickGameState.paddle.x) / brickGameState.paddle.width;
+                    brickGameState.ball.dx = 10 * (hitPos - 0.5);
+                    brickGameState.ball.dy = -Math.abs(brickGameState.ball.dy);
                 }
 
                 // 砖块碰撞检测
-                gameState.bricks.forEach(brick => {
+                brickGameState.bricks.forEach(brick => {
                     if (brick.visible) {
-                        if (gameState.ball.x > brick.x &&
-                            gameState.ball.x < brick.x + brick.width &&
-                            gameState.ball.y > brick.y &&
-                            gameState.ball.y < brick.y + brick.height) {
+                        if (brickGameState.ball.x > brick.x &&
+                            brickGameState.ball.x < brick.x + brick.width &&
+                            brickGameState.ball.y > brick.y &&
+                            brickGameState.ball.y < brick.y + brick.height) {
 
-                            gameState.ball.dy = -gameState.ball.dy;
+                            brickGameState.ball.dy = -brickGameState.ball.dy;
                             brick.visible = false;
-                            gameState.score += 10;
-                            document.getElementById('score').textContent = `得分: ${gameState.score}`;
+                            brickGameState.score += 10;
+                            document.getElementById('score').textContent = `得分: ${brickGameState.score}`;
 
                             // 检查是否胜利
-                            if (gameState.bricks.every(b => !b.visible)) {
-                                winGame();
+                            if (brickGameState.bricks.every(b => !b.visible)) {
+                                brickWinGame();  // 改为 brickWinGame
                             }
                         }
                     }
@@ -483,490 +484,491 @@
             }
 
             // 重置球的位置
-            function resetBall() {
-                gameState.ball.x = canvas0.width / 2;
-                gameState.ball.y = canvas0.height - 30;
-                gameState.ball.dx = 4;
-                gameState.ball.dy = -4;
+            function resetBrickBall() {  // 改为 resetBrickBall
+                brickGameState.ball.x = canvas0.width / 2;
+                brickGameState.ball.y = canvas0.height - 30;
+                brickGameState.ball.dx = 4;
+                brickGameState.ball.dy = -4;
             }
 
             // 游戏结束
-            function gameOver() {
-                gameState.isRunning = false;
-                alert(`游戏结束！最终得分: ${gameState.score}`);
+            function brickGameOver() {  // 改为 brickGameOver
+                brickGameState.isRunning = false;
+                alert(`游戏结束！最终得分: ${brickGameState.score}`);
                 document.getElementById('lives').textContent = `生命: 3`;
             }
 
             // 胜利
-            function winGame() {
-                gameState.isRunning = false;
-                alert(`恭喜你赢了！最终得分: ${gameState.score}`);
+            function brickWinGame() {  // 改为 brickWinGame
+                brickGameState.isRunning = false;
+                alert(`恭喜你赢了！最终得分: ${brickGameState.score}`);
             }
 
             // 鼠标移动控制挡板
             canvas0.addEventListener('mousemove', function (event) {
-                if (!gameState.isRunning) return;
+                if (!brickGameState.isRunning) return;
 
                 const rect = canvas0.getBoundingClientRect();
                 const mouseX = event.clientX - rect.left;
-                gameState.paddle.x = Math.max(
+                brickGameState.paddle.x = Math.max(
                     0,
-                    Math.min(mouseX - gameState.paddle.width / 2, canvas0.width - gameState.paddle.width)
+                    Math.min(mouseX - brickGameState.paddle.width / 2, canvas0.width - brickGameState.paddle.width)
                 );
             });
 
             // 控制函数
-            function startGame() {
-                if (!gameState.isRunning) {
-                    gameState.score = 0;
-                    gameState.lives = 3;
-                    gameState.isRunning = true;
-                    gameState.isPaused = false;
+            function startBrickGame() {  // 改为 startBrickGame
+                if (!brickGameState.isRunning) {
+                    brickGameState.score = 0;
+                    brickGameState.lives = 3;
+                    brickGameState.isRunning = true;
+                    brickGameState.isPaused = false;
                     initBricks();
-                    resetBall();
-                    document.getElementById('score').textContent = `得分: ${gameState.score}`;
-                    document.getElementById('lives').textContent = `生命: ${gameState.lives}`;
+                    resetBrickBall();  // 改为 resetBrickBall
+                    document.getElementById('score').textContent = `得分: ${brickGameState.score}`;
+                    document.getElementById('lives').textContent = `生命: ${brickGameState.lives}`;
                 }
             }
 
-            function pauseGame() {
-                if (gameState.isRunning) {
-                    gameState.isPaused = !gameState.isPaused;
+            function pauseBrickGame() {  // 改为 pauseBrickGame
+                if (brickGameState.isRunning) {
+                    brickGameState.isPaused = !brickGameState.isPaused;
                 }
             }
 
             // 游戏循环
-            function gameLoop() {
-                update();
-                draw();
-                requestAnimationFrame(gameLoop);
+            function brickGameLoop() {  // 改为 brickGameLoop
+                updateBrickGame();      // 改为 updateBrickGame
+                drawBrickGame();        // 改为 drawBrickGame
+                requestAnimationFrame(brickGameLoop);
             }
 
             // 初始化
             initBricks();
-            gameLoop();
+            brickGameLoop();
         </script>
     </article>
-</body>
 
-<article>
-    <h2>粒子系统效果展示</h2>
-    <!--粒子系统-->
-    <canvas id="particleCanvas" width="800" height="500"></canvas>
-    <div>
-        <button onclick="addParticles(100)">添加粒子</button>
-        <button onclick="clearAllParticles()">清除所有粒子</button>
-        <button onclick="toggleGravity()">切换重力</button>
-        <button onclick="toggleInteraction()">切换交互模式</button>
-    </div>
 
-    <script>
-        const canvas1 = document.getElementById('particleCanvas');
-        const ctx1 = canvas1.getContext('2d');
+    <article>
+        <h2>粒子系统效果展示</h2>
+        <!--粒子系统-->
+        <canvas id="particleCanvas" width="800" height="500"></canvas>
+        <div>
+            <button onclick="addParticles(100)">添加粒子</button>
+            <button onclick="clearAllParticles()">清除所有粒子</button>
+            <button onclick="toggleGravity()">切换重力</button>
+            <button onclick="toggleInteraction()">切换交互模式</button>
+        </div>
 
-        // 粒子系统
-        const particles = [];
-        let gravityEnabled = false;
-        let interactionEnabled = true;
+        <script>
+            const canvas1 = document.getElementById('particleCanvas');
+            const ctx1 = canvas1.getContext('2d');
 
-        // 粒子类
-        class Particle {
-            constructor(x, y) {
-                this.x = x; 1
-                this.y = y;
-                this.size = Math.random() * 5 + 1;
-                this.speedX = Math.random() * 3 - 1.5;
-                this.speedY = Math.random() * 3 - 1.5;
-                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                this.life = 100; // 粒子寿命
-            }
+            // 粒子系统
+            const particles = [];
+            let gravityEnabled = false;
+            let interactionEnabled = true;
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (gravityEnabled) {
-                    this.speedY += 0.05; // 重力
+            // 粒子类
+            class Particle {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.size = Math.random() * 5 + 1;
+                    this.speedX = Math.random() * 3 - 1.5;
+                    this.speedY = Math.random() * 3 - 1.5;
+                    this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    this.life = 100; // 粒子寿命
                 }
 
-                // 边界反弹
-                if (this.x <= 0 || this.x >= canvas1.width) {
-                    this.speedX = -this.speedX * 0.9; // 能量损失
-                }
-                if (this.y <= 0 || this.y >= canvas1.height) {
-                    this.speedY = -this.speedY * 0.9;
-                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
 
-                // 粒子寿命减少
-                this.life -= 0.5;
-                this.size *= 0.995; // 逐渐缩小
-            }
-
-            draw() {
-                ctx1.fillStyle = this.color;
-                ctx1.beginPath();
-                ctx1.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx1.fill();
-
-                // 添加发光效果
-                ctx1.shadowColor = this.color;
-                ctx1.shadowBlur = 10;
-                ctx1.fill();
-                ctx1.shadowBlur = 0;
-            }
-        }
-
-        // 添加粒子
-        function addParticles(count) {
-            for (let i = 0; i < count; i++) {
-                const x = Math.random() * canvas1.width;
-                const y = Math.random() * canvas1.height;
-                particles.push(new Particle(x, y));
-            }
-        }
-
-        // 绘制粒子间的连线
-        function drawConnections() {
-            const connectionDistance = 100;
-
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < connectionDistance) {
-                        const opacity = 1 - distance / connectionDistance;
-                        ctx1.beginPath();
-                        ctx1.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.5})`;
-                        ctx1.lineWidth = 1;
-                        ctx1.moveTo(particles[i].x, particles[i].y);
-                        ctx1.lineTo(particles[j].x, particles[j].y);
-                        ctx1.stroke();
+                    if (gravityEnabled) {
+                        this.speedY += 0.05; // 重力
                     }
+
+                    // 边界反弹
+                    if (this.x <= 0 || this.x >= canvas1.width) {
+                        this.speedX = -this.speedX * 0.9; // 能量损失
+                    }
+                    if (this.y <= 0 || this.y >= canvas1.height) {
+                        this.speedY = -this.speedY * 0.9;
+                    }
+
+                    // 粒子寿命减少
+                    this.life -= 0.5;
+                    this.size *= 0.995; // 逐渐缩小
+                }
+
+                draw() {
+                    ctx1.fillStyle = this.color;
+                    ctx1.beginPath();
+                    ctx1.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx1.fill();
+
+                    // 添加发光效果
+                    ctx1.shadowColor = this.color;
+                    ctx1.shadowBlur = 10;
+                    ctx1.fill();
+                    ctx1.shadowBlur = 0;
                 }
             }
-        }
 
-        // 动画循环
-        function animateParticles() {
-            // 半透明黑色背景，产生拖尾效果
-            ctx1.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
-
-            // 更新和绘制粒子
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                // 移除生命周期结束的粒子
-                if (particles[i].life <= 0 || particles[i].size < 0.1) {
-                    particles.splice(i, 1);
-                    i--;
+            // 添加粒子
+            function addParticles(count) {
+                for (let i = 0; i < count; i++) {
+                    const x = Math.random() * canvas1.width;
+                    const y = Math.random() * canvas1.height;
+                    particles.push(new Particle(x, y));
                 }
             }
 
             // 绘制粒子间的连线
-            drawConnections();
+            function drawConnections() {
+                const connectionDistance = 100;
 
-            requestAnimationFrame(animateParticles);
-        }
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // 鼠标交互
-        canvas1.addEventListener('mousemove', function (event) {
-            if (!interactionEnabled) return;
-
-            const rect = canvas1.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            // 鼠标附近添加粒子
-            for (let i = 0; i < 3; i++) {
-                particles.push(new Particle(
-                    x + Math.random() * 20 - 10,
-                    y + Math.random() * 20 - 10
-                ));
-            }
-
-            // 给附近的粒子施加力
-            for (let particle of particles) {
-                const dx = particle.x - x;
-                const dy = particle.y - y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 100) {
-                    const force = 100 / distance;
-                    particle.speedX += dx / distance * force * 0.1;
-                    particle.speedY += dy / distance * force * 0.1;
+                        if (distance < connectionDistance) {
+                            const opacity = 1 - distance / connectionDistance;
+                            ctx1.beginPath();
+                            ctx1.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.5})`;
+                            ctx1.lineWidth = 1;
+                            ctx1.moveTo(particles[i].x, particles[i].y);
+                            ctx1.lineTo(particles[j].x, particles[j].y);
+                            ctx1.stroke();
+                        }
+                    }
                 }
             }
-        });
 
-        // 控制函数
-        function clearAllParticles() {
-            particles.length = 0;
-        }
+            // 动画循环
+            function animateParticles() {
+                // 半透明黑色背景，产生拖尾效果
+                ctx1.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
 
-        function toggleGravity() {
-            gravityEnabled = !gravityEnabled;
-        }
+                // 更新和绘制粒子
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
 
-        function toggleInteraction() {
-            interactionEnabled = !interactionEnabled;
-        }
-
-        // 初始添加一些粒子
-        addParticles(50);
-
-        // 开始动画
-        animateParticles();
-    </script>
-</article>
-<article>
-    <!--弹跳球动画-->
-    <h2>弹跳球动画</h2>
-    <canvas id="animationCanvas" width="600" height="400"></canvas>
-    <button onclick="toggleAnimation()">暂停/继续</button>
-
-    <script>
-        const canvas2 = document.getElementById('animationCanvas');
-        const ctx2 = canvas2.getContext('2d');
-
-        // 球的状态
-        const ball = {
-            x: 100,
-            y: 100,
-            radius: 30,
-            dx: 5,  // x轴速度
-            dy: 4,  // y轴速度
-            color: '#FF6B6B'
-        };
-
-        // 动画控制
-        let animationId = null;
-        let isAnimating = true;
-
-        // 绘制函数
-        function drawBall() {
-            ctx2.beginPath();
-            ctx2.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx2.fillStyle = ball.color;
-            ctx2.fill();
-            ctx2.strokeStyle = '#333';
-            ctx2.stroke();
-        }
-
-        // 更新函数
-        function update() {
-            // 清空画布（带透明效果）
-            ctx2.fillStyle = 'rgba(255, 255, 255, 0.2)';
-            ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
-
-            // 更新球的位置
-            ball.x += ball.dx;
-            ball.y += ball.dy;
-
-            // 边界检测
-            if (ball.x + ball.radius > canvas2.width || ball.x - ball.radius < 0) {
-                ball.dx = -ball.dx;
-                ball.color = getRandomColor();
-            }
-
-            if (ball.y + ball.radius > canvas2.height || ball.y - ball.radius < 0) {
-                ball.dy = -ball.dy;
-                ball.color = getRandomColor();
-            }
-
-            drawBall();
-        }
-
-        // 随机颜色
-        function getRandomColor() {
-            const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#06D6A0', '#118AB2', '#EF476F'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        // 动画循环
-        function animate() {
-            update();
-            if (isAnimating) {
-                animationId = requestAnimationFrame(animate);
-            }
-        }
-
-        // 控制函数
-        function toggleAnimation() {
-            isAnimating = !isAnimating;
-            if (isAnimating) {
-                animate();
-            } else {
-                cancelAnimationFrame(animationId);
-            }
-        }
-
-        // 鼠标交互：点击改变球的位置
-        canvas2.addEventListener('click', function (event) {
-            const rect = canvas2.getBoundingClientRect();
-            ball.x = event.clientX - rect.left;
-            ball.y = event.clientY - rect.top;
-            ball.color = getRandomColor();
-        });
-
-        // 开始动画
-        animate();
-    </script>
-</article>
-<article>
-    <!--绘图板-->
-    <h2>绘图板</h2>
-    <canvas id="drawingCanvas" width="800" height="500"></canvas>
-    <div>
-        <button onclick="clearCanvas()">清空</button>
-        <input type="color" id="colorPicker" value="#000000">
-        <input type="range" id="brushSize" min="1" max="50" value="5">
-        <span id="brushSizeValue">5px</span>
-        <button onclick="changeBrushType('round')">圆形笔刷</button>
-        <button onclick="changeBrushType('square')">方形笔刷</button>
-        <button onclick="changeBrushType('eraser')">橡皮擦</button>
-    </div>
-
-    <script>
-        const canvas3 = document.getElementById('drawingCanvas');
-        const ctx3 = canvas3.getContext('2d');
-
-        // 初始化画布为白色
-        ctx3.fillStyle = 'white';
-        ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
-
-        // 绘画状态
-        const drawingState = {
-            isDrawing: false,
-            lastX: 0,
-            lastY: 0,
-            brushColor: '#000000',
-            brushSize: 5,
-            brushType: 'round'
-        };
-
-        // 更新画笔大小显示
-        document.getElementById('brushSize').addEventListener('input', function (e) {
-            drawingState.brushSize = parseInt(e.target.value);
-            document.getElementById('brushSizeValue').textContent = e.target.value + 'px';
-        });
-
-        // 更新颜色
-        document.getElementById('colorPicker').addEventListener('input', function (e) {
-            drawingState.brushColor = e.target.value;
-        });
-
-        // 鼠标事件处理
-        canvas3.addEventListener('mousedown', startDrawing);
-        canvas3.addEventListener('mousemove', draw);
-        canvas3.addEventListener('mouseup', stopDrawing);
-        canvas3.addEventListener('mouseout', stopDrawing);
-
-        // 触摸屏支持
-        canvas3.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas3.dispatchEvent(mouseEvent);
-        });
-
-        canvas3.addEventListener('touchmove', function (e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas3.dispatchEvent(mouseEvent);
-        });
-
-        canvas3.addEventListener('touchend', function (e) {
-            e.preventDefault();
-            const mouseEvent = new MouseEvent('mouseup', {});
-            canvas3.dispatchEvent(mouseEvent);
-        });
-
-        function startDrawing(e) {
-            drawingState.isDrawing = true;
-            [drawingState.lastX, drawingState.lastY] = getMousePos(canvas, e);
-        }
-
-        function draw(e) {
-            if (!drawingState.isDrawing) return;
-
-            e.preventDefault();
-
-            const [currentX, currentY] = getMousePos(canvas3, e);
-
-            // 设置绘图样式
-            ctx3.strokeStyle = drawingState.brushColor;
-            ctx3.lineWidth = drawingState.brushSize;
-            ctx3.lineCap = 'round';
-            ctx3.lineJoin = 'round';
-
-            // 橡皮擦模式
-            if (drawingState.brushType === 'eraser') {
-                ctx3.globalCompositeOperation = 'destination-out';
-                ctx3.lineWidth = drawingState.brushSize * 2;
-            } else {
-                ctx3.globalCompositeOperation = 'source-over';
-            }
-
-            // 开始绘制路径
-            ctx3.beginPath();
-            ctx3.moveTo(drawingState.lastX, drawingState.lastY);
-            ctx3.lineTo(currentX, currentY);
-            ctx3.stroke();
-
-            // 如果是方形笔刷，额外绘制矩形
-            if (drawingState.brushType === 'square') {
-                ctx3.fillStyle = drawingState.brushColor;
-                if (drawingState.brushType === 'eraser') {
-                    ctx3.globalCompositeOperation = 'destination-out';
+                    // 移除生命周期结束的粒子
+                    if (particles[i].life <= 0 || particles[i].size < 0.1) {
+                        particles.splice(i, 1);
+                        i--;
+                    }
                 }
-                ctx3.fillRect(
-                    currentX - drawingState.brushSize / 2,
-                    currentY - drawingState.brushSize / 2,
-                    drawingState.brushSize,
-                    drawingState.brushSize
-                );
+
+                // 绘制粒子间的连线
+                drawConnections();
+
+                requestAnimationFrame(animateParticles);
             }
 
-            // 更新最后位置
-            [drawingState.lastX, drawingState.lastY] = [currentX, currentY];
-        }
+            // 鼠标交互
+            canvas1.addEventListener('mousemove', function (event) {
+                if (!interactionEnabled) return;
 
-        function stopDrawing() {
-            drawingState.isDrawing = false;
-        }
+                const rect = canvas1.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
 
-        // 获取鼠标在canvas上的位置
-        function getMousePos(canvas, evt) {
-            const rect = canvas.getBoundingClientRect();
-            return [
-                evt.clientX - rect.left,
-                evt.clientY - rect.top
-            ];
-        }
+                // 鼠标附近添加粒子
+                for (let i = 0; i < 3; i++) {
+                    particles.push(new Particle(
+                        x + Math.random() * 20 - 10,
+                        y + Math.random() * 20 - 10
+                    ));
+                }
 
-        // 改变笔刷类型
-        function changeBrushType(type) {
-            drawingState.brushType = type;
-        }
+                // 给附近的粒子施加力
+                for (let particle of particles) {
+                    const dx = particle.x - x;
+                    const dy = particle.y - y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // 清空画布
-        function clearCanvas() {
+                    if (distance < 100) {
+                        const force = 100 / distance;
+                        particle.speedX += dx / distance * force * 0.1;
+                        particle.speedY += dy / distance * force * 0.1;
+                    }
+                }
+            });
+
+            // 控制函数
+            function clearAllParticles() {
+                particles.length = 0;
+            }
+
+            function toggleGravity() {
+                gravityEnabled = !gravityEnabled;
+            }
+
+            function toggleInteraction() {
+                interactionEnabled = !interactionEnabled;
+            }
+
+            // 初始添加一些粒子
+            addParticles(50);
+
+            // 开始动画
+            animateParticles();
+        </script>
+    </article>
+    <article>
+        <!--弹跳球动画-->
+        <h2>弹跳球动画</h2>
+        <canvas id="animationCanvas" width="600" height="400"></canvas>
+        <button onclick="toggleBallAnimation()">暂停/继续</button>
+
+        <script>
+            const canvas2 = document.getElementById('animationCanvas');
+            const ctx2 = canvas2.getContext('2d');
+
+            // 球的状态
+            const ball = {
+                x: 100,
+                y: 100,
+                radius: 30,
+                dx: 5,  // x轴速度
+                dy: 4,  // y轴速度
+                color: '#FF6B6B'
+            };
+
+            // 动画控制
+            let animationId = null;
+            let isAnimating = true;
+
+            // 绘制函数
+            function drawBall() {
+                ctx2.beginPath();
+                ctx2.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx2.fillStyle = ball.color;
+                ctx2.fill();
+                ctx2.strokeStyle = '#333';
+                ctx2.stroke();
+            }
+
+            // 更新函数
+            function updateBall() {
+                // 清空画布（带透明效果）
+                ctx2.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+
+                // 更新球的位置
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+
+                // 边界检测
+                if (ball.x + ball.radius > canvas2.width || ball.x - ball.radius < 0) {
+                    ball.dx = -ball.dx;
+                    ball.color = getRandomColor();
+                }
+
+                if (ball.y + ball.radius > canvas2.height || ball.y - ball.radius < 0) {
+                    ball.dy = -ball.dy;
+                    ball.color = getRandomColor();
+                }
+
+                drawBall();
+            }
+
+            // 随机颜色
+            function getRandomColor() {
+                const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#06D6A0', '#118AB2', '#EF476F'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            // 动画循环
+            function animateBall() {
+                updateBall();
+                if (isAnimating) {
+                    animationId = requestAnimationFrame(animateBall);
+                }
+            }
+
+            // 控制函数
+            function toggleBallAnimation() {
+                isAnimating = !isAnimating;
+                if (isAnimating) {
+                    animateBall();
+                } else {
+                    cancelAnimationFrame(animationId);
+                }
+            }
+
+            // 鼠标交互：点击改变球的位置
+            canvas2.addEventListener('click', function (event) {
+                const rect = canvas2.getBoundingClientRect();
+                ball.x = event.clientX - rect.left;
+                ball.y = event.clientY - rect.top;
+                ball.color = getRandomColor();
+            });
+
+            // 开始动画
+            animateBall();
+        </script>
+    </article>
+    <article>
+        <!--绘图板-->
+        <h2>绘图板</h2>
+        <canvas id="drawingCanvas" width="800" height="500"></canvas>
+        <div>
+            <button onclick="clearCanvas()">清空</button>
+            <input type="color" id="colorPicker" value="#000000">
+            <input type="range" id="brushSize" min="1" max="50" value="5">
+            <span id="brushSizeValue">5px</span>
+            <button onclick="changeBrushType('round')">圆形笔刷</button>
+            <button onclick="changeBrushType('square')">方形笔刷</button>
+            <button onclick="changeBrushType('eraser')">橡皮擦</button>
+        </div>
+
+        <script>
+            const canvas3 = document.getElementById('drawingCanvas');
+            const ctx3 = canvas3.getContext('2d');
+
+            // 初始化画布为白色
             ctx3.fillStyle = 'white';
             ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
-        }
-    </script>
-</article>
+
+            // 绘画状态
+            const drawingState = {
+                isDrawing: false,
+                lastX: 0,
+                lastY: 0,
+                brushColor: '#000000',
+                brushSize: 5,
+                brushType: 'round'
+            };
+
+            // 更新画笔大小显示
+            document.getElementById('brushSize').addEventListener('input', function (e) {
+                drawingState.brushSize = parseInt(e.target.value);
+                document.getElementById('brushSizeValue').textContent = e.target.value + 'px';
+            });
+
+            // 更新颜色
+            document.getElementById('colorPicker').addEventListener('input', function (e) {
+                drawingState.brushColor = e.target.value;
+            });
+
+            // 鼠标事件处理
+            canvas3.addEventListener('mousedown', startDrawing);
+            canvas3.addEventListener('mousemove', draw);
+            canvas3.addEventListener('mouseup', stopDrawing);
+            canvas3.addEventListener('mouseout', stopDrawing);
+
+            // 触摸屏支持
+            canvas3.addEventListener('touchstart', function (e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousedown', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas3.dispatchEvent(mouseEvent);
+            });
+
+            canvas3.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousemove', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas3.dispatchEvent(mouseEvent);
+            });
+
+            canvas3.addEventListener('touchend', function (e) {
+                e.preventDefault();
+                const mouseEvent = new MouseEvent('mouseup', {});
+                canvas3.dispatchEvent(mouseEvent);
+            });
+
+            function startDrawing(e) {
+                drawingState.isDrawing = true;
+                [drawingState.lastX, drawingState.lastY] = getMousePos(canvas3, e);
+            }
+
+            function draw(e) {
+                if (!drawingState.isDrawing) return;
+
+                e.preventDefault();
+
+                const [currentX, currentY] = getMousePos(canvas3, e);
+
+                // 设置绘图样式
+                ctx3.strokeStyle = drawingState.brushColor;
+                ctx3.lineWidth = drawingState.brushSize;
+                ctx3.lineCap = 'round';
+                ctx3.lineJoin = 'round';
+
+                // 橡皮擦模式
+                if (drawingState.brushType === 'eraser') {
+                    ctx3.globalCompositeOperation = 'destination-out';
+                    ctx3.lineWidth = drawingState.brushSize * 2;
+                } else {
+                    ctx3.globalCompositeOperation = 'source-over';
+                }
+
+                // 开始绘制路径
+                ctx3.beginPath();
+                ctx3.moveTo(drawingState.lastX, drawingState.lastY);
+                ctx3.lineTo(currentX, currentY);
+                ctx3.stroke();
+
+                // 如果是方形笔刷，额外绘制矩形
+                if (drawingState.brushType === 'square') {
+                    ctx3.fillStyle = drawingState.brushColor;
+                    if (drawingState.brushType === 'eraser') {
+                        ctx3.globalCompositeOperation = 'destination-out';
+                    }
+                    ctx3.fillRect(
+                        currentX - drawingState.brushSize / 2,
+                        currentY - drawingState.brushSize / 2,
+                        drawingState.brushSize,
+                        drawingState.brushSize
+                    );
+                }
+
+                // 更新最后位置
+                [drawingState.lastX, drawingState.lastY] = [currentX, currentY];
+            }
+
+            function stopDrawing() {
+                drawingState.isDrawing = false;
+            }
+
+            // 获取鼠标在canvas上的位置
+            function getMousePos(canvas3, evt) {
+                const rect = canvas3.getBoundingClientRect();
+                return [
+                    evt.clientX - rect.left,
+                    evt.clientY - rect.top
+                ];
+            }
+
+            // 改变笔刷类型
+            function changeBrushType(type) {
+                drawingState.brushType = type;
+            }
+
+            // 清空画布
+            function clearCanvas() {
+                ctx3.fillStyle = 'white';
+                ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
+            }
+        </script>
+    </article>
+</body>
 
 
 
@@ -1022,7 +1024,6 @@
 
 
 
-1
 
 
 
