@@ -38,8 +38,19 @@
     style=" text-align: center;display: flex; align-items: center;flex-direction: column;height: auto;padding-top: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div
-        style="display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
-        <div style="flex:1;color:rgb(29, 123, 123);"></div>
+        style="z-index: 999; display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
+        <div style="flex:1;display: flex;align-self: center;">
+            <!--登录入口-->
+            <button
+                style="padding: 5px 10px; border: none; border-radius: 4px; background-color: rgb(33, 159, 159); color: rgb(246, 247, 247);font-size: 14px;cursor: pointer;margin-left: 10px;"
+                onclick="alert('登录功能尚未开放，敬请期待！')">
+                登录
+            </button>
+            <div id="time"></div>
+            <script src="javascript脚本库\当前时间.js">
+
+            </script>
+        </div>
         <div style="flex:1"><img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
                 style="margin-top: 10px;"></div>
         <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
@@ -55,7 +66,7 @@
             <div>
                 <!--顶部靠右但在导航栏下方的搜索框-->
                 <form style="  display: flex; align-items: center; justify-content:
-                                center;">
+                                    center;">
                     <input type="text" placeholder="搜索..."
                         style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                     <button type="submit"

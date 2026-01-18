@@ -1,0 +1,228 @@
+.game-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a3c34 0%, #1a2c3c 100%);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #2a7c6c 0%, #2a5c7c 100%);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.game-header h1 {
+  color: #ffffff;
+  font-size: 48px;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.score-container {
+  display: flex;
+  gap: 15px;
+}
+
+.score,
+.best {
+  background-color: #2a4c44;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 80px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.score-title {
+  font-size: 14px;
+  color: #b8d8d0;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.score-container div div:last-child {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: rgba(42, 76, 68, 0.7);
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.game-info p {
+  color: #c8e8e0;
+  margin: 0;
+  font-size: 15px;
+  flex: 1;
+}
+
+.game-info strong {
+  color: #ffffff;
+}
+
+.game-info button {
+  background: linear-gradient(to bottom, #2a7c6c, #1a5c4c);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #0a3c2c;
+  margin-left: 15px;
+}
+
+.game-info button:hover {
+  background: linear-gradient(to bottom, #3a8c7c, #2a6c5c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #0a3c2c;
+}
+
+.game-info button:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 0 #0a3c2c;
+}
+
+.signature {
+  font-family: "楷体", "STKaiti", serif;
+  font-size: 28px;
+  color: #a8d8c8;
+  font-weight: bold;
+  margin-left: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  margin: 0 auto;
+}
+
+#gameCanvas {
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(26, 44, 60, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+}
+
+.game-over h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.game-over p {
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: #b8d8d0;
+}
+
+.game-over button {
+  background: linear-gradient(to bottom, #2a7c6c, #1a5c4c);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #0a3c2c;
+}
+
+.game-over button:hover {
+  background: linear-gradient(to bottom, #3a8c7c, #2a6c5c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #0a3c2c;
+}
+
+@media (max-width: 520px) {
+  .game-container {
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .canvas-wrapper,
+  #gameCanvas {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .game-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .score-container {
+    margin-top: 15px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .game-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .game-info p {
+    margin-bottom: 10px;
+  }
+
+  .game-info button {
+    margin-left: 0;
+    align-self: center;
+  }
+
+  .signature {
+    margin-left: 0;
+    margin-top: 10px;
+    align-self: center;
+  }
+}

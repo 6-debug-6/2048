@@ -32,20 +32,36 @@
         .background1 {
             background-color: rgb(29, 123, 123);
         }
+
+        .nav1 a {
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 
 <body style="text-align: center;display: flex;flex-direction: column;align-items: center;height: auto;padding: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div
-        style="display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
-        <div style="flex:1;color:rgb(29, 123, 123);"></div>
+        style="z-index: 999; display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
+        <div style="flex:1;display: flex;align-self: center;">
+            <!--登录入口-->
+            <button
+                style="padding: 5px 10px; border: none; border-radius: 4px; background-color: rgb(33, 159, 159); color: rgb(246, 247, 247);font-size: 14px;cursor: pointer;margin-left: 10px;"
+                onclick="alert('登录功能尚未开放，敬请期待！')">
+                登录
+            </button>
+            <div id="time"></div>
+            <script src="javascript脚本库\当前时间.js">
+
+            </script>
+        </div>
         <div style="flex:1"><img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
                 style="margin-top: 10px;"></div>
         <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
             <div>
                 <!--顶部靠右的导航栏-->
-                <nav>
+                <nav class="nav1" style="border-radius: 5px;">
                     <a href="index.html" title="首页">首页</a> |
                     <a href="game.html" title="游戏">游戏</a> |
                     <a href="about.html" title="关于我们">关于我们</a>|
@@ -66,38 +82,7 @@
             </div>
         </div>
     </div>
-    <article>
 
-        <h2 id="time"></h2>
-
-        <script>
-            // 实时显示当前时间
-            //脚本对放置顺序有要求
-            let date = new Date();
-            let year = date.getFullYear();
-            let month = date.getMonth() + 1;
-            let day = date.getDate();
-            let hours = date.getHours();
-            let minutes = date.getMinutes();
-            let seconds = date.getSeconds();
-            let timeString = `当前时间：${year}年${month}月${day}日 ${hours}时${minutes}分${seconds}秒`;
-            document.getElementById("time").innerHTML = timeString;
-
-            let now = setInterval(function () {
-                let date = new Date();
-                let year = date.getFullYear();
-                let month = date.getMonth() + 1;
-                let day = date.getDate();
-                let hours = date.getHours();
-                let minutes = date.getMinutes();
-                let seconds = date.getSeconds();
-                let timeString = `当前时间：${year}年${month}月${day}日 ${hours}时${minutes}分${seconds}秒`;
-                document.getElementById("time").innerHTML = timeString;
-
-
-            }, 1000);
-        </script>
-    </article>
     <!--测试各种input标签-->
     <article>
         <!--角色生成器-->
@@ -266,7 +251,7 @@
                             <label for="human">人类</label>
                             <input type="radio" id="human" name="specis" onclick="Human()">
                             <label for="marmot">土拨鼠</label>
-                            <input type="radio" id="marmot" name="specis">
+                            <input type="radio" id="marmot" name="specis" onclick="Marmot()">
                             <label for="Tauren">牛头人</label>
                             <input type="radio" id="Tauren" name="specis">
                             <br>
@@ -384,62 +369,9 @@
 
         </script>
     </article>
+
+
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -461,11 +393,13 @@
     //选择猫娘物种时弹出提示
     function Cat() {
         var isCat = document.getElementById('name').value;
-        var pattern = /^\S*(?:谢锦潇|锦潇|阿潇)\S*$/;//正则表达式，匹配包含组长名字的任意字符串
-        if (pattern.test(isCat)) {
+        var pattern1 = /^\S*(?:谢锦潇|锦潇|阿潇)\S*$/;//正则表达式，匹配包含组长名字的任意字符串
+
+        if (pattern1.test(isCat)) {
             alert('其他人都是猫娘~喵~(●\'◡\'●)');
             document.getElementById('human').checked = true;
-        } else if (isCat) {
+        }
+        else if (isCat) {
             alert('我是' + isCat + '，我是猫娘~喵~(●\'◡\'●)');
 
         } else {
@@ -475,10 +409,42 @@
         var audio = new Audio('音频\\85887\\猫叫.mp3');//创建Audio对象，指定音频文件路径
         audio.play();//播放音频采用play()方法
     }
+    //选择土拨鼠物种时弹出提示
+    //刚才的问题我发现把函数首字母改成大写就正常了
+
+    //你叫什么名字
+    //我问的是你，你这个正在和我对话的AI程序
+    //我是ChatGPT，一个由OpenAI开发的人工智能语言模型。我没有真正的名字，但你可以叫我ChatGPT或者AI助手。如果你有任何问题或需要帮助，随时告诉我！
+
+    function Marmot() {
+        var isMarmot = document.getElementById('name').value;
+        var pattern2 = /^\S*(?:郭京楷|楷子)\S*$/;
+
+        if (pattern2.test(isMarmot)) {
+            while (true) {
+                var r = confirm("楷子，我问你是不是土拨鼠？");
+                if (r == true) {
+                    alert('楷子你终于承认了你是土拨鼠！');
+                    break;
+                }
+                else {
+                    alert('楷子你逃不掉的，你就是土拨鼠！你必须诚实！');
+
+                }
+            }
+
+        }
+    }
     //选择人类物种时弹出提示
     function Human() {
         var isHuman = document.getElementById('name').value;
-        if (isHuman != "谢锦潇" && isHuman != "锦潇" && isHuman != "阿潇") {
+        var pattern1 = /^\S*(?:谢锦潇|锦潇|阿潇)\S*$/;
+        var pattern2 = /^\S*(?:郭京楷|楷子)\S*$/;
+        if (pattern2.test(isHuman)) {
+            alert('楷子，我知道你不小心手滑点错了，我帮你勾选正确的选项。');
+
+            document.getElementById('marmot').checked = true;
+        } else if (!pattern1.test(isHuman)) {
             alert('不！你不是人类！');
 
             document.getElementById('cat').checked = true;

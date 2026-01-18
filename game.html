@@ -6,6 +6,7 @@
     <!--更改浏览器图标-->
     <link rel="icon" href="图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg" type="image/png">
     <link rel="preload" as="image" href="图库\compressed-背景图2改.jpg">
+    <link rel="stylesheet" type="text/css" href="css样式库\2048游戏.css">
 
     <title>2048游戏介绍</title>
     <style>
@@ -28,8 +29,19 @@
     style="justify-content: center; align-items: center; height: 100vh; text-align: center;display: flex;flex-direction: column;height: auto;padding-top: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div
-        style="display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
-        <div style="flex:1;color:rgb(29, 123, 123);"></div>
+        style="z-index: 999; display: flex;justify-content:space-between; background-color: rgb(29, 123, 123);width: 100%;position: fixed;top: 0px;">
+        <div style="flex:1;display: flex;align-self: center;">
+            <!--登录入口-->
+            <button
+                style="padding: 5px 10px; border: none; border-radius: 4px; background-color: rgb(33, 159, 159); color: rgb(246, 247, 247);font-size: 14px;cursor: pointer;margin-left: 10px;"
+                onclick="alert('登录功能尚未开放，敬请期待！')">
+                登录
+            </button>
+            <div id="time"></div>
+            <script src="javascript脚本库\当前时间.js">
+
+            </script>
+        </div>
         <div style="flex:1"><img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
                 style="margin-top: 10px;"></div>
         <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
@@ -45,7 +57,7 @@
             <div>
                 <!--顶部靠右但在导航栏下方的搜索框-->
                 <form style="  display: flex; align-items: center; justify-content:
-                                center;">
+                                    center;">
                     <input type="text" placeholder="搜索..."
                         style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                     <button type="submit"
@@ -90,9 +102,38 @@
                     </p>
 
 
-                    <iframe name="iframe1" src="2048游戏.html" title="2048游戏页面" width="65%" height="1015px"
-                        style="border: none; margin-top: 10px;">
-                    </iframe>
+
+                    <section class="game-container">
+                        <div class="game-header">
+                            <h1>2048</h1>
+                            <div class="score-container">
+                                <div class="score">
+                                    <div class="score-title">分数</div>
+                                    <div id="score">0</div>
+                                </div>
+                                <div class="best">
+                                    <div class="score-title">最高分</div>
+                                    <div id="best">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="game-info">
+                            <p>使用 <strong>方向键</strong> 或 <strong>WASD</strong> 移动方块，相同数字合并加倍！</p>
+                            <button id="restart">重新开始</button>
+                            <div class="signature">楷子</div>
+                        </div>
+
+                        <div class="canvas-wrapper">
+                            <canvas id="gameCanvas" width="450" height="450"></canvas>
+                            <div id="gameOver" class="game-over">
+                                <h2>游戏结束！</h2>
+                                <p>最终得分: <span id="finalScore">0</span></p>
+                                <button id="tryAgain">再试一次</button>
+                            </div>
+                        </div>
+                    </section>
+                    <script src="javascript脚本库\2048游戏.js"></script>
                 </div>
             </div>
         </div>
