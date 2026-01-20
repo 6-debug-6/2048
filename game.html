@@ -22,10 +22,15 @@
         .background1 {
             background-color: rgb(29, 123, 123);
         }
+
+        .nav1 a {
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 
-<body
+<body onload="startTime()"
     style="justify-content: center; align-items: center; height: 100vh; text-align: center;display: flex;flex-direction: column;height: auto;padding-top: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div
@@ -47,7 +52,7 @@
         <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
             <div>
                 <!--顶部靠右的导航栏-->
-                <nav>
+                <nav class="nav1">
                     <a href="index.html" title="首页">首页</a> |
                     <a href="game.html" title="游戏">游戏</a> |
                     <a href="about.html" title="关于我们">关于我们</a>|
