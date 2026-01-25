@@ -1,9 +1,16 @@
 //设置名字cookie的函数
-function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays, path) {
   var d = new Date();
+  if (exdays === undefined) {
+    exdays = 30; // 默认过期时间为30天
+  }
+  if (path === undefined) {
+    path = "/"; // 默认路径为根路径
+  }
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   var expires = "expires=" + d.toGMTString();
-  document.cookie = cname + "=" + cvalue + "; " + expires;
+  var cpath = "path=" + path;
+  document.cookie = cname + "=" + cvalue + "; " + expires + ";" + cpath;
 }
 //获取名字cookie的函数
 function getCookie(cname) {
@@ -11,6 +18,7 @@ function getCookie(cname) {
   var ca = document.cookie.split(";");
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i].trim();
+    //trim() 方法用于去除字符串两端的空白字符
     if (c.indexOf(name) == 0) {
       return c.substring(name.length, c.length);
     }

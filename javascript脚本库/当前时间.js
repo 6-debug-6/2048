@@ -12,7 +12,7 @@ function startTime() {
     "当前时间：" + h + ":" + m + ":" + s;
   setTimeout(function () {
     startTime();
-  }, 500);
+  }, 1000);
 }
 function checkTime(i) {
   if (i < 10) {
