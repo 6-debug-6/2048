@@ -9,7 +9,7 @@ input[type="password"] {
   box-sizing: border-box;
 }
 /*按钮样式 */
-button {
+.button_1 {
   background-color: #1db8b8;
   color: white;
   padding: 14px 20px;
@@ -80,11 +80,11 @@ span.psw {
   margin: 5% auto 15% auto;
   /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%;
-  /* Could be more or less, depending on screen size */
+  width: 45%;
+  /* 可以更多或更少，取决于屏幕尺寸 */
 }
 
-/* The Close Button (x) */
+/* 关闭按钮 (x) */
 .close {
   position: absolute;
   right: 25px;

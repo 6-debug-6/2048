@@ -6,7 +6,7 @@
     <!--更改浏览器图标-->
     <link rel="icon" href="图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg" type="image/png">
     <link rel="preload" as="image" href="图库\compressed-背景图1改.jpg">
-    <!--<link rel="stylesheet" type="text/css" href="css样式库\登录表单.css">-->
+    <link rel="stylesheet" type="text/css" href="css样式库\登录表单.css">
     <title>2048网站</title>
     <style>
         .flex {
@@ -107,19 +107,61 @@
             <!--登录入口-->
             <button
                 style="padding: 5px 10px; border: none; border-radius: 4px; background-color: rgb(33, 159, 159); color: rgb(246, 247, 247);font-size: 14px;cursor: pointer;margin-left: 10px;"
-                onclick="alert('登录功能尚未开放，敬请期待！')">
+                onclick="document.getElementById('id01').style.display='block'">
                 登录
             </button>
+            <div id="id01" class="modal">
+
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                            title="Close Modal">&times;</span>
+                        <img src="图库\未知头像.webp" alt="头像" class="avatar">
+                    </div>
+
+                    <div class="container">
+                        <label><b>用户名</b></label>
+                        <input type="text" placeholder="输入用户名" name="uname" required>
+
+                        <label><b>密码</b></label>
+                        <input type="password" placeholder="输入密码" name="psw" required>
+
+                        <button class="button_1" type="submit">登陆</button>
+                        <input type="checkbox" checked="checked"> 记住我
+                    </div>
+
+                    <div class="container"
+                        style="display:flex ;justify-content: space-between; background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn" style="border: none;color: white;">取消</button>
+                        <span class="psw">忘记 <a href="#">密码?</a></span>
+                    </div>
+                </form>
+            </div>
+            <script>
+                // 获取模型
+                var modal = document.getElementById('id01');
+
+                // 鼠标点击模型外区域关闭登录框
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            </script>
             <div>
-                <!--顶部靠右但在导航栏下方的搜索框-->
-                <form style="  display: flex; align-items: center; justify-content:
-                                                center;">
+                <!--顶部靠左但在导航栏下方的搜索框-->
+                <form style="  display: flex;  justify-content:center;">
+
                     <input type="text" placeholder="搜索..."
-                        style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                        style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;width: 200px;">
+                    <!--让button内的字常规下横向排列-->
                     <button type="submit"
-                        style="padding: 5px 10px; margin-left: 5px; background-color: rgb(33, 159, 159); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        style=" padding: 5px 10px; font-size: 14px; margin-left: 5px; background-color: rgb(33, 159, 159); color: white; border: none; border-radius: 4px; cursor: pointer;    ">
                         搜索
                     </button>
+
+
                 </form>
             </div>
 
