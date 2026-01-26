@@ -6,6 +6,7 @@
     <!--更改浏览器图标-->
     <link rel="icon" href="图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg" type="image/png">
     <link rel="preload" as="image" href="图库\compressed-背景图1改.jpg">
+    <!--<link rel="stylesheet" type="text/css" href="css样式库\登录表单.css">-->
     <title>2048网站</title>
     <style>
         .flex {
@@ -56,6 +57,21 @@
         .nav1 a {
             text-decoration: none;
             color: white;
+            padding: 10px;
+            font-size: 19px;
+
+        }
+
+        .nav1 div {
+            height: 64.67px;
+            /*文字居中*/
+            display: flex;
+            align-items: center;
+        }
+
+        .nav1 div:hover {
+            background-color: rgb(7, 137, 151);
+            border-radius: 0px;
         }
 
         .changeColor1 {
@@ -82,7 +98,7 @@
     </script>
 </head>
 
-<body onload="startTime();checkCookie()"
+<body onload="startTime();"
     style="display: flex; flex-direction: column; height: 299vh; text-align: center; align-items: center;padding-top: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div class="changeColor1"
@@ -94,27 +110,10 @@
                 onclick="alert('登录功能尚未开放，敬请期待！')">
                 登录
             </button>
-            <div id="time"></div>
-            <script src="javascript脚本库\当前时间.js">
-
-            </script>
-        </div>
-        <div style="flex:1"><img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
-                style="margin-top: 10px;"></div>
-        <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
-            <div>
-                <!--顶部靠右的导航栏-->
-                <nav class="nav1">
-                    <a href="index.html" title="首页">首页</a>|
-                    <a href="game.html" title="游戏">游戏</a>|
-                    <a href="about.html" title="关于我们">关于我们</a>|
-                    <a href="news.html" title="新闻">新闻</a>
-                </nav>
-            </div>
             <div>
                 <!--顶部靠右但在导航栏下方的搜索框-->
                 <form style="  display: flex; align-items: center; justify-content:
-                                    center;">
+                                                center;">
                     <input type="text" placeholder="搜索..."
                         style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                     <button type="submit"
@@ -123,20 +122,46 @@
                     </button>
                 </form>
             </div>
+
+        </div>
+        <div style="flex:1"><img src=图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg alt="2048" width="50px" height="50px"
+                style="margin-top: 10px;"></div>
+        <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
+            <div class="nav1" style="display: flex;">
+                <!--顶部靠右的导航栏-->
+                <div>
+                    <a href="index.html" title="首页">首页</a>
+
+                </div>
+                <div>
+                    <a href="game.html" title="游戏">游戏</a>
+
+                </div>
+                <div>
+                    <a href="about.html" title="关于我们">关于我们</a>
+
+                </div>
+                <div>
+                    <a href="news.html" title="新闻">新闻</a>
+
+                </div>
+
+
+            </div>
+
         </div>
     </div>
 
 
 
-
     <!--大图-->
     <div>
-        <div style=" border-bottom:solid rgb(29, 123, 123) 50px ;display: flex;justify-content:space-around;"
-            height="80px">
+        <div style="  display: flex;justify-content:space-around;" height="80px">
             <div></div>
             <img src="图库\compressed-背景图1改.jpg" alt="2048大图" width="80%" height="100%">
             <div></div>
         </div>
+        <div class="changeColor1" style="height: 50px;"></div>
     </div>
 
 
