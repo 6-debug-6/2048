@@ -9,7 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css样式库\2048游戏.css">
     <link rel="stylesheet" type="text/css" href="css样式库\登录表单.css">
     <link rel="stylesheet" type="text/css" href="css样式库\顶部区域样式.css">
-
+    <link rel="stylesheet" type="text/css" href="css样式库\左侧侧边栏.css">
+    <link rel="stylesheet" type="text/css" href="css样式库\右侧侧边栏.css">
     <title>2048游戏介绍</title>
     <style>
         .flex {
@@ -124,14 +125,44 @@
     </div>
     <!--大图-->
     <div>
-        <div style="border-bottom: solid rgb(29, 123, 123) 50px;display: flex;justify-content:space-around;"
-            height="80px">
-            <div></div>
-            <img src="图库\compressed-背景图2改.jpg" alt="2048大图" width="80%" height="100%">
-            <div></div>
-        </div>
-    </div>
+        <div style="  display: flex;justify-content:space-around;" height="80px">
+            <div style="flex: 1; display: flex;flex-direction: column;">
+                <div style="flex: 1;"></div>
+                <div style="flex: 4;display: flex;">
+                    <div id="mySidenav_l" class="sidenav_l">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav_l()">&times;</a>
+                        <a href="#">时间</a>
+                        <a href="#">天气</a>
 
+                    </div>
+                    <span id="span_l"
+                        style="color:rgb(29, 123, 123); font-size:90px;cursor:pointer;position:relative;top: 30%;left: 30%;"
+                        onclick="openNav_l()">&#9776;
+                    </span>
+                </div>
+                <div style="flex: 1"></div>
+            </div>
+            <img style="flex: 6;" src="图库\compressed-背景图2改.jpg" alt="2048大图" width="80%" height="100%">
+            <div style="flex: 1; display: flex;flex-direction: column;">
+                <div style="flex: 1;"></div>
+                <div style="flex: 4;display: flex; position: relative;">
+                    <div id="mySidenav_r" class="sidenav_r">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav_r()">&times;</a>
+                        <a href="#">游戏</a>
+                        <a href="#">工具</a>
+
+                    </div>
+                    <span id="span_r"
+                        style="color: rgb(29, 123, 123); font-size:90px;cursor:pointer;position:relative;top: 30%;left: 35px;"
+                        onclick="openNav_r()">&#9776;
+                    </span>
+                </div>
+                <div style="flex: 1"></div>
+            </div>
+        </div>
+        <script src="javascript脚本库\侧边栏脚本.js"></script>
+        <div class="changeColor1" style="height: 50px;"></div>
+    </div>
 
     <div
         style=" margin-right: 25%;margin-left: 25%; border-right:  2px solid rgb(29, 123, 123);border-left:  2px solid rgb(29, 123, 123);display: flex;flex-direction: column;text-align: center;align-items: center;">
