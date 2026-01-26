@@ -1,0 +1,33 @@
+.nav1 a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  font-size: 19px;
+}
+
+.nav1 div {
+  height: 64.67px;
+  /*文字居中*/
+  display: flex;
+  align-items: center;
+}
+
+.nav1 div.active {
+  background-color: rgb(29, 123, 123);
+}
+
+.nav1 div:hover:not(.active) {
+  background-color: rgb(7, 137, 151);
+  border-radius: 0px;
+}
+
+.changeColor1 {
+  background-color: rgb(7, 137, 151);
+
+  /* 不支持线性的时候显示 */
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(29, 123, 123),
+    rgb(43, 211, 211)
+  );
+}

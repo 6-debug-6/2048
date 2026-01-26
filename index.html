@@ -7,6 +7,8 @@
     <link rel="icon" href="图库\compressed-生成简约浏览器图标含‘2048’艺术字.jpg" type="image/png">
     <link rel="preload" as="image" href="图库\compressed-背景图1改.jpg">
     <link rel="stylesheet" type="text/css" href="css样式库\登录表单.css">
+    <link rel="stylesheet" type="text/css" href="css样式库\顶部区域样式.css">
+
     <title>2048网站</title>
     <style>
         .flex {
@@ -53,33 +55,6 @@
             white-space: pre-line;
             word-wrap: break-word;
         }
-
-        .nav1 a {
-            text-decoration: none;
-            color: white;
-            padding: 10px;
-            font-size: 19px;
-
-        }
-
-        .nav1 div {
-            height: 64.67px;
-            /*文字居中*/
-            display: flex;
-            align-items: center;
-        }
-
-        .nav1 div:hover {
-            background-color: rgb(7, 137, 151);
-            border-radius: 0px;
-        }
-
-        .changeColor1 {
-            background-color: rgb(7, 137, 151);
-
-            /* 不支持线性的时候显示 */
-            background-image: linear-gradient(to bottom right, rgb(29, 123, 123), rgb(43, 211, 211));
-        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -121,10 +96,10 @@
 
                     <div class="container">
                         <label><b>用户名</b></label>
-                        <input type="text" placeholder="输入用户名" name="uname" required>
+                        <input type="text" placeholder="输入用户名..." name="uname" required>
 
                         <label><b>密码</b></label>
-                        <input type="password" placeholder="输入密码" name="psw" required>
+                        <input type="password" placeholder="输入密码..." name="psw" required>
 
                         <button class="button_1" type="submit">登陆</button>
                         <input type="checkbox" checked="checked"> 记住我
@@ -171,7 +146,7 @@
         <div style="flex:1;display: flex;flex-direction: column;align-items: flex-end;">
             <div class="nav1" style="display: flex;">
                 <!--顶部靠右的导航栏-->
-                <div>
+                <div class="active">
                     <a href="index.html" title="首页">首页</a>
 
                 </div>
