@@ -3,10 +3,16 @@
   width: 0;
   /*动画要从右往左，必须用absolute或fixed，此时应对父元素使用relative*/
   position: absolute;
-  z-index: 1;
+  /*调成0防止遮挡*/
+  z-index: 0;
   top: 0;
   right: 0;
   background-color: #0d64a3;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(43, 116, 211),
+    rgb(29, 123, 123)
+  );
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;

@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="css样式库\顶部区域样式.css">
     <link rel="stylesheet" type="text/css" href="css样式库\左侧侧边栏.css">
     <link rel="stylesheet" type="text/css" href="css样式库\右侧侧边栏.css">
+    <link rel="stylesheet" type="text/css" href="css样式库\弹窗.css">
+    <link rel="stylesheet" type="text/css" href="css样式库\日历天气集成.css">
 
 
 
@@ -63,7 +65,7 @@
 
 </head>
 
-<body
+<body onload="startTime()"
     style="display: flex; flex-direction: column; height: 299vh; text-align: center; align-items: center;padding-top: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div class="changeColor1"
@@ -107,12 +109,8 @@
                 // 获取模型
                 var modal = document.getElementById('id01');
 
-                // 鼠标点击模型外区域关闭登录框
-                window.onclick = function (event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
+                // 鼠标点击模型外区域关闭登录框，该功能集成到最后一个弹窗脚本里去了
+
             </script>
             <div>
                 <!--顶部靠左但在导航栏下方的搜索框-->
@@ -169,9 +167,156 @@
                 <div style="flex: 4;display: flex;">
                     <div id="mySidenav_l" class="sidenav_l">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav_l()">&times;</a>
-                        <a href="#">时间</a>
-                        <a href="#">天气</a>
+                        <a id="myBtn1">日历</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal1" class="modal1">
 
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>日历</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <!-- 这是您可以插入到现有div中的组件 -->
+                                    <!-- 注意：容器div必须有id="calendarWeatherWidget" -->
+                                    <div id="calendarWeatherWidget">
+                                        <!-- 日历部分 -->
+                                        <section class="calendar-section">
+                                            <div class="calendar-header">
+                                                <h2 id="currentMonthYear">2023年10月</h2>
+                                                <div style="display: flex;justify-content: center;align-items: center;">
+                                                    <img style="height: 80px;" src="图库\钟表.webp" alt="钟表图">
+                                                    <h2 id="time">时间</h2>
+                                                </div>
+
+
+
+                                                <script src="javascript脚本库\当前时间.js"></script>
+                                                <div class="calendar-nav">
+                                                    <button id="prevMonth" title="上一月"><i
+                                                            class="fas fa-chevron-left"></i>
+                                                        <h1>《<span style="opacity: 0;">1</span></h1>
+                                                    </button>
+                                                    <button id="todayBtn" title="返回今天">今天</button>
+                                                    <button id="nextMonth" title="下一月"><i
+                                                            class="fas fa-chevron-right"></i>
+                                                        <h1> <span style="opacity: 0;">1</span>》</h1>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="calendar-weekdays">
+                                                <div>日</div>
+                                                <div>一</div>
+                                                <div>二</div>
+                                                <div>三</div>
+                                                <div>四</div>
+                                                <div>五</div>
+                                                <div>六</div>
+                                            </div>
+
+                                            <div class="calendar-days" id="calendarDays">
+                                                <!-- 日历天数将由JavaScript动态生成 -->
+                                            </div>
+                                        </section>
+
+                                        <!-- 天气部分 -->
+                                        <section class="weather-section">
+                                            <!-- 当前天气 -->
+                                            <div class="weather-card">
+                                                <div class="weather-header">
+                                                    <h2><i class="fas fa-sun"></i> 当前天气</h2>
+                                                    <div class="weather-location">
+                                                        <div>
+                                                            <h3 id="currentLocation">北京, 中国</h3>
+                                                            <p id="currentDate">2023年10月15日 星期日</p>
+                                                        </div>
+                                                        <button id="changeLocation" title="更改位置"><i
+                                                                class="fas fa-map-marker-alt"></i></button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="current-weather">
+                                                    <div>
+                                                        <div class="temperature" id="currentTemp">22°C</div>
+                                                        <div id="weatherCondition">晴朗</div>
+                                                    </div>
+                                                    <div class="weather-details">
+                                                        <div class="weather-detail">
+                                                            <i class="fas fa-wind"></i>
+                                                            <span>风速: <span id="windSpeed">12 km/h</span></span>
+                                                        </div>
+                                                        <div class="weather-detail">
+                                                            <i class="fas fa-tint"></i>
+                                                            <span>湿度: <span id="humidity">45%</span></span>
+                                                        </div>
+                                                        <div class="weather-detail">
+                                                            <i class="fas fa-temperature-high"></i>
+                                                            <span>体感温度: <span id="feelsLike">21°C</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 天气预报 -->
+                                            <div class="weather-card">
+                                                <div class="forecast">
+                                                    <h3>5天预报</h3>
+                                                    <div class="forecast-days" id="forecastDays">
+                                                        <!-- 天气预报将由JavaScript动态生成 -->
+                                                    </div>
+                                                </div>
+
+                                                <div class="forecast">
+                                                    <h3>天气信息来源</h3>
+                                                    <p style="margin-bottom: 15px; color: #666; font-size: 0.9rem;">
+                                                        天气数据来自免费公共API，您可以根据需要替换为其他天气服务。
+                                                    </p>
+                                                    <div style="display: flex; gap: 10px;">
+                                                        <a href="https://openweathermap.org/api" target="_blank">
+                                                            OpenWeather API
+                                                        </a>
+                                                        <a href="https://www.weather.gov/documentation/services-web-api"
+                                                            target="_blank">
+                                                            Weather.gov API
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <script src="javascript脚本库\日历天气集成.js"></script>
+                                    <!--弹窗1功能区边界-->
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <script src="javascript脚本库\弹窗1.js"></script>
+                        <a id="myBtn2">天气</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal2" class="modal1">
+
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>弹窗头部</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <p>弹窗文本..</p>
+                                    <p>弹窗文本..</p>
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <script src="javascript脚本库\弹窗2.js"></script>
                     </div>
                     <span id="span_l"
                         style="color:rgb(29, 123, 123); font-size:90px;cursor:pointer;position:relative;top: 30%;left: 30%;"
@@ -186,10 +331,49 @@
                 <div style="flex: 4;display: flex; position: relative;">
                     <div id="mySidenav_r" class="sidenav_r">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav_r()">&times;</a>
-                        <a href="#">游戏</a>
-                        <a href="#">工具</a>
+                        <a id="myBtn3">游戏</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal3" class="modal1">
 
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>弹窗头部</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <p>弹窗文本...</p>
+                                    <p>弹窗文本...</p>
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <script src="javascript脚本库\弹窗3.js"></script>
+                        <a id="myBtn4">工具</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal4" class="modal1">
+
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>弹窗头部</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <p>弹窗文本....</p>
+                                    <p>弹窗文本....</p>
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+                    <script src="javascript脚本库\弹窗4.js"></script>
                     <span id="span_r"
                         style="color: rgb(29, 123, 123); font-size:90px;cursor:pointer;position:relative;top: 30%;left: 35px;"
                         onclick="openNav_r()">&#9776;
@@ -314,13 +498,19 @@
                 </div>
             </div>
             <!--点击计数器-->
-            <div style="display: flex; justify-content:space-around; height: 31px;">
+            <div style=" height: 31px;">
                 <div
-                    style="border: 2px solid rgb(29, 123, 123); width: 100%; height: 150px; padding: 10px; margin: 10px;">
+                    style="border: 2px solid rgb(29, 123, 123); width: 100%; height: 150px; padding: 10px; margin-left: -7px;margin-top:10px ;">
                     <p>点击计数器</p>
                     <p>注意！每当这个按钮被点击2048次，这个世界上就会有一只无辜的土拨鼠死去！！！</p>
                     <button id="clickButton" title="你要相信死去的这只土拨鼠不会是楷子">点击我！</button>
                     <p>按钮已被点击 <span id="clickCount">0</span> 次。</p>
+                </div>
+                <b>进度条</b>
+                <div style="margin-left: 8px;  width: 100%; background-color: #ddd;">
+                    <div id="Progress_bar"
+                        style="  text-align: right;padding-right: 20px; line-height: 40px;color: rgb(29, 123, 123);width: 0%; background-color: #2196F3;">
+                        0%</div>
                 </div>
             </div>
             <script>
@@ -341,11 +531,18 @@
                     console.log("count");
                 }
                 document.getElementById("clickCount").textContent = Count();
-                //DOMContentLoaded不必等待外部资源加载，文档加载完毕即可
+                let progress;
+
+                //与innerHTML相比DOMContentLoaded不必等待外部资源加载，文档加载完毕即可
                 document.addEventListener("DOMContentLoaded", function () {
                     let clickButton = document.getElementById("clickButton");
                     let clickCount = document.getElementById("clickCount");
-
+                    //加载时更新进度条
+                    if (Count() / 2048 <= 1.00) {
+                        progress = 100 * Count() / 2048;
+                    }
+                    document.getElementById("Progress_bar").style.width = `${progress}` + "%";
+                    document.getElementById("Progress_bar").textContent = `${progress}` + "%";
 
 
                     clickButton.addEventListener("click", function () {
@@ -355,6 +552,12 @@
                         if (Count() % 2048 === 0) {
                             alert("警告！按钮已被点击" + Count() + "次！一只无辜的土拨鼠死去了！！！" + "\n" + "你怎么能这么残忍？！");
                         }
+                        //点击时更新进度条
+                        if (Count() / 2048 <= 1.00) {
+                            progress = 100 * Count() / 2048;
+                        }
+                        document.getElementById("Progress_bar").style.width = `${progress}` + "%";
+                        document.getElementById("Progress_bar").textContent = `${progress}` + "%";
                     });
                 });
             </script>
