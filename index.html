@@ -173,7 +173,8 @@
 
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
-                                <div class="modal1-header">
+                                <div class="modal1-header"
+                                    style="background-image: linear-gradient(to bottom right,rgb(29,123,123),rgb(55, 18, 135));">
                                     <span class="close1">&times;</span>
                                     <h2>日历</h2>
                                 </div>
@@ -352,22 +353,220 @@
 
                         </div>
                         <script src="javascript脚本库\弹窗3.js"></script>
-                        <a id="myBtn4">工具</a>
+                        <a id="myBtn4">留言</a>
                         <!-- 弹窗 -->
                         <div id="myModal4" class="modal1">
 
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
-                                <div class="modal1-header">
+                                <div class="modal1-header"
+                                    style="background-image: linear-gradient(to bottom right,rgb(29,123,123),rgb(8, 74, 159) );">
                                     <span class="close1">&times;</span>
-                                    <h2>弹窗头部</h2>
+                                    <h2>同学录收集表单</h2>
                                 </div>
                                 <div class="modal1-body">
-                                    <p>弹窗文本....</p>
-                                    <p>弹窗文本....</p>
+                                    <!--同学录收集表单-->
+                                    <article style="width: 750px;	border:15px solid transparent;margin-left: 100px;">
+                                        <form>
+                                            <fieldset style="display: flex;background-color: #95a3be;">
+                                                <legend>请填写以下信息：</legend>
+                                                <div style="flex: 2;">
+                                                    <div>
+                                                        <label for="name">姓名：</label>
+                                                        <input type="text" id="name" name="name"
+                                                            placeholder="必填，别填组长的名字" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="age">年龄：</label>
+                                                        <input type="number" id="age" name="age" placeholder="非必填">
+                                                    </div>
+                                                    <div>
+                                                        <label for="email">邮箱：</label>
+                                                        <input type="email" id="email" name="email" placeholder="非必填">
+                                                    </div>
+                                                    <div>
+                                                        <label for="phone">电话：</label>
+                                                        <input type="tel" id="phone" name="phone" placeholder="非必填">
+                                                    </div>
+                                                    <div>
+                                                        <label for="address">地址：</label>
+                                                        <input type="text" id="address" name="address"
+                                                            placeholder="非必填">
+                                                    </div>
+                                                    <div>
+                                                        <label for="QQ">QQ ：</label>
+                                                        <input type="text" id="QQ" name="QQ" placeholder="非必填">
+                                                    </div>
+                                                    <div>
+                                                        <label for="sex">性别：</label>
+                                                        <select id="sex" name="sex">
+                                                            <option value="male">男</option>
+                                                            <option value="female">女</option>
+                                                            <option value="M&&F">人妖</option>
+                                                            <option value="!(M&&F)">无性</option>
+                                                        </select>
+                                                        <label for="birthday">生日：</label>
+                                                        <input type="date" id="birthday" name="birthday">
+                                                    </div>
+                                                    <div>
+                                                        <fieldset>
+                                                            <legend>物种：</legend>
+                                                            <label for="human">人类</label>
+                                                            <input type="radio" id="human" name="specis"
+                                                                onclick="Human()">
+                                                            <label for="marmot">土拨鼠</label>
+                                                            <input type="radio" id="marmot" name="specis"
+                                                                onclick="Marmot()">
+                                                            <label for="Tauren">牛头人</label>
+                                                            <input type="radio" id="Tauren" name="specis">
+                                                            <br>
+                                                            <label for="goat">山羊</label>
+                                                            <input type="radio" id="goat" name="specis">
+                                                            <label for="cat">猫娘</label>
+                                                            <!--点击猫娘就会播放音频-->
+                                                            <input type="radio" id="cat" name="specis" onclick="Cat();">
+                                                            <label for="Si-life">硅基生命</label>
+                                                            <input type="radio" id="Si-life" name="specis">
+
+                                                        </fieldset>
+
+                                                    </div>
+                                                    <!--寄语-->
+                                                    <div>
+                                                        <label for="message">寄语：</label><br>
+                                                        <textarea id="message" name="message" rows="4" cols="30"
+                                                            placeholder="有什么想对组长或其他组员说的话吗......"></textarea>
+                                                    </div>
+                                                    <!--提交和重置按钮-->
+
+                                                    <div>
+                                                        <button type="button" onclick="alert('666')">预览</button>
+                                                        <button type="button" onclick="Give()">提交</button>
+                                                        <button type="reset" id="reset">重置</button>
+                                                    </div>
+                                                </div>
+                                                <div style="flex:3">
+                                                    <div>
+                                                        <!--设法把提交的头像文件在网页中展示出来-->
+                                                        <label for="image"
+                                                            style="border:none;border-radius: 4px;background-color: rgb(33, 71, 159);color: aliceblue;">头像</label>
+                                                        <input type="file" id="image" name="image" accept="image/*"
+                                                            hidden>
+                                                        <div id="preview" style="display: flex;">
+                                                            <div style="flex: 1;">
+                                                                <div>
+                                                                    <label for="introduction">自我介绍：</label><br>
+                                                                    <textarea id="introduction" name="introduction"
+                                                                        rows="10" cols="30"
+                                                                        placeholder="请简单介绍一下自己..."></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div style="flex: 1;">
+                                                                <img id="previewImg" src="#" alt="头像预览"
+                                                                    style=" display:none; width: 82%; margin-top: 10px;">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label for="hobbies">兴趣爱好：</label><br>
+                                                        <textarea id="hobbies" name="hobbies" rows="10" cols="60"
+                                                            placeholder="请描述您的兴趣爱好..."></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </form>
+                                        <!--自己写的脚本而非复制粘贴-->
+                                        <script>
+                                            //头像预览功能
+                                            document.getElementById('image').addEventListener('change', function (event) {
+                                                const file = event.target.files[0];
+                                                if (file) {
+                                                    const reader = new FileReader();
+                                                    reader.onload = function (e) {
+                                                        const previewImg = document.getElementById('previewImg');
+                                                        previewImg.src = e.target.result;
+                                                        previewImg.style.display = 'block';
+                                                    }
+                                                    reader.readAsDataURL(file);
+                                                }
+                                            });
+                                            //选择猫娘物种时弹出提示
+                                            function Cat() {
+                                                var isCat = document.getElementById('name').value;
+                                                var pattern1 = /^\S*(?:谢锦潇|锦潇|阿潇)\S*$/;//正则表达式，匹配包含组长名字的任意字符串
+
+                                                if (pattern1.test(isCat)) {
+                                                    alert('其他人都是猫娘~喵~(●\'◡\'●)');
+                                                    document.getElementById('human').checked = true;
+                                                }
+                                                else if (isCat) {
+                                                    alert('我是' + isCat + '，我是猫娘~喵~(●\'◡\'●)');
+
+                                                } else {
+                                                    alert('我是猫娘~喵~(●\'◡\'●)');
+                                                }
+                                                <!--播放音频-->
+                                                var audio = new Audio('音频\\85887\\猫叫.mp3');//创建Audio对象，指定音频文件路径
+                                                audio.play();//播放音频采用play()方法
+                                            }
+                                            //选择土拨鼠物种时弹出提示
+
+
+                                            function Marmot() {
+                                                var isMarmot = document.getElementById('name').value;
+                                                var pattern2 = /^\S*(?:郭京楷|楷子)\S*$/;
+
+                                                if (pattern2.test(isMarmot)) {
+                                                    while (true) {
+                                                        var r = confirm("楷子，我问你是不是土拨鼠？");
+                                                        if (r == true) {
+                                                            alert('楷子你终于承认了你是土拨鼠！');
+                                                            break;
+                                                        }
+                                                        else {
+                                                            alert('楷子你逃不掉的，你就是土拨鼠！你必须诚实！');
+
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                            //选择人类物种时弹出提示
+                                            function Human() {
+                                                var isHuman = document.getElementById('name').value;
+                                                var pattern1 = /^\S*(?:谢锦潇|锦潇|阿潇)\S*$/;
+                                                var pattern2 = /^\S*(?:郭京楷|楷子)\S*$/;
+                                                if (pattern2.test(isHuman)) {
+                                                    alert('楷子，我知道你不小心手滑点错了，我帮你勾选正确的选项。');
+
+                                                    document.getElementById('marmot').checked = true;
+                                                } else if (!pattern1.test(isHuman)) {
+                                                    alert('不！你不是人类！');
+
+                                                    document.getElementById('cat').checked = true;
+                                                }
+                                            }
+                                            //提交表单时弹出提示
+                                            function Give() {
+                                                var name = document.getElementById('name').value;
+                                                if (name == "谢锦潇" || name == "锦潇" || name == "阿潇") {
+                                                    alert('都说了别填组长的名字了！你咋不听话呢？(╯▔皿▔)╯' + '\n表单已重置，请重新填写。');
+                                                    document.getElementById('reset').click();
+                                                } else if (name) {
+                                                    alert('感谢' + name + '同学的提交！');
+                                                }
+                                                else {
+                                                    alert('请填写姓名后再提交！');
+                                                }
+                                            }
+                                        </script>
+                                    </article>
                                 </div>
-                                <div class="modal1-footer">
-                                    <h3>弹窗底部</h3>
+                                <div class="modal1-footer"
+                                    style="background-image: linear-gradient(to bottom right,rgb(8, 74, 159),rgb(29,123,123) );">
+                                    <img src="图库\告示牌.webp" alt="告示牌" style="height: 40px;">
                                 </div>
                             </div>
 
@@ -385,7 +584,7 @@
         <script src="javascript脚本库\侧边栏脚本.js"></script>
         <div class="changeColor1" style="height: 50px;"></div>
     </div>
-
+    <!---->
 
     <div style="display: flex;">
         <div style="flex: 1;"></div>

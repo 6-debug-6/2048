@@ -4,7 +4,7 @@
   /*动画要从右往左，必须用absolute或fixed，此时应对父元素使用relative*/
   position: absolute;
   /*调成0防止遮挡*/
-  z-index: 0;
+  z-index: 1;
   top: 0;
   right: 0;
   background-color: #0d64a3;
