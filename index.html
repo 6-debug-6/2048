@@ -60,24 +60,10 @@
             word-wrap: break-word;
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let clickButton = document.getElementById("clickButton");
-            let clickCount = document.getElementById("clickCount");
-            let count = 0;
 
-            clickButton.addEventListener("click", function () {
-                count++;
-                clickCount.textContent = count;
-                if (count % 2048 === 0) {
-                    alert("警告！按钮已被点击" + count + "次！一只无辜的土拨鼠死去了！！！" + "\n" + "你怎么能这么残忍？！");
-                }
-            });
-        });
-    </script>
 </head>
 
-<body onload="startTime();"
+<body
     style="display: flex; flex-direction: column; height: 299vh; text-align: center; align-items: center;padding-top: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div class="changeColor1"
@@ -337,6 +323,41 @@
                     <p>按钮已被点击 <span id="clickCount">0</span> 次。</p>
                 </div>
             </div>
+            <script>
+                //该脚本需要放在所涉及元素之后，否则元素没加载好
+                //误区，此时的count是基本类型而不是引用类型
+                //所以用函数模拟宏定义
+                function Count() {
+                    return localStorage.getItem("count");
+                }
+                console.log("count");
+                console.log(Count());
+                console.log(localStorage.getItem("count"));
+
+                if (Count() === null) {
+                    console.log("count");
+
+                    localStorage.setItem("count", 0);
+                    console.log("count");
+                }
+                document.getElementById("clickCount").textContent = Count();
+                //DOMContentLoaded不必等待外部资源加载，文档加载完毕即可
+                document.addEventListener("DOMContentLoaded", function () {
+                    let clickButton = document.getElementById("clickButton");
+                    let clickCount = document.getElementById("clickCount");
+
+
+
+                    clickButton.addEventListener("click", function () {
+                        console.log("count");
+                        localStorage.setItem("count", Count() - 1 + 2);
+                        clickCount.textContent = Count();
+                        if (Count() % 2048 === 0) {
+                            alert("警告！按钮已被点击" + Count() + "次！一只无辜的土拨鼠死去了！！！" + "\n" + "你怎么能这么残忍？！");
+                        }
+                    });
+                });
+            </script>
             <!--暂时无用-->
 
             <div
