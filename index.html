@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css样式库\右侧侧边栏.css">
     <link rel="stylesheet" type="text/css" href="css样式库\弹窗.css">
     <link rel="stylesheet" type="text/css" href="css样式库\日历天气集成.css">
+    <link rel="stylesheet" type="text/css" href="css样式库\计算器.css">
 
 
 
@@ -25,8 +26,6 @@
 
             width: 100%
         }
-
-
 
         .background1 {
             background-color: rgb(29, 123, 123);
@@ -170,7 +169,6 @@
                         <a id="myBtn1">日历</a>
                         <!-- 弹窗 -->
                         <div id="myModal1" class="modal1">
-
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
                                 <div class="modal1-header"
@@ -297,22 +295,61 @@
 
                         </div>
                         <script src="javascript脚本库\弹窗1.js"></script>
-                        <a id="myBtn2">天气</a>
+                        <a id="myBtn2">工具</a>
                         <!-- 弹窗 -->
                         <div id="myModal2" class="modal1">
-
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
-                                <div class="modal1-header">
+                                <div class="modal1-header"
+                                    style="background-image: linear-gradient(to bottom right,rgb(11, 127, 172),rgb(4, 43, 127));">
                                     <span class="close1">&times;</span>
-                                    <h2>弹窗头部</h2>
+                                    <h2>简易计算器</h2>
                                 </div>
-                                <div class="modal1-body">
-                                    <p>弹窗文本..</p>
-                                    <p>弹窗文本..</p>
+                                <div class="modal1-body" style="background-color: #95a3be;">
+                                    <div id="simpleCalculator"
+                                        style="border: 5px solid rgb(33, 71, 159);background-color: #5fa7e2;">
+                                        <!-- 显示区域 -->
+                                        <div class="display">
+                                            <div class="calculation" id="calculationDisplay"></div>
+                                            <div class="result" id="resultDisplay">0</div>
+                                        </div>
+
+                                        <!-- 按钮区域 -->
+                                        <div class="buttons">
+                                            <!-- 第一行 -->
+                                            <button class="special" data-action="clear">AC</button>
+                                            <button class="special" data-action="backspace">⌫</button>
+                                            <button class="operator" data-operator="÷">÷</button>
+                                            <button class="operator" data-operator="×">×</button>
+
+                                            <!-- 第二行 -->
+                                            <button class="number" data-number="7">7</button>
+                                            <button class="number" data-number="8">8</button>
+                                            <button class="number" data-number="9">9</button>
+                                            <button class="operator" data-operator="-">-</button>
+
+                                            <!-- 第三行 -->
+                                            <button class="number" data-number="4">4</button>
+                                            <button class="number" data-number="5">5</button>
+                                            <button class="number" data-number="6">6</button>
+                                            <button class="operator" data-operator="+">+</button>
+
+                                            <!-- 第四行 -->
+                                            <button class="number" data-number="1">1</button>
+                                            <button class="number" data-number="2">2</button>
+                                            <button class="number" data-number="3">3</button>
+                                            <button class="equals" data-action="equals">=</button>
+
+                                            <!-- 第五行 -->
+                                            <button class="number zero" data-number="0">0</button>
+                                            <button class="number" data-number=".">.</button>
+                                        </div>
+                                    </div>
+                                    <script src="javascript脚本库\计算器.js"></script>
                                 </div>
-                                <div class="modal1-footer">
-                                    <h3>弹窗底部</h3>
+                                <div class="modal1-footer"
+                                    style="background-image: linear-gradient(to bottom right,rgb(4,43,127),rgb(11, 127, 172));">
+                                    <img src="图库\计算器.webp" alt="计算器" style="width: 60px;">
                                 </div>
                             </div>
 
@@ -332,22 +369,40 @@
                 <div style="flex: 4;display: flex; position: relative;">
                     <div id="mySidenav_r" class="sidenav_r">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav_r()">&times;</a>
-                        <a id="myBtn3">游戏</a>
+                        <a id="myBtn3">绘板</a>
                         <!-- 弹窗 -->
                         <div id="myModal3" class="modal1">
 
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
-                                <div class="modal1-header">
+                                <div class="modal1-header"
+                                    style="background-image: linear-gradient(to bottom right,rgb(29,123,123),rgb(104, 201, 19));">
                                     <span class="close1">&times;</span>
-                                    <h2>弹窗头部</h2>
+                                    <h2>绘图板</h2>
                                 </div>
-                                <div class="modal1-body">
-                                    <p>弹窗文本...</p>
-                                    <p>弹窗文本...</p>
+                                <div class="modal1-body" style="background-color: #44484d;">
+                                    <article>
+                                        <!--绘图板-->
+                                        <h2 style="opacity: 0;">绘图板</h2>
+                                        <canvas id="drawingCanvas" width="800" height="500"></canvas>
+                                        <div>
+                                            <button onclick="clearCanvas()">清空</button>
+                                            <input type="color" id="colorPicker" value="#000000">
+                                            <input type="range" id="brushSize" min="1" max="50" value="5">
+                                            <span id="brushSizeValue">5px</span>
+                                            <button onclick="changeBrushType('round')">圆形笔刷</button>
+                                            <button onclick="changeBrushType('square')">方形笔刷</button>
+                                            <button onclick="changeBrushType('eraser')">橡皮擦</button>
+                                        </div>
+
+                                        <script src="javascript脚本库\绘图板.js">
+
+                                        </script>
+                                    </article>
                                 </div>
-                                <div class="modal1-footer">
-                                    <h3>弹窗底部</h3>
+                                <div class="modal1-footer"
+                                    style="background-image: linear-gradient(to bottom right,rgb(104, 201, 19),rgb(29, 123, 123));">
+                                    <img src="图库\画板.webp" alt="画板" style="height:60px ;">
                                 </div>
                             </div>
 

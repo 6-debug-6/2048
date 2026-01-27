@@ -46,7 +46,7 @@
     </style>
 </head>
 
-<body onload="startTime();"
+<body
     style="display: flex; flex-direction: column; height: 299vh; text-align: center; align-items: center;padding-top: 56px;">
     <!--顶部导航栏和搜索框合并-->
     <div class="changeColor1"
@@ -149,9 +149,47 @@
                 <div style="flex: 4;display: flex;">
                     <div id="mySidenav_l" class="sidenav_l">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav_l()">&times;</a>
-                        <a href="#">时间</a>
-                        <a href="#">天气</a>
+                        <a id="myBtn1">日历</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal1" class="modal1">
 
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>弹窗头部</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <p>内容</p>
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <script src="javascript脚本库\弹窗1.js"></script>
+                        <a id="myBtn2">天气</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal2" class="modal1">
+
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>弹窗头部</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <p>弹窗文本..</p>
+                                    <p>弹窗文本..</p>
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <script src="javascript脚本库\弹窗2.js"></script>
                     </div>
                     <span id="span_l"
                         style="color:rgb(29, 123, 123); font-size:90px;cursor:pointer;position:relative;top: 30%;left: 30%;"
@@ -166,10 +204,48 @@
                 <div style="flex: 4;display: flex; position: relative;">
                     <div id="mySidenav_r" class="sidenav_r">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav_r()">&times;</a>
-                        <a href="#">游戏</a>
-                        <a href="#">工具</a>
+                        <a id="myBtn3">游戏</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal3" class="modal1">
 
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>弹窗头部</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <p>弹窗文本...</p>
+                                    <p>弹窗文本...</p>
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <script src="javascript脚本库\弹窗3.js"></script>
+                        <a id="myBtn4">留言</a>
+                        <!-- 弹窗 -->
+                        <div id="myModal4" class="modal1">
+
+                            <!-- 弹窗内容 -->
+                            <div class="modal1-content">
+                                <div class="modal1-header">
+                                    <span class="close1">&times;</span>
+                                    <h2>弹窗头部</h2>
+                                </div>
+                                <div class="modal1-body">
+                                    <p>内容</p>
+                                </div>
+                                <div class="modal1-footer">
+                                    <h3>弹窗底部</h3>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+                    <script src="javascript脚本库\弹窗4.js"></script>
                     <span id="span_r"
                         style="color: rgb(29, 123, 123); font-size:90px;cursor:pointer;position:relative;top: 30%;left: 35px;"
                         onclick="openNav_r()">&#9776;

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简约计算器</title>
+    <style>
+        /* 所有样式都封装在计算器容器内 */
+        #simpleCalculator {
+            /* 计算器容器样式 */
+            max-width: 320px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* 只重置组件内部元素的样式 */
+        #simpleCalculator *,
+        #simpleCalculator *::before,
+        #simpleCalculator *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 显示区域 */
+        #simpleCalculator .display {
+            width: 100%;
+            height: 100px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        #simpleCalculator .calculation {
+            font-size: 1.2rem;
+            color: #6c757d;
+            min-height: 24px;
+            word-break: break-all;
+        }
+
+        #simpleCalculator .result {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #212529;
+            word-break: break-all;
+            line-height: 1;
+        }
+
+        /* 按钮区域 */
+        #simpleCalculator .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        #simpleCalculator button {
+            height: 60px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 数字按钮 */
+        #simpleCalculator .number {
+            background-color: #f8f9fa;
+            color: #212529;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        #simpleCalculator .number:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        #simpleCalculator .number:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 操作符按钮 */
+        #simpleCalculator .operator {
+            background-color: #4361ee;
+            color: white;
+            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
+        }
+
+        #simpleCalculator .operator:hover {
+            background-color: #3a56d4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(67, 97, 238, 0.25);
+        }
+
+        #simpleCalculator .operator:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(67, 97, 238, 0.2);
+        }
+
+        /* 特殊按钮 */
+        #simpleCalculator .special {
+            background-color: #6c757d;
+            color: white;
+            box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+        }
+
+        #simpleCalculator .special:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(108, 117, 125, 0.25);
+        }
+
+        #simpleCalculator .special:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(108, 117, 125, 0.2);
+        }
+
+        /* 等号按钮 */
+        #simpleCalculator .equals {
+            background-color: #3a0ca3;
+            color: white;
+            box-shadow: 0 4px 6px rgba(58, 12, 163, 0.2);
+        }
+
+        #simpleCalculator .equals:hover {
+            background-color: #300a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(58, 12, 163, 0.25);
+        }
+
+        #simpleCalculator .equals:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(58, 12, 163, 0.2);
+        }
+
+        /* 零按钮占两列 */
+        #simpleCalculator .zero {
+            grid-column: span 2;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 400px) {
+            #simpleCalculator {
+                max-width: 280px;
+                padding: 15px;
+            }
+
+            #simpleCalculator .display {
+                height: 90px;
+                padding: 15px;
+            }
+
+            #simpleCalculator .result {
+                font-size: 2.2rem;
+            }
+
+            #simpleCalculator button {
+                height: 55px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 300px) {
+            #simpleCalculator {
+                max-width: 240px;
+                padding: 12px;
+            }
+
+            #simpleCalculator .display {
+                height: 80px;
+                padding: 12px;
+            }
+
+            #simpleCalculator .result {
+                font-size: 1.8rem;
+            }
+
+            #simpleCalculator .calculation {
+                font-size: 1rem;
+            }
+
+            #simpleCalculator button {
+                height: 50px;
+                font-size: 1.1rem;
+            }
+
+            #simpleCalculator .buttons {
+                gap: 8px;
+            }
+        }
+
+        /* 按键聚焦状态 */
+        #simpleCalculator button:focus {
+            outline: 2px solid #4361ee;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 简约计算器组件 -->
+    <!-- 注意：容器div必须有id="simpleCalculator" -->
+    <div id="simpleCalculator">
+        <!-- 显示区域 -->
+        <div class="display">
+            <div class="calculation" id="calculationDisplay"></div>
+            <div class="result" id="resultDisplay">0</div>
+        </div>
+
+        <!-- 按钮区域 -->
+        <div class="buttons">
+            <!-- 第一行 -->
+            <button class="special" data-action="clear">AC</button>
+            <button class="special" data-action="backspace">⌫</button>
+            <button class="operator" data-operator="÷">÷</button>
+            <button class="operator" data-operator="×">×</button>
+
+            <!-- 第二行 -->
+            <button class="number" data-number="7">7</button>
+            <button class="number" data-number="8">8</button>
+            <button class="number" data-number="9">9</button>
+            <button class="operator" data-operator="-">-</button>
+
+            <!-- 第三行 -->
+            <button class="number" data-number="4">4</button>
+            <button class="number" data-number="5">5</button>
+            <button class="number" data-number="6">6</button>
+            <button class="operator" data-operator="+">+</button>
+
+            <!-- 第四行 -->
+            <button class="number" data-number="1">1</button>
+            <button class="number" data-number="2">2</button>
+            <button class="number" data-number="3">3</button>
+            <button class="equals" data-action="equals">=</button>
+
+            <!-- 第五行 -->
+            <button class="number zero" data-number="0">0</button>
+            <button class="number" data-number=".">.</button>
+        </div>
+    </div>
+
+    <script>
+        // 计算器状态管理
+        class Calculator {
+            constructor() {
+                this.currentInput = '0';
+                this.previousInput = '';
+                this.operator = null;
+                this.waitingForNewInput = false;
+                this.calculationString = '';
+
+                this.init();
+            }
+
+            init() {
+                this.updateDisplay();
+                this.setupEventListeners();
+                this.setupKeyboardSupport();
+            }
+
+            // 更新显示
+            updateDisplay() {
+                const resultDisplay = document.getElementById('resultDisplay');
+                const calculationDisplay = document.getElementById('calculationDisplay');
+
+                resultDisplay.textContent = this.formatDisplayNumber(this.currentInput);
+                calculationDisplay.textContent = this.calculationString;
+            }
+
+            // 格式化显示的数字（添加千位分隔符）
+            formatDisplayNumber(numStr) {
+                if (numStr === '') return '0';
+
+                // 如果是小数，分开处理整数部分和小数部分
+                if (numStr.includes('.')) {
+                    const [integerPart, decimalPart] = numStr.split('.');
+                    return this.addThousandsSeparator(integerPart) + '.' + decimalPart;
+                }
+
+                return this.addThousandsSeparator(numStr);
+            }
+
+            // 添加千位分隔符
+            addThousandsSeparator(numStr) {
+                // 处理负数
+                const isNegative = numStr.startsWith('-');
+                const absoluteNumStr = isNegative ? numStr.slice(1) : numStr;
+
+                // 添加千位分隔符
+                const parts = absoluteNumStr.split('.');
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                return (isNegative ? '-' : '') + parts.join('.');
+            }
+
+            // 处理数字输入
+            inputNumber(number) {
+                // 如果等待新输入（刚刚执行完计算或按了运算符）
+                if (this.waitingForNewInput) {
+                    this.currentInput = number;
+                    this.waitingForNewInput = false;
+                } else {
+                    // 防止输入多个小数点
+                    if (number === '.' && this.currentInput.includes('.')) {
+                        return;
+                    }
+
+                    // 防止输入多个前导零
+                    if (this.currentInput === '0' && number !== '.') {
+                        this.currentInput = number;
+                    } else {
+                        this.currentInput += number;
+                    }
+                }
+
+                this.updateDisplay();
+            }
+
+            // 处理操作符
+            inputOperator(nextOperator) {
+                const inputValue = parseFloat(this.currentInput);
+
+                // 如果已经有操作符，先执行计算
+                if (this.operator && !this.waitingForNewInput) {
+                    this.calculate();
+                }
+
+                // 更新操作符
+                this.operator = nextOperator;
+
+                // 更新计算字符串
+                if (this.calculationString === '') {
+                    this.calculationString = `${this.formatDisplayNumber(this.currentInput)} ${this.operator}`;
+                } else {
+                    this.calculationString = `${this.previousInput} ${this.operator}`;
+                }
+
+                // 保存当前输入，并等待新输入
+                this.previousInput = this.currentInput;
+                this.waitingForNewInput = true;
+
+                this.updateDisplay();
+            }
+
+            // 执行计算
+            calculate() {
+                const prevValue = parseFloat(this.previousInput);
+                const currentValue = parseFloat(this.currentInput);
+
+                if (isNaN(prevValue) || isNaN(currentValue)) return;
+
+                let result;
+
+                switch (this.operator) {
+                    case '+':
+                        result = prevValue + currentValue;
+                        break;
+                    case '-':
+                        result = prevValue - currentValue;
+                        break;
+                    case '×':
+                        result = prevValue * currentValue;
+                        break;
+                    case '÷':
+                        if (currentValue === 0) {
+                            alert("错误：不能除以零");
+                            this.clear();
+                            return;
+                        }
+                        result = prevValue / currentValue;
+                        break;
+                    default:
+                        return;
+                }
+
+                // 处理浮点数精度问题
+                result = Math.round(result * 100000000) / 100000000;
+
+                // 更新显示
+                this.currentInput = result.toString();
+                this.operator = null;
+                this.previousInput = '';
+                this.calculationString = '';
+                this.waitingForNewInput = true;
+
+                this.updateDisplay();
+            }
+
+            // 清除计算器
+            clear() {
+                this.currentInput = '0';
+                this.previousInput = '';
+                this.operator = null;
+                this.waitingForNewInput = false;
+                this.calculationString = '';
+
+                this.updateDisplay();
+            }
+
+            // 退格
+            backspace() {
+                if (this.currentInput.length > 1) {
+                    this.currentInput = this.currentInput.slice(0, -1);
+                } else {
+                    this.currentInput = '0';
+                }
+
+                this.updateDisplay();
+            }
+
+            // 设置事件监听
+            setupEventListeners() {
+                // 数字按钮
+                document.querySelectorAll('[data-number]').forEach(button => {
+                    button.addEventListener('click', () => {
+                        this.inputNumber(button.dataset.number);
+                    });
+                });
+
+                // 操作符按钮
+                document.querySelectorAll('[data-operator]').forEach(button => {
+                    button.addEventListener('click', () => {
+                        this.inputOperator(button.dataset.operator);
+                    });
+                });
+
+                // 等号按钮
+                document.querySelector('[data-action="equals"]').addEventListener('click', () => {
+                    this.calculate();
+                });
+
+                // 清除按钮
+                document.querySelector('[data-action="clear"]').addEventListener('click', () => {
+                    this.clear();
+                });
+
+                // 退格按钮
+                document.querySelector('[data-action="backspace"]').addEventListener('click', () => {
+                    this.backspace();
+                });
+            }
+
+            // 键盘支持
+            setupKeyboardSupport() {
+                document.addEventListener('keydown', (event) => {
+                    // 防止事件冒泡影响其他组件
+                    event.stopPropagation();
+
+                    const key = event.key;
+
+                    // 数字键
+                    if (key >= '0' && key <= '9') {
+                        this.inputNumber(key);
+                        return;
+                    }
+
+                    // 小数点
+                    if (key === '.') {
+                        this.inputNumber('.');
+                        return;
+                    }
+
+                    // 操作符
+                    if (['+', '-', '*', '/'].includes(key)) {
+                        let operator = key;
+                        if (key === '*') operator = '×';
+                        if (key === '/') operator = '÷';
+                        this.inputOperator(operator);
+                        return;
+                    }
+
+                    // 等号或回车
+                    if (key === '=' || key === 'Enter') {
+                        this.calculate();
+                        return;
+                    }
+
+                    // 退格
+                    if (key === 'Backspace') {
+                        this.backspace();
+                        return;
+                    }
+
+                    // 清除 (Escape 或 Delete)
+                    if (key === 'Escape' || key === 'Delete') {
+                        this.clear();
+                        return;
+                    }
+                });
+            }
+        }
+
+        // 初始化计算器
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculator = new Calculator();
+
+            // 添加简单的使用说明提示（可选）
+            console.log("计算器已初始化。支持键盘输入：数字键、+-*/、Enter(=)、Backspace、Escape(AC)");
+        });
+    </script>
+</body>
+
+</html>

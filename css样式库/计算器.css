@@ -1,0 +1,202 @@
+/* 所有样式都封装在计算器容器内 */
+#simpleCalculator {
+  /* 计算器容器样式 */
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* 只重置组件内部元素的样式 */
+#simpleCalculator *,
+#simpleCalculator *::before,
+#simpleCalculator *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 显示区域 */
+#simpleCalculator .display {
+  width: 100%;
+  height: 100px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+#simpleCalculator .calculation {
+  font-size: 1.2rem;
+  color: #6c757d;
+  min-height: 24px;
+  word-break: break-all;
+}
+
+#simpleCalculator .result {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #212529;
+  word-break: break-all;
+  line-height: 1;
+}
+
+/* 按钮区域 */
+#simpleCalculator .buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+#simpleCalculator button {
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 数字按钮 */
+#simpleCalculator .number {
+  background-color: #f8f9fa;
+  color: #212529;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+#simpleCalculator .number:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.08);
+}
+
+#simpleCalculator .number:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 操作符按钮 */
+#simpleCalculator .operator {
+  background-color: #4361ee;
+  color: white;
+  box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
+}
+
+#simpleCalculator .operator:hover {
+  background-color: #3a56d4;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(67, 97, 238, 0.25);
+}
+
+#simpleCalculator .operator:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(67, 97, 238, 0.2);
+}
+
+/* 特殊按钮 */
+#simpleCalculator .special {
+  background-color: #6c757d;
+  color: white;
+  box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+}
+
+#simpleCalculator .special:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(108, 117, 125, 0.25);
+}
+
+#simpleCalculator .special:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(108, 117, 125, 0.2);
+}
+
+/* 等号按钮 */
+#simpleCalculator .equals {
+  background-color: #3a0ca3;
+  color: white;
+  box-shadow: 0 4px 6px rgba(58, 12, 163, 0.2);
+}
+
+#simpleCalculator .equals:hover {
+  background-color: #300a8a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(58, 12, 163, 0.25);
+}
+
+#simpleCalculator .equals:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(58, 12, 163, 0.2);
+}
+
+/* 零按钮占两列 */
+#simpleCalculator .zero {
+  grid-column: span 2;
+}
+
+/* 响应式调整 */
+@media (max-width: 400px) {
+  #simpleCalculator {
+    max-width: 280px;
+    padding: 15px;
+  }
+
+  #simpleCalculator .display {
+    height: 90px;
+    padding: 15px;
+  }
+
+  #simpleCalculator .result {
+    font-size: 2.2rem;
+  }
+
+  #simpleCalculator button {
+    height: 55px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 300px) {
+  #simpleCalculator {
+    max-width: 240px;
+    padding: 12px;
+  }
+
+  #simpleCalculator .display {
+    height: 80px;
+    padding: 12px;
+  }
+
+  #simpleCalculator .result {
+    font-size: 1.8rem;
+  }
+
+  #simpleCalculator .calculation {
+    font-size: 1rem;
+  }
+
+  #simpleCalculator button {
+    height: 50px;
+    font-size: 1.1rem;
+  }
+
+  #simpleCalculator .buttons {
+    gap: 8px;
+  }
+}
+
+/* 按键聚焦状态 */
+#simpleCalculator button:focus {
+  outline: 2px solid #4361ee;
+  outline-offset: 2px;
+}
