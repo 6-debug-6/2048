@@ -1,0 +1,325 @@
+/* 所有样式都封装在游戏容器内 */
+#cardMatchGame {
+  /* 游戏容器样式 */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 只重置组件内部元素的样式 */
+#cardMatchGame *,
+#cardMatchGame *::before,
+#cardMatchGame *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 游戏标题 */
+#cardMatchGame h2 {
+  color: #2d3436;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* 游戏信息区域 */
+#cardMatchGame .game-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 25px;
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+#cardMatchGame .info-item {
+  text-align: center;
+}
+
+#cardMatchGame .info-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 5px;
+}
+
+#cardMatchGame .info-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4361ee;
+}
+
+/* 游戏控制按钮 */
+#cardMatchGame .game-controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+#cardMatchGame .control-btn {
+  padding: 10px 20px;
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#cardMatchGame .control-btn:hover {
+  background-color: #3a56d4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.2);
+}
+
+#cardMatchGame .control-btn:active {
+  transform: translateY(0);
+}
+
+#cardMatchGame .restart-btn {
+  background-color: #3a0ca3;
+}
+
+#cardMatchGame .restart-btn:hover {
+  background-color: #300a8a;
+}
+
+/* 卡片网格容器 */
+#cardMatchGame .cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+/* 卡片样式 */
+#cardMatchGame .card {
+  aspect-ratio: 3/4;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 卡片翻转效果 */
+#cardMatchGame .card.flipped {
+  transform: rotateY(180deg);
+}
+
+#cardMatchGame .card.matched {
+  cursor: default;
+  opacity: 0.7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 卡片正面和背面 */
+#cardMatchGame .card-front,
+#cardMatchGame .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 卡片背面（显示时） */
+#cardMatchGame .card-back {
+  background: linear-gradient(135deg, #4361ee, #3a0ca3);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* 卡片正面（内容） */
+#cardMatchGame .card-front {
+  background-color: white;
+  transform: rotateY(180deg);
+  border: 2px solid #e9ecef;
+  padding: 15px;
+}
+
+/* 卡片内容样式 - 您可以自定义这里 */
+#cardMatchGame .card-content {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: #2d3436;
+  /* 您可以通过修改这里的样式来调整卡片内容的外观 */
+}
+
+/* 游戏结束弹窗 */
+#cardMatchGame .game-over-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
+}
+
+#cardMatchGame .game-over-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#cardMatchGame .modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+#cardMatchGame .modal-title {
+  color: #3a0ca3;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+#cardMatchGame .modal-text {
+  margin-bottom: 20px;
+  color: #495057;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+#cardMatchGame .modal-btn {
+  padding: 12px 30px;
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#cardMatchGame .modal-btn:hover {
+  background-color: #3a56d4;
+}
+
+/* 难度选择 */
+#cardMatchGame .difficulty-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#cardMatchGame .difficulty-btn {
+  padding: 8px 16px;
+  background-color: #e9ecef;
+  color: #495057;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#cardMatchGame .difficulty-btn.active {
+  background-color: #4361ee;
+  color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 650px) {
+  #cardMatchGame .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 500px) {
+  #cardMatchGame .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 350px;
+  }
+
+  #cardMatchGame .card-content {
+    font-size: 1.5rem;
+  }
+
+  #cardMatchGame .card-back {
+    font-size: 1.5rem;
+  }
+
+  #cardMatchGame .game-info {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #cardMatchGame .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #cardMatchGame .info-label {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  #cardMatchGame .info-value {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  #cardMatchGame .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 280px;
+  }
+
+  #cardMatchGame .card-content {
+    font-size: 1.2rem;
+  }
+
+  #cardMatchGame .card-back {
+    font-size: 1.2rem;
+  }
+}
+
+/* 游戏说明 */
+#cardMatchGame .game-instructions {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

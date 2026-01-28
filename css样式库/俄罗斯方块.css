@@ -1,0 +1,391 @@
+/* 俄罗斯方块游戏专用样式 - 使用不同前缀避免冲突 */
+#tetrisGame {
+  /* 游戏容器样式 */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1a2e;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* 只重置组件内部元素的样式 */
+#tetrisGame *,
+#tetrisGame *::before,
+#tetrisGame *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 游戏标题 */
+#tetrisGame .game-title {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  text-align: center;
+  text-shadow: 0 0 10px #4361ee;
+  letter-spacing: 2px;
+}
+
+/* 游戏主区域 */
+#tetrisGame .game-main-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+/* 游戏区域容器 */
+#tetrisGame .game-area-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 游戏画布区域 */
+#tetrisGame .game-canvas-container {
+  position: relative;
+  border: 4px solid #4361ee;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(67, 97, 238, 0.3);
+  background-color: #0f0f1a;
+}
+
+/* 游戏画布 */
+#tetrisGame .tetris-canvas {
+  display: block;
+  background-color: #0f0f1a;
+}
+
+/* 游戏侧边面板 */
+#tetrisGame .game-side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-width: 200px;
+}
+
+/* 游戏信息面板 */
+#tetrisGame .game-info-panel {
+  background-color: #16213e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#tetrisGame .info-section {
+  margin-bottom: 20px;
+}
+
+#tetrisGame .info-section:last-child {
+  margin-bottom: 0;
+}
+
+#tetrisGame .info-title {
+  color: #4361ee;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px solid #4361ee;
+  padding-bottom: 5px;
+}
+
+#tetrisGame .info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #e6e6e6;
+}
+
+#tetrisGame .info-label {
+  font-weight: 500;
+}
+
+#tetrisGame .info-value {
+  font-weight: bold;
+  color: #4cc9f0;
+  font-size: 1.2rem;
+}
+
+/* 下一个方块预览 */
+#tetrisGame .next-piece-container {
+  background-color: #16213e;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#tetrisGame .next-piece-title {
+  color: #4361ee;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#tetrisGame .next-piece-canvas {
+  background-color: #0f0f1a;
+  border-radius: 5px;
+  border: 2px solid #4361ee;
+}
+
+/* 游戏控制面板 */
+#tetrisGame .game-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #16213e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+
+#tetrisGame .control-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+#tetrisGame .control-btn {
+  padding: 12px 15px;
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  text-align: center;
+}
+
+#tetrisGame .control-btn:hover {
+  background-color: #3a56d4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+}
+
+#tetrisGame .control-btn:active {
+  transform: translateY(0);
+}
+
+#tetrisGame .control-btn.pause-btn {
+  background-color: #f72585;
+}
+
+#tetrisGame .control-btn.pause-btn:hover {
+  background-color: #e01e74;
+}
+
+#tetrisGame .control-btn.restart-btn {
+  background-color: #3a0ca3;
+}
+
+#tetrisGame .control-btn.restart-btn:hover {
+  background-color: #300a8a;
+}
+
+/* 游戏状态信息 */
+#tetrisGame .game-status {
+  text-align: center;
+  color: #4cc9f0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 15px 0;
+  height: 30px;
+}
+
+/* 游戏说明 */
+#tetrisGame .game-instructions {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #16213e;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  color: #b0b0b0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+#tetrisGame .instructions-title {
+  color: #4361ee;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+#tetrisGame .key-controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+#tetrisGame .key-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+#tetrisGame .key {
+  background-color: #4361ee;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+#tetrisGame .key-desc {
+  color: #e6e6e6;
+}
+
+/* 响应式设计 */
+@media (max-width: 850px) {
+  #tetrisGame .game-main-area {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #tetrisGame .game-side-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  #tetrisGame .game-info-panel,
+  #tetrisGame .next-piece-container {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  #tetrisGame .game-controls-panel {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  #tetrisGame .tetris-canvas {
+    width: 300px !important;
+    height: 600px !important;
+  }
+
+  #tetrisGame .next-piece-canvas {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  #tetrisGame .key-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  #tetrisGame {
+    padding: 15px;
+  }
+
+  #tetrisGame .tetris-canvas {
+    width: 250px !important;
+    height: 500px !important;
+  }
+
+  #tetrisGame .game-title {
+    font-size: 2rem;
+  }
+
+  #tetrisGame .control-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 暂停遮罩层 */
+#tetrisGame .pause-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px #4361ee;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+/* 游戏结束遮罩层 */
+#tetrisGame .game-over-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 4px;
+  z-index: 10;
+  text-align: center;
+}
+
+#tetrisGame .game-over-title {
+  font-size: 3rem;
+  color: #f72585;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #f72585;
+}
+
+#tetrisGame .game-over-score {
+  font-size: 2rem;
+  color: #4cc9f0;
+  margin-bottom: 30px;
+}
+
+/* 方块颜色定义 */
+.tetris-block-I {
+  background-color: #00f5ff;
+}
+.tetris-block-J {
+  background-color: #4361ee;
+}
+.tetris-block-L {
+  background-color: #f8961e;
+}
+.tetris-block-O {
+  background-color: #ffd166;
+}
+.tetris-block-S {
+  background-color: #06d6a0;
+}
+.tetris-block-T {
+  background-color: #9d4edd;
+}
+.tetris-block-Z {
+  background-color: #ef476f;
+}

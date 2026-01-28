@@ -4,512 +4,1215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简约计算器</title>
+    <title>俄罗斯方块</title>
     <style>
-        /* 所有样式都封装在计算器容器内 */
-        #simpleCalculator {
-            /* 计算器容器样式 */
-            max-width: 320px;
+        /* 俄罗斯方块游戏专用样式 - 使用不同前缀避免冲突 */
+        #tetrisGame {
+            /* 游戏容器样式 */
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
             font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #1a1a2e;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         /* 只重置组件内部元素的样式 */
-        #simpleCalculator *,
-        #simpleCalculator *::before,
-        #simpleCalculator *::after {
+        #tetrisGame *,
+        #tetrisGame *::before,
+        #tetrisGame *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        /* 显示区域 */
-        #simpleCalculator .display {
-            width: 100%;
-            height: 100px;
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 20px;
+        /* 游戏标题 */
+        #tetrisGame .game-title {
+            color: #ffffff;
             margin-bottom: 20px;
-            text-align: right;
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 0 0 10px #4361ee;
+            letter-spacing: 2px;
+        }
+
+        /* 游戏主区域 */
+        #tetrisGame .game-main-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        /* 游戏区域容器 */
+        #tetrisGame .game-area-container {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 游戏画布区域 */
+        #tetrisGame .game-canvas-container {
+            position: relative;
+            border: 4px solid #4361ee;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 0 20px rgba(67, 97, 238, 0.3);
+            background-color: #0f0f1a;
         }
 
-        #simpleCalculator .calculation {
-            font-size: 1.2rem;
-            color: #6c757d;
-            min-height: 24px;
-            word-break: break-all;
+        /* 游戏画布 */
+        #tetrisGame .tetris-canvas {
+            display: block;
+            background-color: #0f0f1a;
         }
 
-        #simpleCalculator .result {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: #212529;
-            word-break: break-all;
-            line-height: 1;
+        /* 游戏侧边面板 */
+        #tetrisGame .game-side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            min-width: 200px;
         }
 
-        /* 按钮区域 */
-        #simpleCalculator .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        #simpleCalculator button {
-            height: 60px;
-            border: none;
+        /* 游戏信息面板 */
+        #tetrisGame .game-info-panel {
+            background-color: #16213e;
             border-radius: 10px;
-            font-size: 1.3rem;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #tetrisGame .info-section {
+            margin-bottom: 20px;
+        }
+
+        #tetrisGame .info-section:last-child {
+            margin-bottom: 0;
+        }
+
+        #tetrisGame .info-title {
+            color: #4361ee;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 1px solid #4361ee;
+            padding-bottom: 5px;
+        }
+
+        #tetrisGame .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #e6e6e6;
+        }
+
+        #tetrisGame .info-label {
+            font-weight: 500;
+        }
+
+        #tetrisGame .info-value {
+            font-weight: bold;
+            color: #4cc9f0;
+            font-size: 1.2rem;
+        }
+
+        /* 下一个方块预览 */
+        #tetrisGame .next-piece-container {
+            background-color: #16213e;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #tetrisGame .next-piece-title {
+            color: #4361ee;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #tetrisGame .next-piece-canvas {
+            background-color: #0f0f1a;
+            border-radius: 5px;
+            border: 2px solid #4361ee;
+        }
+
+        /* 游戏控制面板 */
+        #tetrisGame .game-controls-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        #tetrisGame .control-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        #tetrisGame .control-btn {
+            padding: 12px 15px;
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #tetrisGame .control-btn:hover {
+            background-color: #3a56d4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+        }
+
+        #tetrisGame .control-btn:active {
+            transform: translateY(0);
+        }
+
+        #tetrisGame .control-btn.pause-btn {
+            background-color: #f72585;
+        }
+
+        #tetrisGame .control-btn.pause-btn:hover {
+            background-color: #e01e74;
+        }
+
+        #tetrisGame .control-btn.restart-btn {
+            background-color: #3a0ca3;
+        }
+
+        #tetrisGame .control-btn.restart-btn:hover {
+            background-color: #300a8a;
+        }
+
+        /* 游戏状态信息 */
+        #tetrisGame .game-status {
+            text-align: center;
+            color: #4cc9f0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 15px 0;
+            height: 30px;
+        }
+
+        /* 游戏说明 */
+        #tetrisGame .game-instructions {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #16213e;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        #tetrisGame .instructions-title {
+            color: #4361ee;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        #tetrisGame .key-controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        #tetrisGame .key-item {
             display: flex;
             align-items: center;
+            gap: 10px;
             justify-content: center;
         }
 
-        /* 数字按钮 */
-        #simpleCalculator .number {
-            background-color: #f8f9fa;
-            color: #212529;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        #simpleCalculator .number:hover {
-            background-color: #e9ecef;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        #simpleCalculator .number:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        /* 操作符按钮 */
-        #simpleCalculator .operator {
+        #tetrisGame .key {
             background-color: #4361ee;
             color: white;
-            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
         }
 
-        #simpleCalculator .operator:hover {
-            background-color: #3a56d4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(67, 97, 238, 0.25);
+        #tetrisGame .key-desc {
+            color: #e6e6e6;
         }
 
-        #simpleCalculator .operator:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(67, 97, 238, 0.2);
+        /* 响应式设计 */
+        @media (max-width: 850px) {
+            #tetrisGame .game-main-area {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #tetrisGame .game-side-panel {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            #tetrisGame .game-info-panel,
+            #tetrisGame .next-piece-container {
+                flex: 1;
+                min-width: 200px;
+            }
+
+            #tetrisGame .game-controls-panel {
+                width: 100%;
+                max-width: 400px;
+            }
         }
 
-        /* 特殊按钮 */
-        #simpleCalculator .special {
-            background-color: #6c757d;
-            color: white;
-            box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+        @media (max-width: 600px) {
+            #tetrisGame .tetris-canvas {
+                width: 300px !important;
+                height: 600px !important;
+            }
+
+            #tetrisGame .next-piece-canvas {
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            #tetrisGame .key-controls {
+                grid-template-columns: 1fr;
+            }
         }
 
-        #simpleCalculator .special:hover {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(108, 117, 125, 0.25);
-        }
-
-        #simpleCalculator .special:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(108, 117, 125, 0.2);
-        }
-
-        /* 等号按钮 */
-        #simpleCalculator .equals {
-            background-color: #3a0ca3;
-            color: white;
-            box-shadow: 0 4px 6px rgba(58, 12, 163, 0.2);
-        }
-
-        #simpleCalculator .equals:hover {
-            background-color: #300a8a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(58, 12, 163, 0.25);
-        }
-
-        #simpleCalculator .equals:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(58, 12, 163, 0.2);
-        }
-
-        /* 零按钮占两列 */
-        #simpleCalculator .zero {
-            grid-column: span 2;
-        }
-
-        /* 响应式调整 */
         @media (max-width: 400px) {
-            #simpleCalculator {
-                max-width: 280px;
+            #tetrisGame {
                 padding: 15px;
             }
 
-            #simpleCalculator .display {
-                height: 90px;
-                padding: 15px;
+            #tetrisGame .tetris-canvas {
+                width: 250px !important;
+                height: 500px !important;
             }
 
-            #simpleCalculator .result {
-                font-size: 2.2rem;
+            #tetrisGame .game-title {
+                font-size: 2rem;
             }
 
-            #simpleCalculator button {
-                height: 55px;
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 300px) {
-            #simpleCalculator {
-                max-width: 240px;
-                padding: 12px;
-            }
-
-            #simpleCalculator .display {
-                height: 80px;
-                padding: 12px;
-            }
-
-            #simpleCalculator .result {
-                font-size: 1.8rem;
-            }
-
-            #simpleCalculator .calculation {
-                font-size: 1rem;
-            }
-
-            #simpleCalculator button {
-                height: 50px;
-                font-size: 1.1rem;
-            }
-
-            #simpleCalculator .buttons {
-                gap: 8px;
+            #tetrisGame .control-buttons {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* 按键聚焦状态 */
-        #simpleCalculator button:focus {
-            outline: 2px solid #4361ee;
-            outline-offset: 2px;
+        /* 暂停遮罩层 */
+        #tetrisGame .pause-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px #4361ee;
+            border-radius: 4px;
+            z-index: 10;
+        }
+
+        /* 游戏结束遮罩层 */
+        #tetrisGame .game-over-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 4px;
+            z-index: 10;
+            text-align: center;
+        }
+
+        #tetrisGame .game-over-title {
+            font-size: 3rem;
+            color: #f72585;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #f72585;
+        }
+
+        #tetrisGame .game-over-score {
+            font-size: 2rem;
+            color: #4cc9f0;
+            margin-bottom: 30px;
+        }
+
+        /* 方块颜色定义 */
+        .tetris-block-I {
+            background-color: #00f5ff;
+        }
+
+        .tetris-block-J {
+            background-color: #4361ee;
+        }
+
+        .tetris-block-L {
+            background-color: #f8961e;
+        }
+
+        .tetris-block-O {
+            background-color: #ffd166;
+        }
+
+        .tetris-block-S {
+            background-color: #06d6a0;
+        }
+
+        .tetris-block-T {
+            background-color: #9d4edd;
+        }
+
+        .tetris-block-Z {
+            background-color: #ef476f;
         }
     </style>
 </head>
 
 <body>
-    <!-- 简约计算器组件 -->
-    <!-- 注意：容器div必须有id="simpleCalculator" -->
-    <div id="simpleCalculator">
-        <!-- 显示区域 -->
-        <div class="display">
-            <div class="calculation" id="calculationDisplay"></div>
-            <div class="result" id="resultDisplay">0</div>
+    <!-- 俄罗斯方块游戏组件 -->
+    <!-- 注意：容器div必须有id="tetrisGame" -->
+    <div id="tetrisGame">
+        <h1 class="game-title">俄罗斯方块</h1>
+
+        <!-- 游戏主区域 -->
+        <div class="game-main-area">
+            <!-- 游戏区域 -->
+            <div class="game-area-container">
+                <div class="game-canvas-container" id="gameCanvasContainer">
+                    <canvas class="tetris-canvas" id="tetrisCanvas" width="400" height="800"></canvas>
+                    <!-- 暂停遮罩层 -->
+                    <div class="pause-overlay" id="pauseOverlay" style="display: none;">
+                        游戏暂停
+                    </div>
+                    <!-- 游戏结束遮罩层 -->
+                    <div class="game-over-overlay" id="gameOverOverlay" style="display: none;">
+                        <div class="game-over-title">游戏结束</div>
+                        <div class="game-over-score">得分: <span id="finalGameScore">0</span></div>
+                        <button class="control-btn" id="restartAfterGameOver">重新开始</button>
+                    </div>
+                </div>
+
+                <!-- 游戏状态显示 -->
+                <div class="game-status" id="gameStatus">
+                    点击"开始游戏"按钮开始
+                </div>
+            </div>
+
+            <!-- 侧边面板 -->
+            <div class="game-side-panel">
+                <!-- 游戏信息面板 -->
+                <div class="game-info-panel">
+                    <div class="info-section">
+                        <div class="info-title">游戏信息</div>
+                        <div class="info-item">
+                            <span class="info-label">得分:</span>
+                            <span class="info-value" id="scoreValue">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">等级:</span>
+                            <span class="info-value" id="levelValue">1</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">已消除行:</span>
+                            <span class="info-value" id="linesValue">0</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-title">下一个方块</div>
+                        <div class="next-piece-container">
+                            <canvas class="next-piece-canvas" id="nextPieceCanvas" width="150" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游戏控制面板 -->
+                <div class="game-controls-panel">
+                    <div class="control-buttons">
+                        <button class="control-btn" id="startBtn">开始游戏</button>
+                        <button class="control-btn pause-btn" id="pauseBtn">暂停</button>
+                        <button class="control-btn restart-btn" id="restartBtn">重新开始</button>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-title">游戏控制</div>
+                        <div class="info-item">
+                            <span class="info-label">左移:</span>
+                            <span class="info-value">← 或 A</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">右移:</span>
+                            <span class="info-value">→ 或 D</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">旋转:</span>
+                            <span class="info-value">↑ 或 W</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">加速下落:</span>
+                            <span class="info-value">↓ 或 S</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">直接落下:</span>
+                            <span class="info-value">空格键</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- 按钮区域 -->
-        <div class="buttons">
-            <!-- 第一行 -->
-            <button class="special" data-action="clear">AC</button>
-            <button class="special" data-action="backspace">⌫</button>
-            <button class="operator" data-operator="÷">÷</button>
-            <button class="operator" data-operator="×">×</button>
+        <!-- 游戏说明 -->
+        <div class="game-instructions">
+            <div class="instructions-title">游戏说明</div>
+            <p>俄罗斯方块是一款经典的益智游戏。方块会从顶部不断下落，您需要移动和旋转方块，使它们在底部拼成完整的一行。当一行被填满时，该行会被消除，您将获得分数。</p>
 
-            <!-- 第二行 -->
-            <button class="number" data-number="7">7</button>
-            <button class="number" data-number="8">8</button>
-            <button class="number" data-number="9">9</button>
-            <button class="operator" data-operator="-">-</button>
-
-            <!-- 第三行 -->
-            <button class="number" data-number="4">4</button>
-            <button class="number" data-number="5">5</button>
-            <button class="number" data-number="6">6</button>
-            <button class="operator" data-operator="+">+</button>
-
-            <!-- 第四行 -->
-            <button class="number" data-number="1">1</button>
-            <button class="number" data-number="2">2</button>
-            <button class="number" data-number="3">3</button>
-            <button class="equals" data-action="equals">=</button>
-
-            <!-- 第五行 -->
-            <button class="number zero" data-number="0">0</button>
-            <button class="number" data-number=".">.</button>
+            <div class="key-controls">
+                <div class="key-item">
+                    <div class="key">← / A</div>
+                    <div class="key-desc">向左移动方块</div>
+                </div>
+                <div class="key-item">
+                    <div class="key">→ / D</div>
+                    <div class="key-desc">向右移动方块</div>
+                </div>
+                <div class="key-item">
+                    <div class="key">↑ / W</div>
+                    <div class="key-desc">旋转方块</div>
+                </div>
+                <div class="key-item">
+                    <div class="key">↓ / S</div>
+                    <div class="key-desc">加速下落</div>
+                </div>
+                <div class="key-item">
+                    <div class="key">空格</div>
+                    <div class="key-desc">方块直接落到底部</div>
+                </div>
+                <div class="key-item">
+                    <div class="key">P</div>
+                    <div class="key-desc">暂停/继续游戏</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 计算器状态管理
-        class Calculator {
+        // 俄罗斯方块游戏
+        class TetrisGame {
             constructor() {
-                this.currentInput = '0';
-                this.previousInput = '';
-                this.operator = null;
-                this.waitingForNewInput = false;
-                this.calculationString = '';
+                // 游戏状态
+                this.gameActive = false;
+                this.gamePaused = false;
+                this.gameOver = false;
 
+                // 游戏数据
+                this.score = 0;
+                this.level = 1;
+                this.lines = 0;
+                this.dropInterval = 1000; // 初始下落间隔（毫秒）
+                this.dropCounter = 0;
+                this.lastTime = 0;
+
+                // 游戏板尺寸
+                this.boardWidth = 10;
+                this.boardHeight = 20;
+                this.cellSize = 40;
+
+                // 游戏板状态（0表示空，其他数字表示不同类型的方块）
+                this.board = Array.from({ length: this.boardHeight }, () =>
+                    Array(this.boardWidth).fill(0)
+                );
+
+                // 当前方块和下一个方块
+                this.currentPiece = null;
+                this.nextPiece = null;
+
+                // 方块类型和颜色
+                this.pieces = [
+                    // I 型方块
+                    {
+                        shape: [
+                            [0, 0, 0, 0],
+                            [1, 1, 1, 1],
+                            [0, 0, 0, 0],
+                            [0, 0, 0, 0]
+                        ],
+                        color: '#00f5ff',
+                        className: 'tetris-block-I'
+                    },
+                    // J 型方块
+                    {
+                        shape: [
+                            [1, 0, 0],
+                            [1, 1, 1],
+                            [0, 0, 0]
+                        ],
+                        color: '#4361ee',
+                        className: 'tetris-block-J'
+                    },
+                    // L 型方块
+                    {
+                        shape: [
+                            [0, 0, 1],
+                            [1, 1, 1],
+                            [0, 0, 0]
+                        ],
+                        color: '#f8961e',
+                        className: 'tetris-block-L'
+                    },
+                    // O 型方块
+                    {
+                        shape: [
+                            [1, 1],
+                            [1, 1]
+                        ],
+                        color: '#ffd166',
+                        className: 'tetris-block-O'
+                    },
+                    // S 型方块
+                    {
+                        shape: [
+                            [0, 1, 1],
+                            [1, 1, 0],
+                            [0, 0, 0]
+                        ],
+                        color: '#06d6a0',
+                        className: 'tetris-block-S'
+                    },
+                    // T 型方块
+                    {
+                        shape: [
+                            [0, 1, 0],
+                            [1, 1, 1],
+                            [0, 0, 0]
+                        ],
+                        color: '#9d4edd',
+                        className: 'tetris-block-T'
+                    },
+                    // Z 型方块
+                    {
+                        shape: [
+                            [1, 1, 0],
+                            [0, 1, 1],
+                            [0, 0, 0]
+                        ],
+                        color: '#ef476f',
+                        className: 'tetris-block-Z'
+                    }
+                ];
+
+                // Canvas 元素
+                this.canvas = document.getElementById('tetrisCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.nextPieceCanvas = document.getElementById('nextPieceCanvas');
+                this.nextPieceCtx = this.nextPieceCanvas.getContext('2d');
+
+                // 游戏状态元素
+                this.scoreElement = document.getElementById('scoreValue');
+                this.levelElement = document.getElementById('levelValue');
+                this.linesElement = document.getElementById('linesValue');
+                this.gameStatusElement = document.getElementById('gameStatus');
+
+                // 游戏控制元素
+                this.startBtn = document.getElementById('startBtn');
+                this.pauseBtn = document.getElementById('pauseBtn');
+                this.restartBtn = document.getElementById('restartBtn');
+                this.restartAfterGameOverBtn = document.getElementById('restartAfterGameOver');
+
+                // 遮罩层元素
+                this.pauseOverlay = document.getElementById('pauseOverlay');
+                this.gameOverOverlay = document.getElementById('gameOverOverlay');
+                this.finalGameScoreElement = document.getElementById('finalGameScore');
+
+                // 初始化游戏
                 this.init();
             }
 
             init() {
-                this.updateDisplay();
+                // 设置Canvas尺寸
+                this.updateCanvasSize();
+
+                // 创建第一个方块
+                this.nextPiece = this.createRandomPiece();
+                this.spawnNewPiece();
+
+                // 绘制初始状态
+                this.drawBoard();
+                this.drawNextPiece();
+
+                // 设置事件监听
                 this.setupEventListeners();
-                this.setupKeyboardSupport();
+
+                // 开始游戏循环
+                this.gameLoop(0);
             }
 
-            // 更新显示
-            updateDisplay() {
-                const resultDisplay = document.getElementById('resultDisplay');
-                const calculationDisplay = document.getElementById('calculationDisplay');
+            // 更新Canvas尺寸
+            updateCanvasSize() {
+                // 根据窗口大小调整Canvas尺寸
+                const container = document.getElementById('gameCanvasContainer');
+                const maxWidth = 400;
+                const maxHeight = 800;
 
-                resultDisplay.textContent = this.formatDisplayNumber(this.currentInput);
-                calculationDisplay.textContent = this.calculationString;
-            }
+                // 保持宽高比
+                const aspectRatio = maxWidth / maxHeight;
+                let canvasWidth = container.clientWidth - 20; // 减去边框和内边距
+                let canvasHeight = canvasWidth / aspectRatio;
 
-            // 格式化显示的数字（添加千位分隔符）
-            formatDisplayNumber(numStr) {
-                if (numStr === '') return '0';
-
-                // 如果是小数，分开处理整数部分和小数部分
-                if (numStr.includes('.')) {
-                    const [integerPart, decimalPart] = numStr.split('.');
-                    return this.addThousandsSeparator(integerPart) + '.' + decimalPart;
+                if (canvasHeight > maxHeight) {
+                    canvasHeight = maxHeight;
+                    canvasWidth = canvasHeight * aspectRatio;
                 }
 
-                return this.addThousandsSeparator(numStr);
+                // 设置Canvas尺寸
+                this.canvas.width = canvasWidth;
+                this.canvas.height = canvasHeight;
+                this.cellSize = canvasWidth / this.boardWidth;
+
+                // 重新绘制
+                this.drawBoard();
             }
 
-            // 添加千位分隔符
-            addThousandsSeparator(numStr) {
-                // 处理负数
-                const isNegative = numStr.startsWith('-');
-                const absoluteNumStr = isNegative ? numStr.slice(1) : numStr;
-
-                // 添加千位分隔符
-                const parts = absoluteNumStr.split('.');
-                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-                return (isNegative ? '-' : '') + parts.join('.');
+            // 创建随机方块
+            createRandomPiece() {
+                const pieceType = Math.floor(Math.random() * this.pieces.length);
+                return {
+                    shape: this.pieces[pieceType].shape,
+                    color: this.pieces[pieceType].color,
+                    className: this.pieces[pieceType].className,
+                    x: Math.floor(this.boardWidth / 2) - Math.floor(this.pieces[pieceType].shape[0].length / 2),
+                    y: 0
+                };
             }
 
-            // 处理数字输入
-            inputNumber(number) {
-                // 如果等待新输入（刚刚执行完计算或按了运算符）
-                if (this.waitingForNewInput) {
-                    this.currentInput = number;
-                    this.waitingForNewInput = false;
-                } else {
-                    // 防止输入多个小数点
-                    if (number === '.' && this.currentInput.includes('.')) {
-                        return;
-                    }
+            // 生成新方块
+            spawnNewPiece() {
+                this.currentPiece = this.nextPiece;
+                this.nextPiece = this.createRandomPiece();
 
-                    // 防止输入多个前导零
-                    if (this.currentInput === '0' && number !== '.') {
-                        this.currentInput = number;
-                    } else {
-                        this.currentInput += number;
-                    }
+                // 检查游戏是否结束（新方块无法放置）
+                if (this.checkCollision(this.currentPiece.x, this.currentPiece.y, this.currentPiece.shape)) {
+                    this.gameOver = true;
+                    this.gameActive = false;
+                    this.showGameOver();
                 }
 
-                this.updateDisplay();
+                // 更新下一个方块预览
+                this.drawNextPiece();
             }
 
-            // 处理操作符
-            inputOperator(nextOperator) {
-                const inputValue = parseFloat(this.currentInput);
+            // 绘制游戏板
+            drawBoard() {
+                // 清除Canvas
+                this.ctx.fillStyle = '#0f0f1a';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-                // 如果已经有操作符，先执行计算
-                if (this.operator && !this.waitingForNewInput) {
-                    this.calculate();
+                // 绘制网格线
+                this.ctx.strokeStyle = '#1a1a2e';
+                this.ctx.lineWidth = 1;
+
+                // 绘制垂直线
+                for (let x = 0; x <= this.boardWidth; x++) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(x * this.cellSize, 0);
+                    this.ctx.lineTo(x * this.cellSize, this.canvas.height);
+                    this.ctx.stroke();
                 }
 
-                // 更新操作符
-                this.operator = nextOperator;
-
-                // 更新计算字符串
-                if (this.calculationString === '') {
-                    this.calculationString = `${this.formatDisplayNumber(this.currentInput)} ${this.operator}`;
-                } else {
-                    this.calculationString = `${this.previousInput} ${this.operator}`;
+                // 绘制水平线
+                for (let y = 0; y <= this.boardHeight; y++) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, y * this.cellSize);
+                    this.ctx.lineTo(this.canvas.width, y * this.cellSize);
+                    this.ctx.stroke();
                 }
 
-                // 保存当前输入，并等待新输入
-                this.previousInput = this.currentInput;
-                this.waitingForNewInput = true;
+                // 绘制已固定的方块
+                for (let y = 0; y < this.boardHeight; y++) {
+                    for (let x = 0; x < this.boardWidth; x++) {
+                        if (this.board[y][x]) {
+                            // 根据方块类型获取颜色
+                            const pieceIndex = this.board[y][x] - 1;
+                            this.ctx.fillStyle = this.pieces[pieceIndex].color;
 
-                this.updateDisplay();
-            }
+                            // 绘制方块
+                            this.ctx.fillRect(
+                                x * this.cellSize,
+                                y * this.cellSize,
+                                this.cellSize,
+                                this.cellSize
+                            );
 
-            // 执行计算
-            calculate() {
-                const prevValue = parseFloat(this.previousInput);
-                const currentValue = parseFloat(this.currentInput);
+                            // 绘制方块边框
+                            this.ctx.strokeStyle = '#ffffff';
+                            this.ctx.lineWidth = 2;
+                            this.ctx.strokeRect(
+                                x * this.cellSize,
+                                y * this.cellSize,
+                                this.cellSize,
+                                this.cellSize
+                            );
 
-                if (isNaN(prevValue) || isNaN(currentValue)) return;
-
-                let result;
-
-                switch (this.operator) {
-                    case '+':
-                        result = prevValue + currentValue;
-                        break;
-                    case '-':
-                        result = prevValue - currentValue;
-                        break;
-                    case '×':
-                        result = prevValue * currentValue;
-                        break;
-                    case '÷':
-                        if (currentValue === 0) {
-                            alert("错误：不能除以零");
-                            this.clear();
-                            return;
+                            // 绘制内部高光效果
+                            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                            this.ctx.fillRect(
+                                x * this.cellSize + 2,
+                                y * this.cellSize + 2,
+                                this.cellSize - 4,
+                                this.cellSize - 4
+                            );
                         }
-                        result = prevValue / currentValue;
-                        break;
-                    default:
-                        return;
+                    }
                 }
 
-                // 处理浮点数精度问题
-                result = Math.round(result * 100000000) / 100000000;
-
-                // 更新显示
-                this.currentInput = result.toString();
-                this.operator = null;
-                this.previousInput = '';
-                this.calculationString = '';
-                this.waitingForNewInput = true;
-
-                this.updateDisplay();
+                // 绘制当前下落的方块
+                if (this.currentPiece && !this.gameOver) {
+                    this.drawPiece(this.currentPiece);
+                }
             }
 
-            // 清除计算器
-            clear() {
-                this.currentInput = '0';
-                this.previousInput = '';
-                this.operator = null;
-                this.waitingForNewInput = false;
-                this.calculationString = '';
+            // 绘制方块
+            drawPiece(piece) {
+                this.ctx.fillStyle = piece.color;
 
-                this.updateDisplay();
+                for (let y = 0; y < piece.shape.length; y++) {
+                    for (let x = 0; x < piece.shape[y].length; x++) {
+                        if (piece.shape[y][x]) {
+                            // 绘制方块
+                            this.ctx.fillRect(
+                                (piece.x + x) * this.cellSize,
+                                (piece.y + y) * this.cellSize,
+                                this.cellSize,
+                                this.cellSize
+                            );
+
+                            // 绘制方块边框
+                            this.ctx.strokeStyle = '#ffffff';
+                            this.ctx.lineWidth = 2;
+                            this.ctx.strokeRect(
+                                (piece.x + x) * this.cellSize,
+                                (piece.y + y) * this.cellSize,
+                                this.cellSize,
+                                this.cellSize
+                            );
+
+                            // 绘制内部高光效果
+                            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                            this.ctx.fillRect(
+                                (piece.x + x) * this.cellSize + 2,
+                                (piece.y + y) * this.cellSize + 2,
+                                this.cellSize - 4,
+                                this.cellSize - 4
+                            );
+                        }
+                    }
+                }
             }
 
-            // 退格
-            backspace() {
-                if (this.currentInput.length > 1) {
-                    this.currentInput = this.currentInput.slice(0, -1);
+            // 绘制下一个方块预览
+            drawNextPiece() {
+                // 清除预览Canvas
+                this.nextPieceCtx.fillStyle = '#0f0f1a';
+                this.nextPieceCtx.fillRect(0, 0, this.nextPieceCanvas.width, this.nextPieceCanvas.height);
+
+                if (!this.nextPiece) return;
+
+                const piece = this.nextPiece;
+                const blockSize = 30;
+                const offsetX = (this.nextPieceCanvas.width - piece.shape[0].length * blockSize) / 2;
+                const offsetY = (this.nextPieceCanvas.height - piece.shape.length * blockSize) / 2;
+
+                this.nextPieceCtx.fillStyle = piece.color;
+
+                for (let y = 0; y < piece.shape.length; y++) {
+                    for (let x = 0; x < piece.shape[y].length; x++) {
+                        if (piece.shape[y][x]) {
+                            // 绘制方块
+                            this.nextPieceCtx.fillRect(
+                                offsetX + x * blockSize,
+                                offsetY + y * blockSize,
+                                blockSize,
+                                blockSize
+                            );
+
+                            // 绘制方块边框
+                            this.nextPieceCtx.strokeStyle = '#ffffff';
+                            this.nextPieceCtx.lineWidth = 2;
+                            this.nextPieceCtx.strokeRect(
+                                offsetX + x * blockSize,
+                                offsetY + y * blockSize,
+                                blockSize,
+                                blockSize
+                            );
+
+                            // 绘制内部高光效果
+                            this.nextPieceCtx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                            this.nextPieceCtx.fillRect(
+                                offsetX + x * blockSize + 2,
+                                offsetY + y * blockSize + 2,
+                                blockSize - 4,
+                                blockSize - 4
+                            );
+                        }
+                    }
+                }
+            }
+
+            // 检查碰撞
+            checkCollision(x, y, shape) {
+                for (let row = 0; row < shape.length; row++) {
+                    for (let col = 0; col < shape[row].length; col++) {
+                        if (shape[row][col]) {
+                            const newX = x + col;
+                            const newY = y + row;
+
+                            // 检查是否超出边界或与已有方块重叠
+                            if (
+                                newX < 0 ||
+                                newX >= this.boardWidth ||
+                                newY >= this.boardHeight ||
+                                (newY >= 0 && this.board[newY][newX])
+                            ) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            // 合并方块到游戏板
+            mergePieceToBoard() {
+                for (let y = 0; y < this.currentPiece.shape.length; y++) {
+                    for (let x = 0; x < this.currentPiece.shape[y].length; x++) {
+                        if (this.currentPiece.shape[y][x]) {
+                            const boardY = this.currentPiece.y + y;
+                            if (boardY >= 0) { // 确保不会在顶部之外绘制
+                                // 找到当前方块对应的类型索引
+                                const pieceIndex = this.pieces.findIndex(p => p.color === this.currentPiece.color);
+                                this.board[boardY][this.currentPiece.x + x] = pieceIndex + 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 清除完整的行
+            clearLines() {
+                let linesCleared = 0;
+
+                for (let y = this.boardHeight - 1; y >= 0; y--) {
+                    // 检查该行是否已满
+                    if (this.board[y].every(cell => cell !== 0)) {
+                        // 移除该行
+                        this.board.splice(y, 1);
+                        // 在顶部添加新的空行
+                        this.board.unshift(Array(this.boardWidth).fill(0));
+                        linesCleared++;
+                        y++; // 重新检查同一位置（因为行已下移）
+                    }
+                }
+
+                if (linesCleared > 0) {
+                    // 更新分数
+                    const linePoints = [0, 100, 300, 500, 800]; // 根据消除行数获得分数
+                    this.score += linePoints[linesCleared] * this.level;
+
+                    // 更新已消除行数
+                    this.lines += linesCleared;
+
+                    // 更新等级（每消除10行升一级）
+                    const newLevel = Math.floor(this.lines / 10) + 1;
+                    if (newLevel > this.level) {
+                        this.level = newLevel;
+                        // 每升一级，下落速度加快
+                        this.dropInterval = Math.max(100, 1000 - (this.level - 1) * 100);
+                    }
+
+                    // 更新显示
+                    this.updateDisplay();
+                }
+            }
+
+            // 移动方块
+            movePiece(dx, dy) {
+                if (!this.gameActive || this.gamePaused || this.gameOver) return;
+
+                if (!this.checkCollision(this.currentPiece.x + dx, this.currentPiece.y + dy, this.currentPiece.shape)) {
+                    this.currentPiece.x += dx;
+                    this.currentPiece.y += dy;
+                    this.drawBoard();
+                    return true;
+                }
+                return false;
+            }
+
+            // 旋转方块
+            rotatePiece() {
+                if (!this.gameActive || this.gamePaused || this.gameOver) return;
+
+                // 创建旋转后的形状
+                const shape = this.currentPiece.shape;
+                const rows = shape.length;
+                const cols = shape[0].length;
+
+                // 创建新的旋转矩阵
+                const rotated = Array.from({ length: cols }, () => Array(rows).fill(0));
+
+                // 旋转矩阵
+                for (let y = 0; y < rows; y++) {
+                    for (let x = 0; x < cols; x++) {
+                        rotated[x][rows - 1 - y] = shape[y][x];
+                    }
+                }
+
+                // 检查旋转后是否碰撞
+                if (!this.checkCollision(this.currentPiece.x, this.currentPiece.y, rotated)) {
+                    this.currentPiece.shape = rotated;
+                    this.drawBoard();
+                    return true;
+                }
+
+                return false;
+            }
+
+            // 方块直接落到底部
+            hardDrop() {
+                if (!this.gameActive || this.gamePaused || this.gameOver) return;
+
+                // 不断向下移动直到碰撞
+                while (this.movePiece(0, 1)) {
+                    // 继续移动
+                }
+
+                // 固定方块并生成新方块
+                this.mergePieceToBoard();
+                this.clearLines();
+                this.spawnNewPiece();
+                this.drawBoard();
+            }
+
+            // 更新游戏显示
+            updateDisplay() {
+                this.scoreElement.textContent = this.score;
+                this.levelElement.textContent = this.level;
+                this.linesElement.textContent = this.lines;
+            }
+
+            // 游戏主循环
+            gameLoop(time) {
+                const deltaTime = time - this.lastTime;
+                this.lastTime = time;
+
+                if (this.gameActive && !this.gamePaused && !this.gameOver) {
+                    this.dropCounter += deltaTime;
+
+                    if (this.dropCounter > this.dropInterval) {
+                        // 方块自动下落
+                        if (!this.movePiece(0, 1)) {
+                            // 如果不能下落，则固定方块并生成新方块
+                            this.mergePieceToBoard();
+                            this.clearLines();
+                            this.spawnNewPiece();
+                        }
+
+                        this.dropCounter = 0;
+                        this.drawBoard();
+                    }
+
+                    // 更新游戏状态显示
+                    this.gameStatusElement.textContent = `游戏中 - 等级 ${this.level}`;
+                }
+
+                requestAnimationFrame((currentTime) => this.gameLoop(currentTime));
+            }
+
+            // 开始游戏
+            startGame() {
+                if (this.gameOver) {
+                    this.resetGame();
+                }
+
+                this.gameActive = true;
+                this.gamePaused = false;
+                this.pauseOverlay.style.display = 'none';
+                this.gameStatusElement.textContent = `游戏中 - 等级 ${this.level}`;
+
+                // 更新按钮文本
+                this.startBtn.textContent = '重新开始';
+                this.pauseBtn.textContent = '暂停';
+            }
+
+            // 暂停游戏
+            pauseGame() {
+                if (!this.gameActive || this.gameOver) return;
+
+                this.gamePaused = !this.gamePaused;
+
+                if (this.gamePaused) {
+                    this.pauseOverlay.style.display = 'flex';
+                    this.gameStatusElement.textContent = '游戏已暂停';
+                    this.pauseBtn.textContent = '继续';
                 } else {
-                    this.currentInput = '0';
+                    this.pauseOverlay.style.display = 'none';
+                    this.gameStatusElement.textContent = `游戏中 - 等级 ${this.level}`;
+                    this.pauseBtn.textContent = '暂停';
                 }
+            }
 
+            // 重置游戏
+            resetGame() {
+                // 重置游戏状态
+                this.gameActive = false;
+                this.gamePaused = false;
+                this.gameOver = false;
+
+                // 重置游戏数据
+                this.score = 0;
+                this.level = 1;
+                this.lines = 0;
+                this.dropInterval = 1000;
+                this.dropCounter = 0;
+
+                // 重置游戏板
+                this.board = Array.from({ length: this.boardHeight }, () =>
+                    Array(this.boardWidth).fill(0)
+                );
+
+                // 生成新方块
+                this.nextPiece = this.createRandomPiece();
+                this.spawnNewPiece();
+
+                // 重置显示
                 this.updateDisplay();
+                this.drawBoard();
+
+                // 隐藏遮罩层
+                this.pauseOverlay.style.display = 'none';
+                this.gameOverOverlay.style.display = 'none';
+
+                // 更新按钮文本
+                this.startBtn.textContent = '开始游戏';
+                this.pauseBtn.textContent = '暂停';
+                this.gameStatusElement.textContent = '点击"开始游戏"按钮开始';
+            }
+
+            // 显示游戏结束
+            showGameOver() {
+                this.gameActive = false;
+                this.finalGameScoreElement.textContent = this.score;
+                this.gameOverOverlay.style.display = 'flex';
+                this.gameStatusElement.textContent = '游戏结束';
             }
 
             // 设置事件监听
             setupEventListeners() {
-                // 数字按钮
-                document.querySelectorAll('[data-number]').forEach(button => {
-                    button.addEventListener('click', () => {
-                        this.inputNumber(button.dataset.number);
-                    });
+                // 键盘控制
+                document.addEventListener('keydown', (e) => {
+                    // 防止事件冒泡影响其他游戏
+                    e.stopPropagation();
+
+                    if (!this.gameActive || this.gamePaused || this.gameOver) return;
+
+                    switch (e.key) {
+                        case 'ArrowLeft':
+                        case 'a':
+                        case 'A':
+                            this.movePiece(-1, 0);
+                            break;
+                        case 'ArrowRight':
+                        case 'd':
+                        case 'D':
+                            this.movePiece(1, 0);
+                            break;
+                        case 'ArrowDown':
+                        case 's':
+                        case 'S':
+                            this.movePiece(0, 1);
+                            break;
+                        case 'ArrowUp':
+                        case 'w':
+                        case 'W':
+                            this.rotatePiece();
+                            break;
+                        case ' ':
+                            this.hardDrop();
+                            break;
+                        case 'p':
+                        case 'P':
+                            this.pauseGame();
+                            break;
+                    }
                 });
 
-                // 操作符按钮
-                document.querySelectorAll('[data-operator]').forEach(button => {
-                    button.addEventListener('click', () => {
-                        this.inputOperator(button.dataset.operator);
-                    });
+                // 控制按钮事件
+                this.startBtn.addEventListener('click', () => {
+                    this.startGame();
                 });
 
-                // 等号按钮
-                document.querySelector('[data-action="equals"]').addEventListener('click', () => {
-                    this.calculate();
+                this.pauseBtn.addEventListener('click', () => {
+                    this.pauseGame();
                 });
 
-                // 清除按钮
-                document.querySelector('[data-action="clear"]').addEventListener('click', () => {
-                    this.clear();
+                this.restartBtn.addEventListener('click', () => {
+                    this.resetGame();
                 });
 
-                // 退格按钮
-                document.querySelector('[data-action="backspace"]').addEventListener('click', () => {
-                    this.backspace();
+                this.restartAfterGameOverBtn.addEventListener('click', () => {
+                    this.resetGame();
+                    this.startGame();
                 });
-            }
 
-            // 键盘支持
-            setupKeyboardSupport() {
-                document.addEventListener('keydown', (event) => {
-                    // 防止事件冒泡影响其他组件
-                    event.stopPropagation();
-
-                    const key = event.key;
-
-                    // 数字键
-                    if (key >= '0' && key <= '9') {
-                        this.inputNumber(key);
-                        return;
-                    }
-
-                    // 小数点
-                    if (key === '.') {
-                        this.inputNumber('.');
-                        return;
-                    }
-
-                    // 操作符
-                    if (['+', '-', '*', '/'].includes(key)) {
-                        let operator = key;
-                        if (key === '*') operator = '×';
-                        if (key === '/') operator = '÷';
-                        this.inputOperator(operator);
-                        return;
-                    }
-
-                    // 等号或回车
-                    if (key === '=' || key === 'Enter') {
-                        this.calculate();
-                        return;
-                    }
-
-                    // 退格
-                    if (key === 'Backspace') {
-                        this.backspace();
-                        return;
-                    }
-
-                    // 清除 (Escape 或 Delete)
-                    if (key === 'Escape' || key === 'Delete') {
-                        this.clear();
-                        return;
-                    }
+                // 窗口大小改变时调整Canvas尺寸
+                window.addEventListener('resize', () => {
+                    this.updateCanvasSize();
                 });
             }
         }
 
-        // 初始化计算器
+        // 初始化游戏
         document.addEventListener('DOMContentLoaded', () => {
-            const calculator = new Calculator();
+            const tetrisGame = new TetrisGame();
 
-            // 添加简单的使用说明提示（可选）
-            console.log("计算器已初始化。支持键盘输入：数字键、+-*/、Enter(=)、Backspace、Escape(AC)");
+            // 添加游戏启动提示
+            console.log("俄罗斯方块游戏已初始化。点击开始游戏按钮开始！");
         });
     </script>
 </body>

@@ -1,6 +1,6 @@
 // 打砖块游戏
 //不需要script标签
-const canvas0 = document.getElementById("gameCanvas");
+const canvas0 = document.getElementById("gameCanvas1");
 const ctx0 = canvas0.getContext("2d");
 
 // 游戏状态

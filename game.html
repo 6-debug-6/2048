@@ -12,6 +12,10 @@
     <link rel="stylesheet" type="text/css" href="css样式库\左侧侧边栏.css">
     <link rel="stylesheet" type="text/css" href="css样式库\右侧侧边栏.css">
     <link rel="stylesheet" type="text/css" href="css样式库\弹窗.css">
+    <link rel="stylesheet" type="text/css" href="css样式库\翻转卡牌游戏.css">
+    <link rel="stylesheet" type="text/css" href="css样式库\俄罗斯方块.css">
+
+
 
     <title>2048游戏介绍</title>
     <style>
@@ -130,29 +134,64 @@
             <div style="flex: 1; display: flex;flex-direction: column;">
                 <div style="flex: 1;"></div>
                 <div style="flex: 4;display: flex;">
-                    <div id="mySidenav_l" class="sidenav_l">
+                    <div id="mySidenav_l" class="sidenav_l"
+                        style="background-image:linear-gradient(to bottom right, rgb(18, 110, 52),rgb(15, 73, 199));">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav_l()">&times;</a>
-                        <a id="myBtn1">日历</a>
+                        <a id="myBtn1">2048</a>
                         <!-- 弹窗 -->
                         <div id="myModal1" class="modal1">
 
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
-                                <div class="modal1-header">
+                                <div class="modal1-header"
+                                    style="background-image:linear-gradient(to bottom right, rgb(31, 58, 41),rgb(23, 137, 92));">
                                     <span class="close1">&times;</span>
-                                    <h2>弹窗头部</h2>
+                                    <h2>2048游戏</h2>
                                 </div>
-                                <div class="modal1-body">
-                                    <p>内容</p>
+                                <div class="modal1-body" style="background-color: rgb(120, 190, 167);">
+                                    <section class="game-container">
+                                        <div class="game-header">
+                                            <h1>2048</h1>
+                                            <div class="score-container">
+                                                <div class="score">
+                                                    <div class="score-title">分数</div>
+                                                    <div id="score">0</div>
+                                                </div>
+                                                <div class="best">
+                                                    <div class="score-title">最高分</div>
+                                                    <div id="best">0</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="game-info">
+                                            <p>使用 <strong>方向键</strong> 或 <strong>WASD</strong> 移动方块，相同数字合并加倍！</p>
+                                            <button id="restart">重新开始</button>
+                                            <div class="signature">楷子</div>
+                                        </div>
+
+                                        <div class="canvas-wrapper">
+                                            <canvas id="gameCanvas" width="450" height="450"></canvas>
+                                            <div id="gameOver" class="game-over">
+                                                <h2>游戏结束！</h2>
+                                                <p>最终得分: <span id="finalScore">0</span></p>
+                                                <button id="tryAgain">再试一次</button>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <script src="javascript脚本库\2048游戏.js"></script>
                                 </div>
-                                <div class="modal1-footer">
-                                    <h3>弹窗底部</h3>
+                                <div class="modal1-footer"
+                                    style="background-image:linear-gradient(to bottom right,rgb(23, 137, 92), rgb(31, 58, 41));">
+
+
+                                    <img src="图库\2048_new.webp" alt="2048logo" style="height: 60px;">
                                 </div>
                             </div>
 
                         </div>
                         <script src="javascript脚本库\弹窗1.js"></script>
-                        <a id="myBtn2">天气</a>
+                        <a id="myBtn2">俄罗斯方块</a>
                         <!-- 弹窗 -->
                         <div id="myModal2" class="modal1">
 
@@ -163,9 +202,141 @@
                                     <h2>弹窗头部</h2>
                                 </div>
                                 <div class="modal1-body">
-                                    <p>弹窗文本..</p>
-                                    <p>弹窗文本..</p>
+                                    <!-- 俄罗斯方块游戏组件 -->
+                                    <!-- 注意：容器div必须有id="tetrisGame" -->
+                                    <div id="tetrisGame">
+                                        <h1 class="game-title">俄罗斯方块</h1>
+
+                                        <!-- 游戏主区域 -->
+                                        <div class="game-main-area">
+                                            <!-- 游戏区域 -->
+                                            <div class="game-area-container">
+                                                <div class="game-canvas-container" id="gameCanvasContainer">
+                                                    <!--画布区域-->
+                                                    <canvas class="tetris-canvas" id="tetrisCanvas" width="400"
+                                                        height="800"></canvas>
+                                                    <!-- 暂停遮罩层 -->
+                                                    <div class="pause-overlay" id="pauseOverlay" style="display: none;">
+                                                        游戏暂停
+                                                    </div>
+                                                    <!-- 游戏结束遮罩层 -->
+                                                    <div class="game-over-overlay" id="gameOverOverlay"
+                                                        style="display: none;">
+                                                        <div class="game-over-title">游戏结束</div>
+                                                        <div class="game-over-score">得分: <span
+                                                                id="finalGameScore">0</span></div>
+                                                        <button class="control-btn"
+                                                            id="restartAfterGameOver">重新开始</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- 游戏状态显示 -->
+                                                <div class="game-status" id="gameStatus">
+                                                    点击"开始游戏"按钮开始
+                                                </div>
+                                            </div>
+
+                                            <!-- 侧边面板 -->
+                                            <div class="game-side-panel">
+                                                <!-- 游戏信息面板 -->
+                                                <div class="game-info-panel">
+                                                    <div class="info-section">
+                                                        <div class="info-title">游戏信息</div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">得分:</span>
+                                                            <span class="info-value" id="scoreValue">0</span>
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">等级:</span>
+                                                            <span class="info-value" id="levelValue">1</span>
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">已消除行:</span>
+                                                            <span class="info-value" id="linesValue">0</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="info-section">
+                                                        <div class="info-title">下一个方块</div>
+                                                        <div class="next-piece-container">
+                                                            <canvas class="next-piece-canvas" id="nextPieceCanvas"
+                                                                width="150" height="150"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- 游戏控制面板 -->
+                                                <div class="game-controls-panel">
+                                                    <div class="control-buttons">
+                                                        <button class="control-btn" id="startBtn">开始游戏</button>
+                                                        <button class="control-btn pause-btn" id="pauseBtn">暂停</button>
+                                                        <button class="control-btn restart-btn"
+                                                            id="restartBtn">重新开始</button>
+                                                    </div>
+
+                                                    <div class="info-section">
+                                                        <div class="info-title">游戏控制</div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">左移:</span>
+                                                            <span class="info-value">← 或 A</span>
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">右移:</span>
+                                                            <span class="info-value">→ 或 D</span>
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">旋转:</span>
+                                                            <span class="info-value">↑ 或 W</span>
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">加速下落:</span>
+                                                            <span class="info-value">↓ 或 S</span>
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <span class="info-label">直接落下:</span>
+                                                            <span class="info-value">空格键</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 游戏说明 -->
+                                        <div class="game-instructions">
+                                            <div class="instructions-title">游戏说明</div>
+                                            <p>俄罗斯方块是一款经典的益智游戏。方块会从顶部不断下落，您需要移动和旋转方块，使它们在底部拼成完整的一行。当一行被填满时，该行会被消除，您将获得分数。
+                                            </p>
+
+                                            <div class="key-controls">
+                                                <div class="key-item">
+                                                    <div class="key">← / A</div>
+                                                    <div class="key-desc">向左移动方块</div>
+                                                </div>
+                                                <div class="key-item">
+                                                    <div class="key">→ / D</div>
+                                                    <div class="key-desc">向右移动方块</div>
+                                                </div>
+                                                <div class="key-item">
+                                                    <div class="key">↑ / W</div>
+                                                    <div class="key-desc">旋转方块</div>
+                                                </div>
+                                                <div class="key-item">
+                                                    <div class="key">↓ / S</div>
+                                                    <div class="key-desc">加速下落</div>
+                                                </div>
+                                                <div class="key-item">
+                                                    <div class="key">空格</div>
+                                                    <div class="key-desc">方块直接落到底部</div>
+                                                </div>
+                                                <div class="key-item">
+                                                    <div class="key">P</div>
+                                                    <div class="key-desc">暂停/继续游戏</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <script src="javascript脚本库\俄罗斯方块.js"></script>
                                 <div class="modal1-footer">
                                     <h3>弹窗底部</h3>
                                 </div>
@@ -185,42 +356,125 @@
             <div style="flex: 1; display: flex;flex-direction: column;">
                 <div style="flex: 1;"></div>
                 <div style="flex: 4;display: flex; position: relative;">
-                    <div id="mySidenav_r" class="sidenav_r">
+                    <div id="mySidenav_r" class="sidenav_r"
+                        style="background-image:linear-gradient(to bottom right,rgb(15, 73, 199), rgb(18, 110, 52));">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav_r()">&times;</a>
-                        <a id="myBtn3">游戏</a>
+                        <a id="myBtn3">打砖块</a>
                         <!-- 弹窗 -->
                         <div id="myModal3" class="modal1">
 
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
-                                <div class="modal1-header">
+                                <div class="modal1-header"
+                                    style="background-image:linear-gradient(to bottom right, rgb(223, 83, 8),rgb(185, 147, 12));">
                                     <span class="close1">&times;</span>
-                                    <h2>弹窗头部</h2>
+                                    <h2>打砖块小游戏</h2>
                                 </div>
-                                <div class="modal1-body">
-                                    <p>弹窗文本...</p>
-                                    <p>弹窗文本...</p>
+                                <div class="modal1-body" style="background-color: rgb(217, 204, 188);">
+                                    <article>
+                                        <!--打砖块小游戏-->
+                                        <h2>打砖块小游戏</h2>
+                                        <canvas id="gameCanvas1" width="800" height="600"></canvas>
+                                        <div>
+                                            <button onclick="startBrickGame()">开始游戏</button>
+                                            <!-- 改为 startBrickGame -->
+                                            <button onclick="pauseBrickGame()">暂停</button>
+                                            <!-- 改为 pauseBrickGame -->
+                                            <span id="score">得分: 0</span>
+                                            <span id="lives">生命: 3</span>
+                                        </div>
+                                        <script src="javascript脚本库\打砖块游戏.js"></script>
+
+
+                                    </article>
                                 </div>
-                                <div class="modal1-footer">
-                                    <h3>弹窗底部</h3>
+                                <div class="modal1-footer"
+                                    style="background-image:linear-gradient(to bottom right, rgb(185, 147, 12),rgb(223, 83, 8));">
+                                    <img src="图库\打砖块.webp" alt="打砖块" style="height: 60px;">
                                 </div>
                             </div>
 
                         </div>
                         <script src="javascript脚本库\弹窗3.js"></script>
-                        <a id="myBtn4">留言</a>
+                        <a id="myBtn4">翻牌游戏</a>
                         <!-- 弹窗 -->
                         <div id="myModal4" class="modal1">
 
                             <!-- 弹窗内容 -->
                             <div class="modal1-content">
-                                <div class="modal1-header">
+                                <div class="modal1-header"
+                                    style="background-image:linear-gradient(to bottom right, rgb(139, 12, 185),rgb(29, 56, 192));">
                                     <span class="close1">&times;</span>
-                                    <h2>弹窗头部</h2>
+                                    <h2>翻卡牌</h2>
                                 </div>
-                                <div class="modal1-body">
-                                    <p>内容</p>
+                                <div class="modal1-body" style="background-color: rgb(221, 211, 229);">
+                                    <!-- 翻牌匹配游戏组件 -->
+                                    <!-- 注意：容器div必须有id="cardMatchGame" -->
+                                    <div id="cardMatchGame">
+                                        <h2>翻牌匹配游戏</h2>
+
+                                        <!-- 游戏信息 -->
+                                        <div class="game-info">
+                                            <div class="info-item">
+                                                <div class="info-label">分数</div>
+                                                <div class="info-value" id="score">0</div>
+                                            </div>
+                                            <div class="info-item">
+                                                <div class="info-label">已匹配</div>
+                                                <div class="info-value"><span id="matchedPairs">0</span>/<span
+                                                        id="totalPairs">8</span></div>
+                                            </div>
+                                            <div class="info-item">
+                                                <div class="info-label">步数</div>
+                                                <div class="info-value" id="moves">0</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 难度选择 -->
+                                        <div class="difficulty-selector">
+                                            <button class="difficulty-btn active" data-difficulty="easy">简单
+                                                (8张)</button>
+                                            <button class="difficulty-btn" data-difficulty="medium">中等
+                                                (12张)</button>
+                                            <button class="difficulty-btn" data-difficulty="hard">困难
+                                                (16张)</button>
+                                        </div>
+
+                                        <!-- 游戏控制 -->
+                                        <div class="game-controls">
+                                            <button class="control-btn restart-btn" id="restartBtn">重新开始</button>
+                                            <button class="control-btn" id="hintBtn">提示 (剩余: <span
+                                                    id="hintCount">3</span>)</button>
+                                        </div>
+
+                                        <!-- 卡片网格容器 -->
+                                        <div class="cards-container" id="cardsContainer">
+                                            <!-- 卡片将由JavaScript动态生成 -->
+                                        </div>
+
+                                        <!-- 游戏说明 -->
+                                        <div class="game-instructions">
+                                            游戏规则：翻开两张牌，如果内容相同则匹配成功。匹配所有牌即可获胜。尽量减少步数以获得更高分数！
+                                        </div>
+
+                                        <!-- 游戏结束弹窗 -->
+                                        <div class="game-over-modal" id="gameOverModal">
+                                            <div class="modal-content">
+                                                <h3 class="modal-title" id="modalTitle">恭喜！</h3>
+                                                <div class="modal-text" id="modalText">
+                                                    您已成功匹配所有牌！<br>
+                                                    用时: <span id="gameTime">0</span> 秒<br>
+                                                    步数: <span id="finalMoves">0</span><br>
+                                                    分数: <span id="finalScore">0</span>
+                                                </div>
+                                                <button class="modal-btn" id="playAgainBtn">再玩一次</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script src="javascript脚本库\翻转卡牌游戏.js"></script>
+
                                 </div>
+                                <!--被顶掉了-->
                                 <div class="modal1-footer">
                                     <h3>弹窗底部</h3>
                                 </div>
